@@ -7,11 +7,14 @@ import java.util.List;
 
 public interface QuestionDao {
 
-    public void update(QuestionEntity questionEntity);
+    void update(QuestionEntity questionEntity);
 
-    public void delete(int id);
+    void delete(int id);
 
-    public List<QuestionEntity> getAllByTestId(TestEntity testEntity);
+    List<QuestionEntity> getAllByTestId(TestEntity testEntity);
 
     QuestionEntity getQuestion(int id);
+
+    void saveOrUpdate(QuestionEntity questionEntity);
+
 }

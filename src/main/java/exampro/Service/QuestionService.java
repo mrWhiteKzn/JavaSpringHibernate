@@ -24,4 +24,6 @@ public class QuestionService {
     public QuestionEntity getQuestion(int id){
         return questionDao.getQuestion(id);
     }
+
+    public void saveOrUpdate(QuestionEntity questionEntity) { questionDao.saveOrUpdate(questionEntity); }
 }

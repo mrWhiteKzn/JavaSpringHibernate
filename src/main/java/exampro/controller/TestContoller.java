@@ -2,14 +2,12 @@ package exampro.controller;
 
 import exampro.Service.QuestionService;
 import exampro.Service.TestService;
-import exampro.config.TestContainer;
-import exampro.entity.TestEntity;
+import exampro.containerClasses.TestContainer;
+import exampro.entity.QuestionEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @Controller
 @RequestMapping("/exam")
@@ -40,13 +38,13 @@ public class TestContoller {
     //Return page with containter TestContainer
     @GetMapping("/gettest/{id}")
     public String getTest(@PathVariable("id") int id, Model model){
-        model.addAttribute("testContainer", testService.getTest(id));
+        model.addAttribute("testContainer", testService.getTestContainer(id));
         return "test";
     }
 
     @GetMapping("/edit/{id}")
     public String editTest(@PathVariable("id") int id, Model model){
-        model.addAttribute("testContainer", testService.getTest(id));
+        model.addAttribute("testContainer", testService.getTestContainer(id));
         return "editTest";
     }
 
@@ -80,4 +78,15 @@ public class TestContoller {
         return "editQuestion";
     }
 
+    @GetMapping("addQuestion/{id}")
+    public String addQuestion(@PathVariable("id") int id, Model model){
+        model.addAttribute("testEntity",testService.getTestContainer(id).getTestEntity());
+        return "addQuestion";
+    }
+
+    @PostMapping("addQuestion")
+    public String addQuestion(@ModelAttribute ("question") QuestionEntity questionEntity){
+        System.out.println("Вывод ДО: "+ questionEntity);
+        return "redirect:/exam/getall";
+    }
 }

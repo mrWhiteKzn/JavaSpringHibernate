@@ -1,4 +1,4 @@
-package exampro.config;
+package exampro.containerClasses;
 
 import exampro.entity.QuestionEntity;
 import exampro.entity.TestEntity;
@@ -8,6 +8,9 @@ import java.util.List;
 public class TestContainer {
     TestEntity testEntity;
     private List<QuestionEntity> questionEntityList;
+
+    public TestContainer() {
+    }
 
     public TestContainer(TestEntity testEntity, List<QuestionEntity> questionEntityList) {
         this.testEntity = testEntity;

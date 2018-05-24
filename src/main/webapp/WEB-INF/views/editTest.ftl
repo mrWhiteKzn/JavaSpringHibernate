@@ -38,7 +38,12 @@
             </tr>
         </#list>
     </table>
-    <input type="button" value="Добавить вопрос" onclick="add();">
+
 </form>
+
+<form action="/exam/addQuestion/${testContainer.testEntity.id}" method="get">
+    <input type="submit" value="Добавить вопрос">
+</form>
+
 </body>
 </html>

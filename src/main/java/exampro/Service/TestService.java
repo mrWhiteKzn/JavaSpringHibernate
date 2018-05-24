@@ -1,6 +1,6 @@
 package exampro.Service;
 
-import exampro.config.TestContainer;
+import exampro.containerClasses.TestContainer;
 import exampro.dao.QuestionDao;
 import exampro.dao.TestDao;
 import exampro.entity.QuestionEntity;
@@ -19,7 +19,7 @@ public class TestService {
     @Autowired
     QuestionDao questionDao;
 
-    public TestContainer getTest(int id){
+    public TestContainer getTestContainer(int id){
         TestEntity testEntity = testDao.getTest(id);
         List<QuestionEntity> questionEntityList = questionDao.getAllByTestId(testEntity);
         TestContainer testContainer = new TestContainer(testEntity, questionEntityList);
