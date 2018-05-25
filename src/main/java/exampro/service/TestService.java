@@ -1,4 +1,4 @@
-package exampro.Service;
+package exampro.service;
 
 import exampro.containerClasses.TestContainer;
 import exampro.dao.QuestionDao;

@@ -1,8 +1,7 @@
-package exampro.Service;
+package exampro.service;
 
 import exampro.dao.QuestionDao;
 import exampro.entity.QuestionEntity;
-import org.aspectj.weaver.patterns.TypePatternQuestions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

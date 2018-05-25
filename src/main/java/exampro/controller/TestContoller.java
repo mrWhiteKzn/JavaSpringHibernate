@@ -1,7 +1,7 @@
 package exampro.controller;
 
-import exampro.Service.QuestionService;
-import exampro.Service.TestService;
+import exampro.service.QuestionService;
+import exampro.service.TestService;
 import exampro.containerClasses.TestContainer;
 import exampro.entity.QuestionEntity;
 import org.springframework.beans.factory.annotation.Autowired;
