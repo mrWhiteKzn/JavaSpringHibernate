@@ -78,15 +78,22 @@ public class TestContoller {
         return "editQuestion";
     }
 
+    @PostMapping("updateQuestion/{id}")
+    public String editQuestion(@ModelAttribute ("question") QuestionEntity questionEntity, Model model){
+        questionService.saveOrUpdate(questionEntity);
+        model.addAttribute("question", questionEntity);
+        return "editQuestion";
+    }
+
     @GetMapping("addQuestion/{id}")
     public String addQuestion(@PathVariable("id") int id, Model model){
         model.addAttribute("testEntity",testService.getTestContainer(id).getTestEntity());
         return "addQuestion";
     }
 
-    @PostMapping("addQuestion")
-    public String addQuestion(@ModelAttribute ("question") QuestionEntity questionEntity){
-        System.out.println("Вывод ДО: "+ questionEntity);
+    @PostMapping("addQuestion/{id}")
+    public String addQuestion(@ModelAttribute ("question") QuestionEntity questionEntity, @PathVariable("id") int id){
+        testService.saveOrUpdate(questionEntity, id);
         return "redirect:/exam/getall";
     }
 }

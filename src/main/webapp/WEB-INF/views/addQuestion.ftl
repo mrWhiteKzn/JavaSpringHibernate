@@ -6,10 +6,10 @@
 </head>
 <body>
 <h3>Добавить новый вопрос к тесту ${testEntity.name}.</h3>
-<form name="question" action="/exam/addQuestion/" method="post">
+<form name="question" action="/exam/addQuestion/${testEntity.id}" method="post">
     Текст вопроса:<br>
-    <input type="text" name="questionText.text">
-    <input type="hidden" name="testEntity" value="${testEntity}">
+    <input type="text" name="questionText">
+
     <input type="submit" name="addTest" value="Добавить">
 </form>
 </body>

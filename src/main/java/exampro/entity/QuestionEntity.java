@@ -38,6 +38,7 @@ public class QuestionEntity {
     }
 
     public void setTestEntity(TestEntity testEntity) {
+
         this.testEntity = testEntity;
     }
 
@@ -46,6 +47,7 @@ public class QuestionEntity {
         return "QuestionEntity{" +
                 "id=" + id +
                 ", questionText='" + questionText + '\'' +
+                ", testEntity=" + testEntity +
                 '}';
     }
 }

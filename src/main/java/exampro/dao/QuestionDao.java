@@ -17,4 +17,5 @@ public interface QuestionDao {
 
     void saveOrUpdate(QuestionEntity questionEntity);
 
+    void saveOrUpdate(QuestionEntity questionEntity, int id);
 }

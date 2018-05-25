@@ -37,4 +37,9 @@ public class TestService {
     public void delete(int id) {
         testDao.delete(id);
     }
+
+    public void saveOrUpdate(QuestionEntity questionEntity, int id) {
+
+        questionDao.saveOrUpdate(questionEntity, id);
+    }
 }

@@ -1,5 +1,6 @@
 package exampro.dao;
 
+import exampro.entity.QuestionEntity;
 import exampro.entity.TestEntity;
 
 import java.util.List;
@@ -15,4 +16,5 @@ public interface TestDao {
     void saveOrUpdate(TestEntity testEntity);
 
     void delete(int id);
+
 }
