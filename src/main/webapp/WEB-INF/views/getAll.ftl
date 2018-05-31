@@ -15,6 +15,7 @@
         <tr>
             <td>${test.id}</td>
             <td><a href="gettest/${test.id}">${test.name}<a/></td>
+            <td><a href="gettest/${test.id}">пройти</a></td>
             <td><a href="edit/${test.id}">изменить</a></td>
             <td><a href="delete/${test.id}">удалить</a></td>
         </tr>

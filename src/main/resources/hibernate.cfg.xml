@@ -10,11 +10,12 @@
         <property name="connection.password">1234567</property>
 
         <!-- DB schema will be updated if needed -->
-        <property name="hbm2ddl.auto">validate</property>
+        <property name="hbm2ddl.auto">update</property>
         <property name="show_sql">true</property>
 
         <mapping class="exampro.entity.TestEntity" />
         <mapping class="exampro.entity.QuestionEntity" />
+        <mapping class="exampro.entity.AnswerEntity" />
 
        </session-factory>
    </hibernate-configuration>

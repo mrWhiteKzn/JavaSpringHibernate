@@ -1,9 +1,6 @@
 package exampro.config;
 
-import exampro.dao.QuestionDao;
-import exampro.dao.QuestionDaoImp;
-import exampro.dao.TestDao;
-import exampro.dao.TestDaoImp;
+import exampro.dao.*;
 import org.apache.catalina.filters.HttpHeaderSecurityFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -43,5 +40,8 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
 
     @Bean
     public QuestionDao getQuestionDao() { return new QuestionDaoImp(); }
+
+    @Bean
+    public AnswerDao getAnswerDao() { return new AnswerDaoImp(); }
 
 }

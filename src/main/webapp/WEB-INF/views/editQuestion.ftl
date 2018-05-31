@@ -24,12 +24,12 @@ Id вопроса:
     <input type="submit" value="Сохранить вопрос">
 </form>
 
-<form name="answers" action="updateAnswers/${question.id}" method="post">
+<form name="answers" action="/exam/updateAnswers/${question.id}" method="post">
     А теперь сохраним ответы: <br>
-    Ответ №1 <input type="text" name="answer1"><br>
-    Ответ №2 <input type="text" name="answer2"><br>
-    Ответ №3 <input type="text" name="answer3"><br>
-    Ответ №4 <input type="text" name="answer4"><br>
+    Ответ №1 <input type="text" name="answerText"><br>
+    Ответ №2 <input type="text" name="answerText"><br>
+    Ответ №3 <input type="text" name="answerText"><br>
+    Ответ №4 <input type="text" name="answerText"><br>
     <input type="submit" value="Сохранить ответы">
 </form>
 </body>

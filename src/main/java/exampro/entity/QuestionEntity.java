@@ -1,6 +1,7 @@
 package exampro.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "question")
@@ -16,6 +17,9 @@ public class QuestionEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "test_id")
     private TestEntity testEntity;
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "questionEntity")
+    private Set<AnswerEntity> answerEntitySet;
 
     public int getId() {
         return id;
@@ -42,12 +46,21 @@ public class QuestionEntity {
         this.testEntity = testEntity;
     }
 
-    @Override
-    public String toString() {
-        return "QuestionEntity{" +
-                "id=" + id +
-                ", questionText='" + questionText + '\'' +
-                ", testEntity=" + testEntity +
-                '}';
+    public Set<AnswerEntity> getAnswerEntitySet() {
+        return answerEntitySet;
     }
+
+    public void setAnswerEntitySet(Set<AnswerEntity> answerEntitySet) {
+        this.answerEntitySet = answerEntitySet;
+    }
+
+//    @Override
+//    public String toString() {
+//        return "QuestionEntity{" +
+//                "id=" + id +
+//                ", questionText='" + questionText + '\'' +
+//                ", testEntity=" + testEntity +
+//                ", answerEntitySet=" + answerEntitySet +
+//                '}';
+//    }
 }
