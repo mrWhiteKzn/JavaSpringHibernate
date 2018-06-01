@@ -16,6 +16,7 @@
         <mapping class="exampro.entity.TestEntity" />
         <mapping class="exampro.entity.QuestionEntity" />
         <mapping class="exampro.entity.AnswerEntity" />
+        <mapping class="exampro.entity.ResultTest" />
 
        </session-factory>
    </hibernate-configuration>

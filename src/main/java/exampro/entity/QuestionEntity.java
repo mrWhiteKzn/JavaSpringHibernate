@@ -54,13 +54,13 @@ public class QuestionEntity {
         this.answerEntitySet = answerEntitySet;
     }
 
-//    @Override
-//    public String toString() {
-//        return "QuestionEntity{" +
-//                "id=" + id +
-//                ", questionText='" + questionText + '\'' +
-//                ", testEntity=" + testEntity +
-//                ", answerEntitySet=" + answerEntitySet +
-//                '}';
-//    }
+    @Override
+    public String toString() {
+        return "QuestionEntity{" +
+                "id=" + id +
+                ", questionText='" + questionText + '\'' +
+                ", testEntity=" + testEntity +
+                ", answerEntitySet=" + answerEntitySet +
+                '}';
+    }
 }

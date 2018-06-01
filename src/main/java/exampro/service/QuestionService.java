@@ -2,8 +2,12 @@ package exampro.service;
 
 import exampro.dao.QuestionDao;
 import exampro.entity.QuestionEntity;
+import exampro.entity.TestEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class QuestionService {
@@ -25,4 +29,9 @@ public class QuestionService {
     }
 
     public void saveOrUpdate(QuestionEntity questionEntity) { questionDao.saveOrUpdate(questionEntity); }
+
+    public List<QuestionEntity> getQuestionsList(TestEntity testEntity) {
+        List<QuestionEntity> questionList = questionDao.getAllByTestId(testEntity);
+        return questionList;
+    }
 }

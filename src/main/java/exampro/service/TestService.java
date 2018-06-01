@@ -19,6 +19,10 @@ public class TestService {
     @Autowired
     QuestionDao questionDao;
 
+    public TestEntity getTestEntity(int id){
+        return testDao.getTest(id);
+    }
+
     public TestContainer getTestContainer(int id){
         TestEntity testEntity = testDao.getTest(id);
         List<QuestionEntity> questionEntityList = questionDao.getAllByTestId(testEntity);

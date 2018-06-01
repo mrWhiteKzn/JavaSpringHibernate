@@ -2,6 +2,7 @@ package exampro.controller;
 
 import com.fasterxml.jackson.databind.util.TypeKey;
 import exampro.entity.AnswerEntity;
+import exampro.entity.ResultTest;
 import exampro.service.AnswerService;
 import exampro.service.QuestionService;
 import exampro.service.TestService;
@@ -50,10 +51,10 @@ public class TestContoller {
         return "getAll";
     }
 
-    //Return page with containter TestContainer
     @GetMapping("/gettest/{id}")
-    public String getTest(@PathVariable("id") int id, Model model){
-        model.addAttribute("testContainer", testService.getTestContainer(id));
+    public String getTest2(@PathVariable("id") int id, Model model){
+        model.addAttribute("test", testService.getTestEntity(id));
+        model.addAttribute("questionList", questionService.getQuestionsList(testService.getTestEntity(id)));
         return "test";
     }
 
@@ -123,34 +124,13 @@ public class TestContoller {
         return "redirect:/exam/getall";
     }
 
-    @PostMapping("saveResult/{id}")
-    public String saveResult(@RequestParam Map<String, String> stringMap,
-                             Model model,
-                             @RequestParam("checkbox") String[] checkboxes,
-                             @PathVariable("id") int id,
-                             @ModelAttribute("testContainer") TestContainer testContainer){
-        System.out.println("ЧТО-ТО: " + model.toString());
+    @PostMapping("saveResult/")
+    public String saveResult(@ModelAttribute("resultTest") ResultTest resultTest,
+                             @RequestParam("answerEntity") String[] answerEntityList){
 
-        Iterator<String> itr  = stringMap.keySet().iterator();
-        while(itr.hasNext()){
-            String  key = itr.next();
-            String  value = stringMap.get(key);
-
-            System.out.println("KEY: "+ key + "; VALUE: " +value);
+        for(String s : answerEntityList){
+            System.out.println(s);
         }
-
-
-        System.out.println("ЧТО-ТО2: " + stringMap.toString());
-
-
-        for(String s : checkboxes){
-            System.out.println("ЧТО-ТО3: " + s);
-
-        }
-        System.out.println(id);
-
-        System.out.println(testContainer.toString());
-
         return "redirect:/exam/getall";
     }
 
