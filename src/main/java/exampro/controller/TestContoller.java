@@ -34,6 +34,8 @@ public class TestContoller {
     @Autowired
     public void setAnswerService(AnswerService answerService) { this.answerService = answerService; }
 
+    @Autowired
+    public void setResultService(ResultService resultService) { this.resultService = resultService; }
 
 
     @GetMapping("/hello")
@@ -131,6 +133,7 @@ public class TestContoller {
             System.out.println("question.id " + key);
             System.out.println("answer.text " + selectedAnswers.get(key));
         }
+        System.out.println(testId);
 
         resultService.saveTestResult(selectedAnswers, testId);
 
