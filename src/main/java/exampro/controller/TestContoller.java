@@ -126,17 +126,7 @@ public class TestContoller {
     public String saveResult(@RequestParam MultiValueMap<String, String> selectedAnswers,
                              @PathVariable("id") int testId){
 
-
-        Set<String> keys = selectedAnswers.keySet();
-
-        for (String key : keys){
-            System.out.println("question.id " + key);
-            System.out.println("answer.text " + selectedAnswers.get(key));
-        }
-        System.out.println(testId);
-
         resultService.saveTestResult(selectedAnswers, testId);
-
         return "redirect:/exam/getall";
     }
 

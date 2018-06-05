@@ -39,9 +39,4 @@ public class AnswerService {
         return answerDao.getAnswerList();
     }
 
-    public void foo(MultiValueMap<String, String> answers, int testId){
-
-
-    }
-
 }

@@ -30,6 +30,11 @@ public class ResultService {
 
         Set<String> keys = selectedAnswers.keySet();
 
+        for(String key : keys){
+            System.out.println("KEY: " + key);
+            System.out.println("VALUE: "+selectedAnswers.get(key));
+        }
+
         resultDao.saveResult(result);
 
         for (String key : keys) {
