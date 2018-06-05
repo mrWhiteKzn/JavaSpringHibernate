@@ -3,10 +3,11 @@ package exampro.entity;
 import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
+import java.sql.Date;
 
 @Entity
 @Table(name="result")
-public class ResultTest {
+public class Result {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,15 +15,19 @@ public class ResultTest {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "test_id")
-    TestEntity testEntity;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "question_id")
-    QuestionEntity questionEntity;
+    private TestEntity testEntity;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "answer_id")
-    AnswerEntity answerEntity;
+    private AnswerEntity answerEntity;
+
+    @Basic
+    @Column(name = "sqlDate")
+    private java.sql.Date sqlDate;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public int getId() {
         return id;
@@ -40,14 +45,6 @@ public class ResultTest {
         this.testEntity = testEntity;
     }
 
-    public QuestionEntity getQuestionEntity() {
-        return questionEntity;
-    }
-
-    public void setQuestionEntity(QuestionEntity questionEntity) {
-        this.questionEntity = questionEntity;
-    }
-
     public AnswerEntity getAnswerEntity() {
         return answerEntity;
     }
@@ -56,13 +53,19 @@ public class ResultTest {
         this.answerEntity = answerEntity;
     }
 
-    @Override
-    public String toString() {
-        return "ResultTest{" +
-                "id=" + id +
-                ", testEntity=" + testEntity +
-                ", questionEntity=" + questionEntity +
-                ", answerEntity=" + answerEntity +
-                '}';
+    public Date getSqlDate() {
+        return sqlDate;
+    }
+
+    public void setSqlDate(Date sqlDate) {
+        this.sqlDate = sqlDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

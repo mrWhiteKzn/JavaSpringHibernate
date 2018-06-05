@@ -1,18 +1,24 @@
 package exampro.service;
 
 import exampro.dao.AnswerDao;
-import exampro.entity.AnswerEntity;
-import exampro.entity.QuestionEntity;
+import exampro.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.MultiValueMap;
 
+import java.sql.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 @Service
 public class AnswerService {
 
     @Autowired
     AnswerDao answerDao;
+
+    @Autowired
+    TestService testService;
 
     public void saveOrUpdate(AnswerEntity answerEntity, QuestionEntity questionEntity){
         answerDao.saveOrUpdate(answerEntity, questionEntity);
@@ -37,5 +43,9 @@ public class AnswerService {
         return answerDao.getAnswerList();
     }
 
+    public void foo(MultiValueMap<String, String> answers, int testId){
+
+
+    }
 
 }

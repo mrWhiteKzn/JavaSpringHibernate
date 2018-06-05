@@ -1,22 +1,17 @@
 package exampro.controller;
 
-import com.fasterxml.jackson.databind.util.TypeKey;
-import exampro.entity.AnswerEntity;
-import exampro.entity.ResultTest;
 import exampro.service.AnswerService;
 import exampro.service.QuestionService;
+import exampro.service.ResultService;
 import exampro.service.TestService;
 import exampro.containerClasses.TestContainer;
 import exampro.entity.QuestionEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 @Controller
@@ -26,6 +21,7 @@ public class TestContoller {
     TestService testService;
     QuestionService questionService;
     AnswerService answerService;
+    ResultService resultService;
 
     @Autowired
     public void setTestService(TestService testService){
@@ -124,13 +120,20 @@ public class TestContoller {
         return "redirect:/exam/getall";
     }
 
-    @PostMapping("saveResult/")
-    public String saveResult(@ModelAttribute("resultTest") ResultTest resultTest,
-                             @RequestParam("answerEntity") String[] answerEntityList){
+    @PostMapping("saveResult/{id}")
+    public String saveResult(@RequestParam MultiValueMap<String, String> selectedAnswers,
+                             @PathVariable("id") int testId){
 
-        for(String s : answerEntityList){
-            System.out.println(s);
+
+        Set<String> keys = selectedAnswers.keySet();
+
+        for (String key : keys){
+            System.out.println("question.id " + key);
+            System.out.println("answer.text " + selectedAnswers.get(key));
         }
+
+        resultService.saveTestResult(selectedAnswers, testId);
+
         return "redirect:/exam/getall";
     }
 

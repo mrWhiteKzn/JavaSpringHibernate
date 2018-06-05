@@ -5,18 +5,15 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/exam/saveResult/" method="post" style="align-content: center">
+<form action="/exam/saveResult/${test.id}" method="post" style="align-content: center">
     Тест: ${test.name}
     <#list questionList as question>
         ${question.questionText}
 
         <#list question.answerEntitySet as answer>
         <ul>
-            <div>
-                <input type="checkbox" name="answerText" value="${answer.answerText}" id="${answer.id}">
-                <input type="hidden" name="answer.id" value="${answer.id}">
+                <input type="checkbox" name="${question.id}" value="${answer.answerText}" id="${answer.id}">
                 <label for="${answer.id}">${answer.answerText}</label>
-            </div>
         </ul>
         </#list>
 
