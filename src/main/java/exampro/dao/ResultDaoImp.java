@@ -1,14 +1,14 @@
 package exampro.dao;
 
 import exampro.config.HibernateUtil;
-import exampro.entity.Result;
+import exampro.entity.ResultEntity;
 import org.hibernate.Session;
 
 public class ResultDaoImp implements  ResultDao {
     @Override
-    public void saveResult(Result result) {
+    public void saveResult(ResultEntity resultEntity) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        session.save(result);
+        session.save(resultEntity);
         session.close();
     }
 }

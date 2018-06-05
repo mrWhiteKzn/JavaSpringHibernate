@@ -7,6 +7,7 @@
 <body>
 <form action="/exam/saveResult/${test.id}" method="post" style="align-content: center">
     Тест: ${test.name}
+    <p>
     <#list questionList as question>
         ${question.questionText}
 
@@ -16,8 +17,8 @@
                 <label for="${answer.id}">${answer.answerText}</label>
         </ul>
         </#list>
-
     </#list>
+    </p>
     <input type="submit" value="сохранить">
 </form>
 </body>

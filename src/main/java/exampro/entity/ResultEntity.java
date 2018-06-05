@@ -1,13 +1,11 @@
 package exampro.entity;
 
-import org.springframework.context.annotation.Lazy;
-
 import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
 @Table(name="result")
-public class Result {
+public class ResultEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +25,7 @@ public class Result {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
-    private User user;
+    private UserEntity userEntity;
 
     public int getId() {
         return id;
@@ -61,11 +59,11 @@ public class Result {
         this.sqlDate = sqlDate;
     }
 
-    public User getUser() {
-        return user;
+    public UserEntity getUserEntity() {
+        return userEntity;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setUserEntity(UserEntity userEntity) {
+        this.userEntity = userEntity;
     }
 }

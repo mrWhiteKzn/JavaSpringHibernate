@@ -1,8 +1,9 @@
 package exampro.service;
 
 import exampro.dao.ResultDao;
-import exampro.entity.Result;
-import exampro.entity.User;
+import exampro.entity.ResultDetailEntity;
+import exampro.entity.ResultEntity;
+import exampro.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
@@ -22,15 +23,19 @@ public class ResultService {
 
     public void saveTestResult(MultiValueMap<String, String> selectedAnswers, int testId) {
 
-        Result result = new Result();
+        ResultEntity result = new ResultEntity();
 
         result.setTestEntity(testService.getTestEntity(testId));
-        result.setUser(new User("Dima", "White"));
+        result.setUserEntity(new UserEntity("Dima", "White"));
         result.setSqlDate(new java.sql.Date(System.currentTimeMillis()));
 
         Set<String> keys = selectedAnswers.keySet();
 
         for(String key : keys){
+            ResultDetailEntity resultDetailEntity = new ResultDetailEntity();
+
+            //остановился тут
+            resultDetailEntity.setAnswerEntity();
             System.out.println("KEY: " + key);
             System.out.println("VALUE: "+selectedAnswers.get(key));
         }

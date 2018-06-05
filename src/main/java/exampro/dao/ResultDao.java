@@ -1,7 +1,7 @@
 package exampro.dao;
 
-import exampro.entity.Result;
+import exampro.entity.ResultEntity;
 
 public interface ResultDao {
-    void saveResult(Result result);
+    void saveResult(ResultEntity result);
 }
