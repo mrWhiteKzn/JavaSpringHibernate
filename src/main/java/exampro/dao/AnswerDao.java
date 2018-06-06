@@ -14,4 +14,6 @@ public interface AnswerDao {
     void delete(AnswerEntity answerEntity);
 
     List<AnswerEntity> getAnswerList();
+
+    AnswerEntity getAnswerEntityById(int id);
 }

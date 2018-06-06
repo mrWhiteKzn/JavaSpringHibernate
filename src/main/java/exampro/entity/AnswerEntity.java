@@ -55,8 +55,6 @@ public class AnswerEntity {
         this.questionEntity = questionEntity;
     }
 
-
-
     @Override
     public String toString() {
         return "AnswerEntity{" +
