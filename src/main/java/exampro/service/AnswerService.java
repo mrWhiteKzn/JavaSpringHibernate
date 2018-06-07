@@ -5,6 +5,7 @@ import exampro.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class AnswerService {
@@ -25,15 +26,26 @@ public class AnswerService {
         answerDao.saveOrUpdate(answerEntity, questionEntity);
     }
 
-    public void saveorUpdateList(String[] answerTextArray, QuestionEntity questionEntity){
-        for(String answer : answerTextArray){
+    public void saveorUpdateList(String[] answers, QuestionEntity questionEntity){
+        for(String answer : answers){
             AnswerEntity answerEntity = new AnswerEntity();
             answerEntity.setAnswerText(answer);
             answerEntity.setQuestionEntity(questionEntity);
             answerEntity.setCorrect(false);
 
-            answerDao.saveOrUpdate(answerEntity, questionEntity);
+            answerDao.saveOrUpdate(answerEntity,questionEntity);
         }
+    }
+
+    public void updateAnswers(Map<String, String> answersMap, QuestionEntity questionEntity){
+        answersMap.forEach((id,text) ->{
+            AnswerEntity answerEntity = answerDao.getAnswerEntityById(Integer.parseInt(id));
+            answerEntity.setAnswerText(text);
+            answerEntity.setQuestionEntity(questionEntity);
+            answerEntity.setCorrect(false);
+
+            answerDao.saveOrUpdate(answerEntity,questionEntity);
+        });
     }
 
     public void delete(AnswerEntity answerEntity){

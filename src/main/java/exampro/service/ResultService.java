@@ -7,10 +7,6 @@ import exampro.entity.UserEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
-
-import java.util.Iterator;
-import java.util.Set;
 
 @Service
 public class ResultService {
@@ -19,7 +15,6 @@ public class ResultService {
     private AnswerService answerService;
     private QuestionService questionService;
     private ResultDao resultDao;
-
 
     @Autowired
     public void setTestService(TestService testService) {

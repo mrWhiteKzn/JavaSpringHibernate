@@ -26,10 +26,14 @@ Id вопроса:
 
 <form name="answers" action="/exam/updateAnswers/${question.id}" method="post">
     А теперь сохраним ответы: <br>
-    Ответ №1 <input type="text" name="answerText"><br>
-    Ответ №2 <input type="text" name="answerText"><br>
-    Ответ №3 <input type="text" name="answerText"><br>
-    Ответ №4 <input type="text" name="answerText"><br>
+
+    <#--переделать-->
+    <#--https://stackoverflow.com/questions/9617207/listfoo-as-form-backing-object-using-spring-3-mvc-correct-syntax?rq=1 -->
+    <#--чтоб было красиво-->
+
+    <#list question.answerEntitySet as answer>
+        <input type="text" name="${answer.id}" value="${answer.answerText}"><br>
+    </#list>
     <input type="submit" value="Сохранить ответы">
 </form>
 </body>

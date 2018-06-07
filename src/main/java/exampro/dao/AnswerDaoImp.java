@@ -34,7 +34,6 @@ public class AnswerDaoImp implements AnswerDao {
     public AnswerEntity getAnswerEntityById(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         AnswerEntity answerEntity = session.load(AnswerEntity.class, id);
-        session.close();
         return answerEntity;
     }
 }

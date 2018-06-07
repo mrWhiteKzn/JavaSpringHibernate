@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.Set;
 
 @Controller
@@ -115,10 +116,13 @@ public class TestContoller {
     }
 
     @PostMapping("updateAnswers/{id}")
-    public String updateAnswers(@RequestParam ("answerText") String[] answerTextArray,
+    public String updateAnswers(@RequestParam Map<String, String> answersMap,
                                 @PathVariable("id") int id,
                                 Model model){
-        answerService.saveorUpdateList(answerTextArray, questionService.getQuestion(id));
+        answerService.updateAnswers(answersMap, questionService.getQuestion(id));
+        answersMap.forEach((k,v) -> {
+            System.out.println("MAP: " + k + " " +v );
+        });
         return "redirect:/exam/getall";
     }
 
