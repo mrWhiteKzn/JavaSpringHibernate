@@ -4,6 +4,8 @@ import exampro.config.HibernateUtil;
 import exampro.entity.AnswerEntity;
 import exampro.entity.QuestionEntity;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
+
 import java.util.List;
 
 public class AnswerDaoImp implements AnswerDao {
@@ -11,7 +13,11 @@ public class AnswerDaoImp implements AnswerDao {
     @Override
     public void saveOrUpdate(AnswerEntity answerEntity, QuestionEntity questionEntity) {
         Session session = HibernateUtil.getSessionFactory().openSession();
+        System.out.println("СЕЙЧАС БУДЕТ МЕРДЖ!!!");
+        Transaction transaction = session.beginTransaction();
         session.saveOrUpdate(answerEntity);
+        transaction.commit();
+        System.out.println("КОНЕЦ!!!");
         session.close();
     }
 
@@ -33,7 +39,8 @@ public class AnswerDaoImp implements AnswerDao {
     @Override
     public AnswerEntity getAnswerEntityById(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        AnswerEntity answerEntity = session.load(AnswerEntity.class, id);
+        AnswerEntity answerEntity = session.get(AnswerEntity.class, id);
+        session.close();
         return answerEntity;
     }
 }

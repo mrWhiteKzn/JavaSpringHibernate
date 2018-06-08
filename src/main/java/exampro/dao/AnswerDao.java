@@ -2,6 +2,7 @@ package exampro.dao;
 
 import exampro.entity.AnswerEntity;
 import exampro.entity.QuestionEntity;
+import org.hibernate.Session;
 
 import java.util.List;
 

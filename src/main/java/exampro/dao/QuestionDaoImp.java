@@ -35,7 +35,7 @@ public class QuestionDaoImp implements QuestionDao {
     @Override
     public QuestionEntity getQuestion(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        return session.load(QuestionEntity.class, id);
+        return session.get(QuestionEntity.class, id);
     }
 
     @Override

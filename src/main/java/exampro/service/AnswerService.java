@@ -1,7 +1,9 @@
 package exampro.service;
 
+import exampro.config.HibernateUtil;
 import exampro.dao.AnswerDao;
 import exampro.entity.*;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -11,6 +13,7 @@ import java.util.Map;
 public class AnswerService {
     AnswerDao answerDao;
     TestService testService;
+    QuestionService questionService;
 
     @Autowired
     public void setAnswerDao(AnswerDao answerDao) {
@@ -20,6 +23,11 @@ public class AnswerService {
     @Autowired
     public void setTestService(TestService testService) {
         this.testService = testService;
+    }
+
+    @Autowired
+    public void setQuestionService(QuestionService questionService) {
+        this.questionService = questionService;
     }
 
     public void saveOrUpdate(AnswerEntity answerEntity, QuestionEntity questionEntity){
@@ -38,14 +46,18 @@ public class AnswerService {
     }
 
     public void updateAnswers(Map<String, String> answersMap, QuestionEntity questionEntity){
+
+        Session session = HibernateUtil.getSessionFactory().openSession();
         answersMap.forEach((id,text) ->{
             AnswerEntity answerEntity = answerDao.getAnswerEntityById(Integer.parseInt(id));
+
             answerEntity.setAnswerText(text);
-            answerEntity.setQuestionEntity(questionEntity);
+//            answerEntity.setQuestionEntity(questionService.getQuestion(Integer.parseInt(id)));
             answerEntity.setCorrect(false);
 
             answerDao.saveOrUpdate(answerEntity,questionEntity);
         });
+        session.close();
     }
 
     public void delete(AnswerEntity answerEntity){
