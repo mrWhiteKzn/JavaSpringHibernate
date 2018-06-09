@@ -13,11 +13,9 @@ public class AnswerDaoImp implements AnswerDao {
     @Override
     public void saveOrUpdate(AnswerEntity answerEntity, QuestionEntity questionEntity) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        System.out.println("СЕЙЧАС БУДЕТ МЕРДЖ!!!");
         Transaction transaction = session.beginTransaction();
         session.saveOrUpdate(answerEntity);
         transaction.commit();
-        System.out.println("КОНЕЦ!!!");
         session.close();
     }
 

@@ -9,15 +9,15 @@ public class ResultEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    int id;
+    private int id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "test_id")
     private TestEntity testEntity;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "answer_id")
-    private AnswerEntity answerEntity;
+//    @ManyToOne(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "answer_id")
+//    private AnswerEntity answerEntity;
 
     @Basic
     @Column(name = "sqlDate")
@@ -43,13 +43,13 @@ public class ResultEntity {
         this.testEntity = testEntity;
     }
 
-    public AnswerEntity getAnswerEntity() {
-        return answerEntity;
-    }
+//    public AnswerEntity getAnswerEntity() {
+//        return answerEntity;
+//    }
 
-    public void setAnswerEntity(AnswerEntity answerEntity) {
-        this.answerEntity = answerEntity;
-    }
+//    public void setAnswerEntity(AnswerEntity answerEntity) {
+//        this.answerEntity = answerEntity;
+//    }
 
     public Date getSqlDate() {
         return sqlDate;

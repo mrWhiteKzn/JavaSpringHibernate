@@ -52,7 +52,6 @@ public class AnswerService {
             AnswerEntity answerEntity = answerDao.getAnswerEntityById(Integer.parseInt(id));
 
             answerEntity.setAnswerText(text);
-//            answerEntity.setQuestionEntity(questionService.getQuestion(Integer.parseInt(id)));
             answerEntity.setCorrect(false);
 
             answerDao.saveOrUpdate(answerEntity,questionEntity);

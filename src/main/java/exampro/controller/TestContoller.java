@@ -120,9 +120,6 @@ public class TestContoller {
                                 @PathVariable("id") int id,
                                 Model model){
         answerService.updateAnswers(answersMap, questionService.getQuestion(id));
-        answersMap.forEach((k,v) -> {
-            System.out.println("MAP: " + k + " " +v );
-        });
         return "redirect:/exam/getall";
     }
 

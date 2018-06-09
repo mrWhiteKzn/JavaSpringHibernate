@@ -4,9 +4,13 @@ import exampro.dao.ResultDao;
 import exampro.entity.ResultDetailEntity;
 import exampro.entity.ResultEntity;
 import exampro.entity.UserEntity;
+import exampro.reports.ExamResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.MultiValueMap;
+
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class ResultService {
@@ -60,5 +64,9 @@ public class ResultService {
 
     public ResultEntity getResultEntityById(int id){
         return resultDao.getResultEntityById(id);
+    }
+
+    public List<ExamResult> getRecentlyResults() {
+        return resultDao.getRecentlyResults();
     }
 }

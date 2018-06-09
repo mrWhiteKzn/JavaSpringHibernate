@@ -3,7 +3,11 @@ package exampro.dao;
 import exampro.config.HibernateUtil;
 import exampro.entity.ResultDetailEntity;
 import exampro.entity.ResultEntity;
+import exampro.reports.ExamResult;
+import exampro.reports.Reports;
 import org.hibernate.Session;
+
+import java.util.List;
 
 public class ResultDaoImp implements  ResultDao {
     @Override
@@ -26,5 +30,11 @@ public class ResultDaoImp implements  ResultDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.save(resultDetailEntity);
         session.close();
+    }
+
+    @Override
+    public List<ExamResult> getRecentlyResults() {
+        Reports reports = new Reports();
+        return reports.getExamResults("white");
     }
 }

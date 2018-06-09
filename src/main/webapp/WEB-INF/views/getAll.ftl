@@ -9,7 +9,7 @@
 <table>
     <tr>
         <td>Id</td>
-        <td>Название теста</td>
+        <td>Название экзамена</td>
     </tr>
     <#list tests as test>
         <tr>
