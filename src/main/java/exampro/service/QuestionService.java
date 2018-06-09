@@ -13,7 +13,7 @@ import java.util.Map;
 public class QuestionService {
 
 
-    QuestionDao questionDao;
+    private QuestionDao questionDao;
 
     @Autowired
     public void setQuestionDao(QuestionDao questionDao) {

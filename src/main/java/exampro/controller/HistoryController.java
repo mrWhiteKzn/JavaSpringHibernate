@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/history")
 public class HistoryController {
 
-    ResultService resultService;
+    private ResultService resultService;
 
     @Autowired
     public void setResultService(ResultService resultService) {

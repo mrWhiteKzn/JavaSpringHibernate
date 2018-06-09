@@ -15,7 +15,6 @@ public class Reports {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
         Query hibernateQuery = session.createQuery(query);
-        List<ExamResult> list = hibernateQuery.list();
         return hibernateQuery.list();
     }
 }

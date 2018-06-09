@@ -7,7 +7,7 @@ import java.util.List;
 
 public class TestContainer {
 
-    TestEntity testEntity;
+    private TestEntity testEntity;
     private List<QuestionEntity> questionEntityList;
 
     public TestContainer() {

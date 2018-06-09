@@ -12,12 +12,18 @@ import java.util.List;
 
 @Service
 public class TestService {
+    private TestDao testDao;
+    private QuestionDao questionDao;
 
     @Autowired
-    TestDao testDao;
+    public void setTestDao(TestDao testDao) {
+        this.testDao = testDao;
+    }
 
     @Autowired
-    QuestionDao questionDao;
+    public void setQuestionDao(QuestionDao questionDao) {
+        this.questionDao = questionDao;
+    }
 
     public TestEntity getTestEntity(int id){
         return testDao.getTest(id);
@@ -26,8 +32,7 @@ public class TestService {
     public TestContainer getTestContainer(int id){
         TestEntity testEntity = testDao.getTest(id);
         List<QuestionEntity> questionEntityList = questionDao.getAllByTestId(testEntity);
-        TestContainer testContainer = new TestContainer(testEntity, questionEntityList);
-        return testContainer;
+        return new TestContainer(testEntity, questionEntityList);
     }
 
     public List<TestEntity> findAll() {

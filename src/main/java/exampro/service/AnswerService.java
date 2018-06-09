@@ -11,9 +11,9 @@ import java.util.Map;
 
 @Service
 public class AnswerService {
-    AnswerDao answerDao;
-    TestService testService;
-    QuestionService questionService;
+    private AnswerDao answerDao;
+    private TestService testService;
+    private QuestionService questionService;
 
     @Autowired
     public void setAnswerDao(AnswerDao answerDao) {

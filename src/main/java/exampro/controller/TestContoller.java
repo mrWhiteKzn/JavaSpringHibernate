@@ -19,10 +19,10 @@ import java.util.Set;
 @RequestMapping("/exam")
 public class TestContoller {
 
-    TestService testService;
-    QuestionService questionService;
-    AnswerService answerService;
-    ResultService resultService;
+    private TestService testService;
+    private QuestionService questionService;
+    private AnswerService answerService;
+    private ResultService resultService;
 
     @Autowired
     public void setTestService(TestService testService){
