@@ -31,9 +31,20 @@ Id вопроса:
     <#--https://stackoverflow.com/questions/9617207/listfoo-as-form-backing-object-using-spring-3-mvc-correct-syntax?rq=1 -->
     <#--чтоб было красиво-->
 
-    <#list question.answerEntitySet as answer>
-        <input type="text" name="${answer.id}" value="${answer.answerText}"><br>
-    </#list>
+<#--<#list question.answerEntitySet as answer>-->
+<#--<input type="text" name="${answer.id}" value="${answer.answerText}">-->
+<#--<input type="checkbox" id="isCorrect" name="isCorrect" value="${answer.id}">-->
+<#--<label for="isCorrect">Верный</label><br>-->
+<#--</#list>-->
+
+     <#list question.answerEntitySet as answer>
+        <input type="hidden" name="id" value="${answer.id}">
+        <input type="text" name="answerText" value="${answer.answerText}">
+        <input type="checkbox" name="isCorrect" id="isCorrect">
+
+        <label for="isCorrect">Верный</label><br>
+     </#list>
+
     <input type="submit" value="Сохранить ответы">
 </form>
 </body>

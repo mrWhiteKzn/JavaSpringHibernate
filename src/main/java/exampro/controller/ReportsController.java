@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/history")
-public class HistoryController {
+@RequestMapping("/reports")
+public class ReportsController {
 
     private ResultService resultService;
 
@@ -18,7 +18,7 @@ public class HistoryController {
         this.resultService = resultService;
     }
 
-    @GetMapping("showRecently")
+    @GetMapping("Recently")
     public String showRecently(Model model){
         model.addAttribute("examResultList",resultService.getRecentlyResults());
         return "recently";

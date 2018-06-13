@@ -1,5 +1,7 @@
 package exampro.controller;
 
+import exampro.containerClasses.AnswerContainer;
+import exampro.entity.AnswerEntity;
 import exampro.service.AnswerService;
 import exampro.service.QuestionService;
 import exampro.service.ResultService;
@@ -12,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -86,12 +89,6 @@ public class TestContoller {
         return "redirect:/exam/getall";
     }
 
-    @GetMapping("editQuestion/{id}")
-    public String editQuestion(@PathVariable("id") int id, Model model){
-        model.addAttribute("question", questionService.getQuestion(id));
-        return "editQuestion";
-    }
-
     @PostMapping("updateQuestion/{id}")
     public String editQuestion(@ModelAttribute ("question") QuestionEntity questionEntity, Model model){
         questionService.saveOrUpdate(questionEntity);
@@ -115,11 +112,29 @@ public class TestContoller {
         return "redirect:/exam/getall";
     }
 
+    @GetMapping("editQuestion/{id}")
+    public String editQuestion(@PathVariable("id") int id, Model model) {
+        model.addAttribute("question", questionService.getQuestion(id));
+        model.addAttribute("answerContainer", new AnswerContainer());
+        return "editQuestion";
+    }
+
+    /*
+     *
+     * Map<String, String> answerMap is a map, which contains answerId as a key and answerText as a value.
+     * QuestionId  is identificator of a question, to which belong all answers
+     * isCorrectMas is massive of String which marks answers as a correct answer.
+     */
     @PostMapping("updateAnswers/{id}")
     public String updateAnswers(@RequestParam Map<String, String> answersMap,
-                                @PathVariable("id") int id,
-                                Model model){
-        answerService.updateAnswers(answersMap, questionService.getQuestion(id));
+                                @PathVariable("id") int QuestionId,
+                                @RequestParam AnswerContainer answerContainer) {
+
+        answerEntityList.forEach((v) -> {
+            System.out.println(v);
+        });
+
+//        answerService.updateAnswers(answersMap, questionService.getQuestion(QuestionId), isCorrectList);
         return "redirect:/exam/getall";
     }
 

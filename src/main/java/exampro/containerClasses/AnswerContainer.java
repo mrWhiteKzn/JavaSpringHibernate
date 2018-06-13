@@ -18,4 +18,11 @@ public class AnswerContainer {
     public void add(AnswerEntity answerEntity){
         this.answerEntityList.add(answerEntity);
     }
+
+    @Override
+    public String toString() {
+        return "AnswerContainer{" +
+                "answerEntityList=" + answerEntityList +
+                '}';
+    }
 }
