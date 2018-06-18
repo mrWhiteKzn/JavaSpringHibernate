@@ -15,9 +15,9 @@ public class AnswerEntity {
     @Column(name = "answer_text")
     private String answerText;
 
-    @Column(name = "isCorrect")
+    @Column(name = "Correct")
     @Type(type = "org.hibernate.type.NumericBooleanType")
-    private boolean isCorrect;
+    private boolean correct;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id")
@@ -40,11 +40,11 @@ public class AnswerEntity {
     }
 
     public boolean isCorrect() {
-        return isCorrect;
+        return correct;
     }
 
     public void setCorrect(boolean correct) {
-        isCorrect = correct;
+        this.correct = correct;
     }
 
     public QuestionEntity getQuestionEntity() {
@@ -55,13 +55,4 @@ public class AnswerEntity {
         this.questionEntity = questionEntity;
     }
 
-    @Override
-    public String toString() {
-        return "AnswerEntity{" +
-                "id=" + id +
-                ", answerText='" + answerText + '\'' +
-                ", isCorrect=" + isCorrect +
-                ", questionEntity=" + questionEntity +
-                '}';
-    }
 }
