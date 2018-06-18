@@ -52,14 +52,14 @@ public class AnswerService {
         Session session = HibernateUtil.getSessionFactory().openSession();
         answersMap.forEach((id,text) ->{
             System.out.println(id);
-//            AnswerEntity answerEntity = answerDao.getAnswerEntityById(Integer.parseInt(id));
-//            answerEntity.setAnswerText(text);
+            AnswerEntity answerEntity = answerDao.getAnswerEntityById(Integer.parseInt(id));
+            answerEntity.setAnswerText(text);
 //            if(isCorrectMas.contains(id)){
 //                System.out.println("Верный ответ: " + id + " " + answerEntity.getAnswerText() );
 //            }
-//            answerEntity.setCorrect(false);
-
-//            answerDao.saveOrUpdate(answerEntity,questionEntity);
+            answerEntity.setCorrect(false);
+//
+            answerDao.saveOrUpdate(answerEntity, questionEntity);
         });
         session.close();
     }

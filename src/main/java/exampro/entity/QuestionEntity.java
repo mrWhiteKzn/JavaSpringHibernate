@@ -1,6 +1,7 @@
 package exampro.entity;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -19,7 +20,7 @@ public class QuestionEntity {
     private TestEntity testEntity;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "questionEntity")
-    private Set<AnswerEntity> answerEntitySet;
+    private List<AnswerEntity> answerEntityList;
 
     public int getId() {
         return id;
@@ -46,12 +47,12 @@ public class QuestionEntity {
         this.testEntity = testEntity;
     }
 
-    public Set<AnswerEntity> getAnswerEntitySet() {
-        return answerEntitySet;
+    public List<AnswerEntity> getAnswerEntityList() {
+        return answerEntityList;
     }
 
-    public void setAnswerEntitySet(Set<AnswerEntity> answerEntitySet) {
-        this.answerEntitySet = answerEntitySet;
+    public void setAnswerEntityList(List<AnswerEntity> answerEntityList) {
+        this.answerEntityList = answerEntityList;
     }
 
     @Override
@@ -60,7 +61,7 @@ public class QuestionEntity {
                 "id=" + id +
                 ", questionText='" + questionText + '\'' +
                 ", testEntity=" + testEntity +
-                ", answerEntitySet=" + answerEntitySet +
+                ", answerEntitySet=" + answerEntityList +
                 '}';
     }
 }

@@ -16,7 +16,7 @@
 </head>
 <body>
 <h3>Форма редактирования теста:</h3>
-<form name="editedTestContainer" action="/exam/updateTest" method="post">
+<form name="editedTestContainer1" action="/exam/updateTest" method="post">
 <table id="testTable">
     ID теста: <input type="text" name="id" title="id" value="${testContainer.testEntity.id}"><br>
     Название теста: <input type="text" name="name" title="testName" value="${testContainer.testEntity.name}"><br>

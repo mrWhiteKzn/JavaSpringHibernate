@@ -1,48 +1,43 @@
+<#import "spring.ftl" as spring />
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <script language="JavaScript">
-        function add(){
-            var tr = document.createElement('tr');
-            var td = document.createElement('td');
-
-            td.innerHTML="<input type='text' name='question'>";
-            document.getElementById('testTable').appendChild(tr);
-            tr.appendChild(td);
-        }
-    </script>
 </head>
 <body>
 <h3>Форма редактирования вопроса:</h3>
 <form name="editedQuestion" action="/exam/updateQuestion/${question.id}" method="post">
-Id вопроса:
+    Id вопроса:
     <input type="text" value="${question.id}"><br>
     Текст вопроса:
     <input type="text" value="${question.questionText}">
     <input type="submit" value="Сохранить вопрос">
 </form>
 
-<form name="answers" action="/exam/updateAnswers/${question.id}" method="post">
+<form name="answerContainer" action="/exam/updateAnswers/" method="post">
     А теперь сохраним ответы: <br>
-
-    <#--переделать-->
-    <#--https://stackoverflow.com/questions/9617207/listfoo-as-form-backing-object-using-spring-3-mvc-correct-syntax?rq=1 -->
-    <#--чтоб было красиво-->
+<#--переделать-->
+<#--https://stackoverflow.com/questions/9617207/listfoo-as-form-backing-object-using-spring-3-mvc-correct-syntax?rq=1 -->
+<#--чтоб было красиво-->
 
 <#--<#list question.answerEntitySet as answer>-->
 <#--<input type="text" name="${answer.id}" value="${answer.answerText}">-->
 <#--<input type="checkbox" id="isCorrect" name="isCorrect" value="${answer.id}">-->
 <#--<label for="isCorrect">Верный</label><br>-->
 <#--</#list>-->
+     <#list answerContainer.answerEntityList as answer>
+         <@spring.bind path="answerContainer.answerEntityList[${answer_index}].id"/>
+        <input type="text" name="${spring.status.expression}" value="${spring.status.value}">
 
-     <#list question.answerEntitySet as answer>
-        <input type="hidden" name="id" value="${answer.id}">
-        <input type="text" name="answerText" value="${answer.answerText}">
-        <input type="checkbox" name="isCorrect" id="isCorrect">
+         <@spring.bind path="answerContainer.answerEntityList[${answer_index}].answerText"/>
+        <input type="text" name="${spring.status.expression}" value="${spring.status.value}">
 
-        <label for="isCorrect">Верный</label><br>
+         <@spring.bind path="answerContainer.answerEntityList[${answer_index}].isCorrect"/>
+        <input type="text" name="${spring.status.expression}" id="isCorrect" value="${spring.status.value}">
+
+        <input type="text" name="questionEntity" value="">
+     <#--<label for="isCorrect">Верный</label><br>--><br>
      </#list>
 
     <input type="submit" value="Сохранить ответы">

@@ -2,10 +2,18 @@ package exampro.containerClasses;
 
 import exampro.entity.AnswerEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AnswerContainer {
-    private List<AnswerEntity> answerEntityList;
+    private List<AnswerEntity> answerEntityList = new ArrayList<AnswerEntity>();
+
+    public AnswerContainer() {
+    }
+
+    public AnswerContainer(List<AnswerEntity> answerEntitySet) {
+        this.answerEntityList = answerEntitySet;
+    }
 
     public List<AnswerEntity> getAnswerEntityList() {
         return answerEntityList;
@@ -15,14 +23,5 @@ public class AnswerContainer {
         this.answerEntityList = answerEntityList;
     }
 
-    public void add(AnswerEntity answerEntity){
-        this.answerEntityList.add(answerEntity);
-    }
 
-    @Override
-    public String toString() {
-        return "AnswerContainer{" +
-                "answerEntityList=" + answerEntityList +
-                '}';
-    }
 }

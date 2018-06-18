@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -114,24 +115,37 @@ public class TestContoller {
 
     @GetMapping("editQuestion/{id}")
     public String editQuestion(@PathVariable("id") int id, Model model) {
-        model.addAttribute("question", questionService.getQuestion(id));
-        model.addAttribute("answerContainer", new AnswerContainer());
+        QuestionEntity questionEntity = questionService.getQuestion(id);
+        AnswerContainer answerContainer = new AnswerContainer();
+        answerContainer.setAnswerEntityList(questionEntity.getAnswerEntityList());
+
+        List<AnswerEntity> answerEntityList = new ArrayList<AnswerEntity>();
+
+        if (!answerEntityList.isEmpty()) System.out.println("SIZE: " + answerEntityList.size());
+
+
+        model.addAttribute("question", questionEntity);
+        model.addAttribute("answerContainer", answerContainer);
+        model.addAttribute("answerList", answerEntityList);
+
         return "editQuestion";
     }
 
     /*
-     *
-     * Map<String, String> answerMap is a map, which contains answerId as a key and answerText as a value.
-     * QuestionId  is identificator of a question, to which belong all answers
-     * isCorrectMas is massive of String which marks answers as a correct answer.
+     * Map<String, String> answersMap is a map, which contains answerId as a key and answerText as a value.
+     * QuestionId  is identificator of a question, to which belong answersMap
      */
-    @PostMapping("updateAnswers/{id}")
+    @PostMapping("updateAnswers/")
     public String updateAnswers(@RequestParam Map<String, String> answersMap,
-                                @PathVariable("id") int QuestionId,
-                                @RequestParam AnswerContainer answerContainer) {
+//                                @PathVariable("id") int QuestionId,
+                                @ModelAttribute("answerContainer") AnswerContainer answerContainer) {
 
-        answerEntityList.forEach((v) -> {
-            System.out.println(v);
+        System.out.println("КОЛИЧЕСТВО ПОЛУЧЕННЫХ БИНОВ:" + answerContainer.getAnswerEntityList().size());
+        answerContainer.getAnswerEntityList().forEach((bean) -> {
+            System.out.println("ID: " + bean.getId());
+            System.out.println("Answer Text: " + bean.getAnswerText());
+            System.out.println("Question entity: " + bean.getQuestionEntity());
+            System.out.println("is correct: " + bean.isCorrect());
         });
 
 //        answerService.updateAnswers(answersMap, questionService.getQuestion(QuestionId), isCorrectList);

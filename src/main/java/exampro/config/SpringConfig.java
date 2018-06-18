@@ -1,6 +1,7 @@
 package exampro.config;
 
 import exampro.dao.*;
+import freemarker.template.DefaultObjectWrapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
