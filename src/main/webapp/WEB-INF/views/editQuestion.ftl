@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
 </head>
 <body>
 <h3>Форма редактирования вопроса:</h3>
@@ -25,14 +26,22 @@
         <input type="text" name="${spring.status.expression}" value="${spring.status.value}">
 
          <@spring.bind path="answerContainer.answerEntityList[${answer_index}].correct"/>
-        <input type="checkbox" name="${spring.status.expression}" id="correct" value="${spring.status.value}">
-        <label for="correct">Верный</label>
+        <input type="checkbox" name="${spring.status.expression}" id="correct${answer_index}"
+               value="${spring.status.value}">
+        <label for="correct${answer_index}" onclick="changeValue('correct${answer_index}');">Верный</label>
 
-         <@spring.bind path="answerContainer.answerEntityList[${answer_index}].questionEntity"/>
-        <input type="hidden" name="${spring.status.expression}" value="${spring.status.value}">
+     <#--<@spring.bind path="answerContainer.answerEntityList[${answer_index}].questionEntity"/>-->
+     <#--<input type="hidden" name="${spring.status.expression}" value="${spring.status.value}">-->
      <br>
      </#list>
     <input type="submit" value="Сохранить ответы">
 </form>
+
+<script language="JavaScript">
+    function changeValue(id) {
+        document.getElementById(id).setAttribute("value", "true");
+    }
+</script>
+<script src=”https://code.jquery.com/jquery-3.2.1.min.js”></script>
 </body>
 </html>

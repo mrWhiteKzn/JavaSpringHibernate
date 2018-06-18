@@ -11,7 +11,7 @@
     <#list questionList as question>
         ${question.questionText}
 
-        <#list question.answerEntitySet as answer>
+        <#list question.answerEntityList as answer>
         <ul>
                 <input type="checkbox" name="${question.id}" value="${answer.id}" id="${answer.id}">
                 <label for="${answer.id}">${answer.answerText}</label>
