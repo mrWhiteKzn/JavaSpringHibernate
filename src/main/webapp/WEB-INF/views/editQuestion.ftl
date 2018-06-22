@@ -36,7 +36,6 @@
      </#list>
     <input type="submit" value="Сохранить ответы">
 </form>
-
 <script language="JavaScript">
     function changeValue(id) {
         document.getElementById(id).setAttribute("value", "true");

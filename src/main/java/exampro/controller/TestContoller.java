@@ -2,6 +2,7 @@ package exampro.controller;
 
 import exampro.containerClasses.AnswerContainer;
 import exampro.entity.AnswerEntity;
+import exampro.entity.TestEntity;
 import exampro.service.AnswerService;
 import exampro.service.QuestionService;
 import exampro.service.ResultService;
@@ -54,6 +55,15 @@ public class TestContoller {
         return "getAll";
     }
 
+    @PostMapping("/addNew")
+    public String addNew(@ModelAttribute TestEntity testEntity) {
+        System.out.println("===========================" + testEntity.toString());
+        TestContainer testContainer = new TestContainer();
+        testContainer.setTestEntity(testEntity);
+        testService.saveOrUpdate(testContainer);
+        return "redirect:/exam/getall";
+    }
+
     @GetMapping("/gettest/{id}")
     public String getTest2(@PathVariable("id") int id, Model model){
         model.addAttribute("test", testService.getTestEntity(id));
@@ -74,7 +84,9 @@ public class TestContoller {
     }
 
     @GetMapping("/addnew")
-    public String addNew(){
+    public String addNew(Model model) {
+        TestContainer testContainer = new TestContainer();
+        model.addAttribute(testContainer);
         return "addNew";
     }
 

@@ -35,6 +35,7 @@ public class ResultDaoImp implements  ResultDao {
     @Override
     public List<ExamResult> getRecentlyResults() {
         Reports reports = new Reports();
+        System.out.println("=-========================" + reports.getExamResults("white"));
         return reports.getExamResults("white");
     }
 }

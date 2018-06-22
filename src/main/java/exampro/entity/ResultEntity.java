@@ -2,6 +2,8 @@ package exampro.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="result")
@@ -15,10 +17,6 @@ public class ResultEntity {
     @JoinColumn(name = "test_id")
     private TestEntity testEntity;
 
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "answer_id")
-//    private AnswerEntity answerEntity;
-
     @Basic
     @Column(name = "sqlDate")
     private java.sql.Date sqlDate;
@@ -26,6 +24,9 @@ public class ResultEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "resultEntity", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<ResultDetailEntity> resultDetailEntityList;
 
     public int getId() {
         return id;

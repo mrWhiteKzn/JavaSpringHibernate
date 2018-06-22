@@ -1,3 +1,5 @@
+<#import "spring.ftl" as spring />
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +8,9 @@
 </head>
 <body>
 <h3>Добавить новый тест.</h3>
-<form name="test" action="updateTest" method="post">
+<form name="test" action="addNew" method="post">
     Наименование теста:<br>
+
     <input type="text" name="name">
     <input type="submit" name="addTest" value="Добавить">
 

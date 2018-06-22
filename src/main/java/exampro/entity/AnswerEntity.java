@@ -1,8 +1,10 @@
 package exampro.entity;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "answer")
@@ -22,6 +24,17 @@ public class AnswerEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "question_id")
     private QuestionEntity questionEntity;
+
+    @OneToMany(mappedBy = "answerEntity", cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private List<ResultDetailEntity> resultDetailEntityList;
+
+    public List<ResultDetailEntity> getResultDetailEntityList() {
+        return resultDetailEntityList;
+    }
+
+    public void setResultDetailEntityList(List<ResultDetailEntity> resultDetailEntityList) {
+        this.resultDetailEntityList = resultDetailEntityList;
+    }
 
     public int getId() {
         return id;

@@ -14,8 +14,11 @@ public class TestEntity {
     @Column
     private String name;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "testEntity")
+    @OneToMany(mappedBy = "testEntity", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
     private Set<QuestionEntity> questions;
+
+    @OneToMany(mappedBy = "testEntity", fetch = FetchType.LAZY, cascade = CascadeType.PERSIST, orphanRemoval = true)
+    private Set<ResultEntity> resultEntities;
 
     public int getId() {
         return id;
@@ -31,14 +34,6 @@ public class TestEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Set<QuestionEntity> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(Set<QuestionEntity> questions) {
-        this.questions = questions;
     }
 
     @Override

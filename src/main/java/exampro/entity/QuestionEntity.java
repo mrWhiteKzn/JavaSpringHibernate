@@ -19,7 +19,7 @@ public class QuestionEntity {
     @JoinColumn(name = "test_id")
     private TestEntity testEntity;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "questionEntity")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "questionEntity", cascade = CascadeType.REMOVE)
     private List<AnswerEntity> answerEntityList;
 
     public int getId() {

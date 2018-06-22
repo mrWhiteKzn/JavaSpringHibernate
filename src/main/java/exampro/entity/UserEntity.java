@@ -16,6 +16,9 @@ public class UserEntity {
     @Column(name = "password")
     private String password;
 
+    public UserEntity() {
+    }
+
     public UserEntity(String login, String password) {
         this.login = login;
         this.password = password;

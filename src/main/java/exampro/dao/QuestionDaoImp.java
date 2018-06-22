@@ -19,6 +19,7 @@ public class QuestionDaoImp implements QuestionDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         QuestionEntity questionEntity = session.load(QuestionEntity.class, id);
+        questionEntity.setTestEntity(null);
         session.delete(questionEntity);
         transaction.commit();
         session.close();
