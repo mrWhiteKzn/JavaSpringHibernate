@@ -44,9 +44,7 @@ public class AnswerService {
     }
 
     public void updateAnswers(QuestionContainer questionContainer) {
-        questionContainer.getAnswerEntityList().forEach((answerEntity) -> {
-//            saveOrUpdate(answerEntity,answerEntity.getQuestionEntity());
-        });
+        answerDao.saveorUpdateList(questionContainer.getAnswerEntityList(), questionContainer.getQuestionEntity());
     }
 
     public void delete(AnswerEntity answerEntity){

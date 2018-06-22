@@ -21,6 +21,16 @@ public class AnswerDaoImp implements AnswerDao {
 
     @Override
     public void saveorUpdateList(List<AnswerEntity> answerEntityList, QuestionEntity questionEntity) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction transaction = session.beginTransaction();
+
+        answerEntityList.forEach(answerEntity -> {
+            answerEntity.setQuestionEntity(questionEntity);
+            System.out.println("ID: " + answerEntity.getId());
+            System.out.println("Answer Text: " + answerEntity.getAnswerText());
+            System.out.println("Question entity: " + answerEntity.getQuestionEntity());
+            System.out.println("is correct: " + answerEntity.isCorrect());
+        });
 
     }
 
