@@ -1,7 +1,6 @@
 package exampro.controller;
 
-import exampro.containerClasses.AnswerContainer;
-import exampro.entity.AnswerEntity;
+import exampro.containerClasses.QuestionContainer;
 import exampro.entity.TestEntity;
 import exampro.service.AnswerService;
 import exampro.service.QuestionService;
@@ -14,11 +13,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 @Controller
 @RequestMapping("/exam")
@@ -55,9 +49,11 @@ public class TestContoller {
         return "getAll";
     }
 
+    /*
+     * Comment for myself: think whether you should avoid class-wrapper here
+     * */
     @PostMapping("/addNew")
     public String addNew(@ModelAttribute TestEntity testEntity) {
-        System.out.println("===========================" + testEntity.toString());
         TestContainer testContainer = new TestContainer();
         testContainer.setTestEntity(testEntity);
         testService.saveOrUpdate(testContainer);
@@ -121,46 +117,33 @@ public class TestContoller {
                               @RequestParam("answerText") String[] answersTextArray){
         testService.saveOrUpdate(questionEntity, id);
         answerService.saveorUpdateList(answersTextArray, questionEntity);
-
         return "redirect:/exam/getall";
     }
 
     @GetMapping("editQuestion/{id}")
     public String editQuestion(@PathVariable("id") int id, Model model) {
         QuestionEntity questionEntity = questionService.getQuestion(id);
-        AnswerContainer answerContainer = new AnswerContainer();
-        answerContainer.setAnswerEntityList(questionEntity.getAnswerEntityList());
 
-        List<AnswerEntity> answerEntityList = new ArrayList<AnswerEntity>();
+        QuestionContainer questionContainer = new QuestionContainer();
+        questionContainer.setQuestionEntity(questionEntity);
+        questionContainer.setAnswerEntityList(questionEntity.getAnswerEntityList());
 
-        if (!answerEntityList.isEmpty()) System.out.println("SIZE: " + answerEntityList.size());
-
-
-        model.addAttribute("question", questionEntity);
-        model.addAttribute("answerContainer", answerContainer);
-        model.addAttribute("answerList", answerEntityList);
-
+        model.addAttribute(questionContainer);
         return "editQuestion";
     }
 
-    /*
-     * Map<String, String> answersMap is a map, which contains answerId as a key and answerText as a value.
-     * QuestionId  is identificator of a question, to which belong answersMap
-     */
     @PostMapping("updateAnswers/")
-    public String updateAnswers(@RequestParam Map<String, String> answersMap,
-//                                @PathVariable("id") int QuestionId,
-                                @ModelAttribute("answerContainer") AnswerContainer answerContainer) {
+    public String updateAnswers(@ModelAttribute("questionContainer") QuestionContainer questionContainer) {
 
-        System.out.println("КОЛИЧЕСТВО ПОЛУЧЕННЫХ БИНОВ:" + answerContainer.getAnswerEntityList().size());
-        answerContainer.getAnswerEntityList().forEach((bean) -> {
+        System.out.println("КОЛИЧЕСТВО ПОЛУЧЕННЫХ БИНОВ:" + questionContainer.getAnswerEntityList().size());
+        questionContainer.getAnswerEntityList().forEach((bean) -> {
             System.out.println("ID: " + bean.getId());
             System.out.println("Answer Text: " + bean.getAnswerText());
             System.out.println("Question entity: " + bean.getQuestionEntity());
             System.out.println("is correct: " + bean.isCorrect());
         });
 
-//        answerService.updateAnswers(answersMap, questionService.getQuestion(QuestionId), isCorrectList);
+        answerService.updateAnswers(questionContainer);
         return "redirect:/exam/getall";
     }
 

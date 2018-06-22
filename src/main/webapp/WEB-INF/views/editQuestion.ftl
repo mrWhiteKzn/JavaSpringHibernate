@@ -8,24 +8,24 @@
 </head>
 <body>
 <h3>Форма редактирования вопроса:</h3>
-<form name="editedQuestion" action="/exam/updateQuestion/${question.id}" method="post">
+<form name="editedQuestion" action="/exam/updateQuestion/${questionContainer.questionEntity.id}" method="post">
     Id вопроса:
-    <input type="text" value="${question.id}"><br>
+    <input type="text" value="${questionContainer.questionEntity.id}"><br>
     Текст вопроса:
-    <input type="text" value="${question.questionText}">
+    <input type="text" value="${questionContainer.questionEntity.questionText}">
     <input type="submit" value="Сохранить вопрос">
 </form>
 
-<form name="answerContainer" action="/exam/updateAnswers/" method="post">
+<form name="questionContainer" action="/exam/updateAnswers/" method="post">
     А теперь сохраним ответы: <br>
-     <#list answerContainer.answerEntityList as answer>
-         <@spring.bind path="answerContainer.answerEntityList[${answer_index}].id"/>
+     <#list questionContainer.answerEntityList as answer>
+         <@spring.bind path="questionContainer.answerEntityList[${answer_index}].id"/>
         <input type="hidden" name="${spring.status.expression}" value="${spring.status.value}">
 
-         <@spring.bind path="answerContainer.answerEntityList[${answer_index}].answerText"/>
+         <@spring.bind path="questionContainer.answerEntityList[${answer_index}].answerText"/>
         <input type="text" name="${spring.status.expression}" value="${spring.status.value}">
 
-         <@spring.bind path="answerContainer.answerEntityList[${answer_index}].correct"/>
+         <@spring.bind path="questionContainer.answerEntityList[${answer_index}].correct"/>
         <input type="checkbox" name="${spring.status.expression}" id="correct${answer_index}"
                value="${spring.status.value}">
         <label for="correct${answer_index}" onclick="changeValue('correct${answer_index}');">Верный</label>
