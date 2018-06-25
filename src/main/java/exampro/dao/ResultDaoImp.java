@@ -10,6 +10,7 @@ import org.hibernate.Session;
 import java.util.List;
 
 public class ResultDaoImp implements  ResultDao {
+
     @Override
     public void saveResult(ResultEntity resultEntity) {
         Session session = HibernateUtil.getSessionFactory().openSession();

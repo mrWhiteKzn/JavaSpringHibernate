@@ -7,10 +7,11 @@ import exampro.entity.UserEntity;
 import exampro.reports.ExamResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.MultiValueMap;
 
 import java.util.List;
-import java.util.Map;
 
 @Service
 public class ResultService {
@@ -40,6 +41,7 @@ public class ResultService {
         this.questionService = questionService;
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public void saveTestResult(MultiValueMap<String, String> selectedAnswers, int testId) {
         ResultEntity result = new ResultEntity();
 

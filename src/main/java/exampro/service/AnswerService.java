@@ -5,6 +5,9 @@ import exampro.dao.AnswerDao;
 import exampro.entity.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 
 @Service
@@ -28,10 +31,12 @@ public class AnswerService {
         this.questionService = questionService;
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public void saveOrUpdate(AnswerEntity answerEntity, QuestionEntity questionEntity){
         answerDao.saveOrUpdate(answerEntity, questionEntity);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public void saveorUpdateList(String[] answers, QuestionEntity questionEntity){
         for(String answer : answers){
             AnswerEntity answerEntity = new AnswerEntity();
@@ -43,10 +48,12 @@ public class AnswerService {
         }
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public void updateAnswers(QuestionContainer questionContainer) {
         answerDao.saveorUpdateList(questionContainer.getAnswerEntityList(), questionContainer.getQuestionEntity());
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public void delete(AnswerEntity answerEntity){
         answerDao.delete(answerEntity);
     }

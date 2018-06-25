@@ -4,7 +4,6 @@ import exampro.config.HibernateUtil;
 import exampro.entity.QuestionEntity;
 import exampro.entity.TestEntity;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 
 import java.util.List;
 
@@ -17,11 +16,9 @@ public class QuestionDaoImp implements QuestionDao {
     @Override
     public void delete(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Transaction transaction = session.beginTransaction();
         QuestionEntity questionEntity = session.load(QuestionEntity.class, id);
         questionEntity.setTestEntity(null);
         session.delete(questionEntity);
-        transaction.commit();
         session.close();
     }
 
@@ -48,10 +45,8 @@ public class QuestionDaoImp implements QuestionDao {
     @Override
     public void saveOrUpdate(QuestionEntity questionEntity, int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
         TestEntity testEntity = session.load(TestEntity.class, id);
         questionEntity.setTestEntity(testEntity);
         session.save(questionEntity);
-        session.getTransaction().commit();
     }
 }
