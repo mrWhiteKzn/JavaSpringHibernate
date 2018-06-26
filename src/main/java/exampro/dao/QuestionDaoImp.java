@@ -4,22 +4,34 @@ import exampro.config.HibernateUtil;
 import exampro.entity.QuestionEntity;
 import exampro.entity.TestEntity;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public class QuestionDaoImp implements QuestionDao {
+
+    @Autowired
+    SessionFactory sessionFactory;
+
+//    public void setSessionFactory(SessionFactory sessionFactory) {
+//        this.sessionFactory = sessionFactory;
+//    }
+
     @Override
     public void update(QuestionEntity questionEntity) {
-
     }
 
     @Override
     public void delete(int id) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.getCurrentSession();
+//        session.beginTransaction();
         QuestionEntity questionEntity = session.load(QuestionEntity.class, id);
         questionEntity.setTestEntity(null);
         session.delete(questionEntity);
-        session.close();
+//        session.flush();
+//        session.close();
     }
 
     @Override
@@ -45,8 +57,9 @@ public class QuestionDaoImp implements QuestionDao {
     @Override
     public void saveOrUpdate(QuestionEntity questionEntity, int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        TestEntity testEntity = session.load(TestEntity.class, id);
+        TestEntity testEntity = session.get(TestEntity.class, id);
         questionEntity.setTestEntity(testEntity);
-        session.save(questionEntity);
+        session.saveOrUpdate(questionEntity);
+        session.close();
     }
 }

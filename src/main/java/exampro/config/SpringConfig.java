@@ -1,10 +1,13 @@
 package exampro.config;
 
 import exampro.dao.*;
-import freemarker.template.DefaultObjectWrapper;
+import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -13,6 +16,7 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
 @Configuration
 @EnableWebMvc
+@EnableTransactionManagement
 @ComponentScan("exampro")
 public class SpringConfig extends WebMvcConfigurerAdapter {
 
@@ -49,8 +53,19 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public ResultDao getResutlDao() {
+    public ResultDao getResultDao() {
         return new ResultDaoImp();
     }
 
+    @Bean
+    public SessionFactory getSessionFactory() {
+        return HibernateUtil.getSessionFactory();
+    }
+
+    @Bean
+    public PlatformTransactionManager hibernateTransactionManager() {
+        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
+        transactionManager.setSessionFactory(getSessionFactory());
+        return transactionManager;
+    }
 }

@@ -9,8 +9,8 @@
 <form name="question" action="/exam/addQuestion/${testEntity.id}" method="post">
     Текст вопроса:<br>
     <input type="text" name="questionText" >
+    <input type="hidden" name="id" value="0">
     <br>
-
 
     Ответы:
     <table>

@@ -12,6 +12,7 @@ public class AnswerDaoImp implements AnswerDao {
     public void saveOrUpdate(AnswerEntity answerEntity, QuestionEntity questionEntity) {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.saveOrUpdate(answerEntity);
+        session.flush();
         session.close();
     }
 
@@ -25,6 +26,15 @@ public class AnswerDaoImp implements AnswerDao {
             System.out.println("Answer Text: " + answerEntity.getAnswerText());
             System.out.println("Question entity: " + answerEntity.getQuestionEntity());
             System.out.println("is correct: " + answerEntity.isCorrect());
+
+            AnswerEntity answerEntityFromDb = session.load(AnswerEntity.class, answerEntity.getId());
+            if (!answerEntityFromDb.equals(answerEntity)) {
+                answerEntityFromDb.setAnswerText(answerEntity.getAnswerText());
+                answerEntityFromDb.setCorrect(answerEntity.isCorrect());
+                session.update(answerEntityFromDb);
+            }
+
+
         });
         session.close();
     }

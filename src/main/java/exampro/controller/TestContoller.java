@@ -107,7 +107,10 @@ public class TestContoller {
 
     @GetMapping("addQuestion/{id}")
     public String addQuestion(@PathVariable("id") int id, Model model){
+        QuestionEntity questionEntity = new QuestionEntity();
+
         model.addAttribute("testEntity",testService.getTestContainer(id).getTestEntity());
+        model.addAttribute("question", questionEntity);
         return "addQuestion";
     }
 
@@ -134,15 +137,6 @@ public class TestContoller {
 
     @PostMapping("updateAnswers/")
     public String updateAnswers(@ModelAttribute("questionContainer") QuestionContainer questionContainer) {
-
-        System.out.println("КОЛИЧЕСТВО ПОЛУЧЕННЫХ БИНОВ:" + questionContainer.getAnswerEntityList().size());
-        questionContainer.getAnswerEntityList().forEach((bean) -> {
-            System.out.println("ID: " + bean.getId());
-            System.out.println("Answer Text: " + bean.getAnswerText());
-            System.out.println("Question entity: " + bean.getQuestionEntity());
-            System.out.println("is correct: " + bean.isCorrect());
-        });
-
         answerService.updateAnswers(questionContainer);
         return "redirect:/exam/getall";
     }

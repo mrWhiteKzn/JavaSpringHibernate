@@ -48,7 +48,7 @@ public class AnswerService {
         }
     }
 
-    @Transactional(propagation = Propagation.REQUIRED)
+    //    @Transactional(propagation = Propagation.REQUIRED)
     public void updateAnswers(QuestionContainer questionContainer) {
         answerDao.saveorUpdateList(questionContainer.getAnswerEntityList(), questionContainer.getQuestionEntity());
     }

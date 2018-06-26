@@ -7,8 +7,6 @@ import java.util.List;
 
 public class TestDaoImp implements TestDao{
 
-
-
     @Override
     public TestEntity getTest(int id) {
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -37,6 +35,7 @@ public class TestDaoImp implements TestDao{
         Session session = HibernateUtil.getSessionFactory().openSession();
         TestEntity test = session.load(TestEntity.class, id);
         session.delete(test);
+        session.flush();
         session.close();
     }
 }
