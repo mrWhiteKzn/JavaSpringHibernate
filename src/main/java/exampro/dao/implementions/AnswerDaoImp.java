@@ -1,24 +1,28 @@
-package exampro.dao;
+package exampro.dao.implementions;
 
-import exampro.config.HibernateUtil;
+import exampro.dao.AnswerDao;
 import exampro.entity.AnswerEntity;
 import exampro.entity.QuestionEntity;
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import java.util.List;
 
 public class AnswerDaoImp implements AnswerDao {
 
+    @Autowired
+    SessionFactory sessionFactory;
+
     @Override
     public void saveOrUpdate(AnswerEntity answerEntity, QuestionEntity questionEntity) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.getCurrentSession();
         session.saveOrUpdate(answerEntity);
-        session.flush();
-        session.close();
     }
 
     @Override
     public void saveorUpdateList(List<AnswerEntity> answerEntityList, QuestionEntity questionEntity) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.getCurrentSession();
 
         answerEntityList.forEach(answerEntity -> {
             answerEntity.setQuestionEntity(questionEntity);
@@ -51,7 +55,7 @@ public class AnswerDaoImp implements AnswerDao {
 
     @Override
     public AnswerEntity getAnswerEntityById(int id) {
-        Session session = HibernateUtil.getSessionFactory().openSession();
+        Session session = sessionFactory.getCurrentSession();
         AnswerEntity answerEntity = session.get(AnswerEntity.class, id);
         session.close();
         return answerEntity;

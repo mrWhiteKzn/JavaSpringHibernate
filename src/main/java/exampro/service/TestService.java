@@ -27,16 +27,19 @@ public class TestService {
         this.questionDao = questionDao;
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public TestEntity getTestEntity(int id){
         return testDao.getTest(id);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public TestContainer getTestContainer(int id){
         TestEntity testEntity = testDao.getTest(id);
         List<QuestionEntity> questionEntityList = questionDao.getAllByTestId(testEntity);
         return new TestContainer(testEntity, questionEntityList);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public List<TestEntity> findAll() {
         return testDao.getAll();
     }

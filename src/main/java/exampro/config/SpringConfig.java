@@ -1,12 +1,15 @@
 package exampro.config;
 
 import exampro.dao.*;
+import exampro.dao.implementions.*;
+import exampro.entity.*;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
@@ -14,31 +17,33 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
+import java.util.Properties;
+
 @Configuration
-@EnableWebMvc
 @EnableTransactionManagement
+@EnableWebMvc
 @ComponentScan("exampro")
 public class SpringConfig extends WebMvcConfigurerAdapter {
 
     @Bean
-    public ViewResolver getViewResolver(){
+    public ViewResolver getViewResolver() {
         FreeMarkerViewResolver freeMarkerViewResolver = new FreeMarkerViewResolver();
         freeMarkerViewResolver.setContentType("text/html; charset=utf-8");
         freeMarkerViewResolver.setOrder(1);
         freeMarkerViewResolver.setSuffix(".ftl");
         freeMarkerViewResolver.setPrefix("");
-        return  freeMarkerViewResolver;
+        return freeMarkerViewResolver;
     }
 
     @Bean
-    public FreeMarkerConfigurer getFreemarkerConfigurer(){
+    public FreeMarkerConfigurer getFreemarkerConfigurer() {
         FreeMarkerConfigurer freeMarkerConfigurer = new FreeMarkerConfigurer();
         freeMarkerConfigurer.setTemplateLoaderPath("/WEB-INF/views");
         return freeMarkerConfigurer;
     }
 
     @Bean
-    public TestDao getTestDao(){
+    public TestDao getTestDao() {
         return new TestDaoImp();
     }
 
@@ -58,14 +63,42 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public SessionFactory getSessionFactory() {
-        return HibernateUtil.getSessionFactory();
+    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
+        HibernateTransactionManager txManager = new HibernateTransactionManager();
+        txManager.setSessionFactory(sessionFactory);
+        return txManager;
     }
 
     @Bean
-    public PlatformTransactionManager hibernateTransactionManager() {
-        HibernateTransactionManager transactionManager = new HibernateTransactionManager();
-        transactionManager.setSessionFactory(getSessionFactory());
-        return transactionManager;
+    public org.springframework.jdbc.datasource.DriverManagerDataSource getDataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://192.168.5.248:3306/exams?useSSL=false");
+        dataSource.setUsername("root");
+        dataSource.setPassword("1234567");
+        return dataSource;
+    }
+
+    @Bean
+    public UserDao getUserDao() {
+        return new UserDaoImp();
+    }
+
+    @Bean
+    public LocalSessionFactoryBean getSessionFactory() {
+        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+        sessionFactory.setDataSource(getDataSource());
+        sessionFactory.setPackagesToScan(new String[]{"examPro"});
+        sessionFactory.setAnnotatedClasses(AnswerEntity.class, QuestionEntity.class, ResultDetailEntity.class, ResultEntity.class, TestEntity.class, UserEntity.class);
+        sessionFactory.setHibernateProperties(getHibernateProperties());
+        return sessionFactory;
+    }
+
+    private final Properties getHibernateProperties() {
+        Properties hibernateProperties = new Properties();
+        hibernateProperties.setProperty("hbm2ddl.auto", "update");
+        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
+
+        return hibernateProperties;
     }
 }

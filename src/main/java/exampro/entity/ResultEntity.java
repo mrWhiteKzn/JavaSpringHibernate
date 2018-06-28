@@ -44,14 +44,6 @@ public class ResultEntity {
         this.testEntity = testEntity;
     }
 
-//    public AnswerEntity getAnswerEntity() {
-//        return answerEntity;
-//    }
-
-//    public void setAnswerEntity(AnswerEntity answerEntity) {
-//        this.answerEntity = answerEntity;
-//    }
-
     public Date getSqlDate() {
         return sqlDate;
     }
@@ -66,5 +58,16 @@ public class ResultEntity {
 
     public void setUserEntity(UserEntity userEntity) {
         this.userEntity = userEntity;
+    }
+
+    @Override
+    public String toString() {
+        return "ResultEntity{" +
+                "id=" + id +
+                ", testEntity=" + testEntity +
+                ", sqlDate=" + sqlDate +
+                ", userEntity=" + userEntity +
+                ", resultDetailEntityList=" + resultDetailEntityList +
+                '}';
     }
 }

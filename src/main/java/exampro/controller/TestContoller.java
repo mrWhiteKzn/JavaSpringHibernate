@@ -144,7 +144,6 @@ public class TestContoller {
     @PostMapping("saveResult/{id}")
     public String saveResult(@RequestParam MultiValueMap<String, String> selectedAnswers,
                              @PathVariable("id") int testId){
-
         resultService.saveTestResult(selectedAnswers, testId);
         return "redirect:/exam/getall";
     }

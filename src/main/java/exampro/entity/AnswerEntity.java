@@ -1,6 +1,5 @@
 package exampro.entity;
 
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;

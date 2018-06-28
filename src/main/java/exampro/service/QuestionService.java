@@ -14,8 +14,8 @@ import java.util.List;
 @Service
 public class QuestionService {
 
-    @Autowired
-    SessionFactory sessionFactory;
+//    @Autowired
+//    private SessionFactory sessionFactory;
 
     private QuestionDao questionDao;
 
@@ -26,7 +26,6 @@ public class QuestionService {
 
     @Transactional(propagation = Propagation.REQUIRED)
     public void delete(int id){
-        System.out.println("##### STARTED TRANSACTION METHOD ####");
         questionDao.delete(id);
     }
 
@@ -37,6 +36,7 @@ public class QuestionService {
     @Transactional(propagation = Propagation.REQUIRED)
     public void saveOrUpdate(QuestionEntity questionEntity) { questionDao.saveOrUpdate(questionEntity); }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public List<QuestionEntity> getQuestionsList(TestEntity testEntity) {
         List<QuestionEntity> questionList = questionDao.getAllByTestId(testEntity);
         return questionList;

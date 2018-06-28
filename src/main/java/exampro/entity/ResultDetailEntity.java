@@ -53,4 +53,14 @@ public class ResultDetailEntity {
     public void setAnswerEntity(AnswerEntity answerEntity) {
         this.answerEntity = answerEntity;
     }
+
+    @Override
+    public String toString() {
+        return "ResultDetailEntity{" +
+                "id=" + id +
+                ", resultEntity=" + resultEntity +
+                ", questionEntity=" + questionEntity +
+                ", answerEntity=" + answerEntity +
+                '}';
+    }
 }
