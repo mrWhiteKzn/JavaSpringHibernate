@@ -16,13 +16,8 @@ public class UserService {
         this.userDao = userDao;
     }
 
-    public void deleteUser(UserEntity userEntity) {
-//        userDao.delete(userEntity);
-    }
-
     @Transactional(propagation = Propagation.REQUIRED)
-    public UserEntity getUser(int id) {
-//        return userDao.findOne(id);
-        return null;
+    public UserEntity getUser(String login) {
+        return userDao.getUser(login);
     }
 }
