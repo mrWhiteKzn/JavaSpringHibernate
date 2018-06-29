@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/secure")
-public class Secure {
+public class SecureController {
 
     @RequestMapping("login")
     public String login() {
@@ -14,6 +14,6 @@ public class Secure {
 
     @RequestMapping("registration")
     public String registerNewUser() {
-        return "register";
+        return "registration";
     }
 }
