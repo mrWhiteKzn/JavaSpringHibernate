@@ -1,6 +1,9 @@
 package exampro.reports;
 
+import org.springframework.stereotype.Service;
+
 import java.sql.Date;
+
 
 public class ExamResult {
     private String userName;

@@ -3,7 +3,6 @@ package exampro.service;
 import exampro.dao.QuestionDao;
 import exampro.entity.QuestionEntity;
 import exampro.entity.TestEntity;
-import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -13,9 +12,6 @@ import java.util.List;
 
 @Service
 public class QuestionService {
-
-//    @Autowired
-//    private SessionFactory sessionFactory;
 
     private QuestionDao questionDao;
 

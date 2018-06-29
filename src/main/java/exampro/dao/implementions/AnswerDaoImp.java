@@ -40,7 +40,6 @@ public class AnswerDaoImp implements AnswerDao {
 
 
         });
-        session.close();
     }
 
     @Override
@@ -57,7 +56,6 @@ public class AnswerDaoImp implements AnswerDao {
     public AnswerEntity getAnswerEntityById(int id) {
         Session session = sessionFactory.getCurrentSession();
         AnswerEntity answerEntity = session.get(AnswerEntity.class, id);
-        session.close();
         return answerEntity;
     }
 }

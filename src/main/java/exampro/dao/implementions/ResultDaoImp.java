@@ -14,10 +14,16 @@ import java.util.List;
 public class ResultDaoImp implements ResultDao {
 
     SessionFactory sessionFactory;
+    Reports reports;
 
     @Autowired
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
+    }
+
+    @Autowired
+    public void setReports(Reports reports) {
+        this.reports = reports;
     }
 
     @Override
@@ -45,7 +51,6 @@ public class ResultDaoImp implements ResultDao {
 
     @Override
     public List<ExamResult> getRecentlyResults() {
-        Reports reports = new Reports();
         return reports.getExamResults("white");
     }
 }

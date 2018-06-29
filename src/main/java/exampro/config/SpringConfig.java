@@ -3,6 +3,7 @@ package exampro.config;
 import exampro.dao.*;
 import exampro.dao.implementions.*;
 import exampro.entity.*;
+import exampro.reports.Reports;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -82,6 +83,11 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
     @Bean
     public UserDao getUserDao() {
         return new UserDaoImp();
+    }
+
+    @Bean
+    public Reports getReports() {
+        return new Reports();
     }
 
     @Bean
