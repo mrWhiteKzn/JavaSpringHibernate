@@ -1,29 +1,36 @@
 package exampro.config;
 
+import exampro.config.core.SecurityWebApplicationInitializer;
 import exampro.dao.*;
 import exampro.dao.implementions.*;
 import exampro.entity.*;
 import exampro.reports.Reports;
 import org.hibernate.SessionFactory;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer;
 import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
+import javax.servlet.ServletRegistration;
 import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
 @EnableWebMvc
+@Import({SecurityWebApplicationInitializer.class})
 @ComponentScan("exampro")
 public class SpringConfig extends WebMvcConfigurerAdapter {
 
@@ -100,6 +107,12 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
         sessionFactory.setHibernateProperties(getHibernateProperties());
         return sessionFactory;
     }
+
+//    @Bean
+//    public ServletRegistrationBean dispatcherServlet(){
+//        ServletRegistrationBean registrationBean = new ServletRegistrationBean(new DispatcherServlet(), "/exam/*");
+//        return registrationBean;
+//    }
 
     private final Properties getHibernateProperties() {
         Properties hibernateProperties = new Properties();

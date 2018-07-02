@@ -22,6 +22,10 @@
     </#list>
 </table>
 <a href="addnew">Добавить новый тест</a>
-
+<div>
+    <form action="/secure/logout" method="post">
+        <input type="submit" value="Выйти">
+    </form>
+</div>
 </body>
 </html>

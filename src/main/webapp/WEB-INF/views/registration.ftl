@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+<#--Bootstrap core CSS-->
+    <link href="/css/bootstrap.css" rel="stylesheet">
 </head>
 <body>
-<form action="/secure/login" method="post">
-    <h3>Регистрация</h3>
-    <p><input type="text" name="login" placeholder="login" required autofocus></p>
-    <p><input type="password" name="password" placeholder="password"></p>
-    <p><input type="password" name="password" placeholder="confirm password"></p>
+<div class="container" style="width: 300px">
+    <form action="/secure/login" method="post">
+        <h3>Регистрация</h3>
+        <p><input type="text" class="form-control" name="j_username" placeholder="login" required autofocus></p>
+        <p><input type="password" class="form-control" name="j_password" placeholder="password"></p>
+        <p><input type="password" class="form-control" name="j_password" placeholder="confirm password"></p>
 
-    <input type="submit" value="Зарегистрироваться">
+        <input type="submit" class="btn btn-lg btn-primary btn-block" value="Зарегистрироваться">
+</div>
 </form>
 </body>
 </html>
