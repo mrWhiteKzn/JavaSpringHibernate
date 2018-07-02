@@ -16,7 +16,9 @@
         <p><input type="password" class="form-control" name="j_password" placeholder="confirm password"></p>
 
         <input type="submit" class="btn btn-lg btn-primary btn-block" value="Зарегистрироваться">
+
+        <input type="hidden" name="_csrf" value="${_csrf.token}">
+    </form>
 </div>
-</form>
 </body>
 </html>

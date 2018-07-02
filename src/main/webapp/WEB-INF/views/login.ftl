@@ -14,6 +14,7 @@
         <h3>Вход</h3>
         <input type="text" class="form-control" name="username" placeholder="login" required autofocus>
         <input type="password" class="form-control" name="password" placeholder="password">
+        <input type="hidden" name="_csrf" value="${_csrf.token}">
 
         <div class="checkbox mb-3">
             <label>

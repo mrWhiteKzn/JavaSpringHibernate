@@ -23,8 +23,9 @@
 </table>
 <a href="addnew">Добавить новый тест</a>
 <div>
-    <form action="/secure/logout" method="post">
+    <form action="/secure/login?logout" method="post">
         <input type="submit" value="Выйти">
+        <input type="hidden" name="_csrf" value="${_csrf.token}">
     </form>
 </div>
 </body>

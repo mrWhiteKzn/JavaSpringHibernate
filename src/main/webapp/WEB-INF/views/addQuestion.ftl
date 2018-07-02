@@ -33,6 +33,7 @@
     </table>
 
     <input type="submit" name="addTest" value="Сохранить">
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
 </form>
 </body>
 </html>

@@ -14,6 +14,7 @@
     Текст вопроса:
     <input type="text" value="${questionContainer.questionEntity.questionText}">
     <input type="submit" value="Сохранить вопрос">
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
 </form>
 
 <form name="questionContainer" action="/exam/updateAnswers/" method="post">
@@ -35,6 +36,7 @@
      <br>
      </#list>
     <input type="submit" value="Сохранить ответы">
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
 </form>
 <script language="JavaScript">
     function changeValue(id) {

@@ -20,6 +20,7 @@
     </#list>
     </p>
     <input type="submit" value="сохранить">
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
 </form>
 </body>
 </html>

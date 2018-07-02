@@ -39,10 +39,12 @@
         </#list>
     </table>
 
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
 </form>
 
 <form action="/exam/addQuestion/${testContainer.testEntity.id}" method="get">
     <input type="submit" value="Добавить вопрос">
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
 </form>
 
 </body>
