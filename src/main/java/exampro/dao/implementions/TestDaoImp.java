@@ -24,11 +24,6 @@ public class TestDaoImp implements TestDao {
 
     @Override
     public List<TestEntity> getAll() {
-        if (sessionFactory != null) {
-            System.out.println("######## NOT NULLLL");
-        } else {
-            System.out.println("########  NULLLL!!!!");
-        }
         return sessionFactory.getCurrentSession().createQuery("from TestEntity").list();
     }
 

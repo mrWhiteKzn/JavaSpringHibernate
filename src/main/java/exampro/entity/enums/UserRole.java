@@ -1,10 +1,10 @@
 package exampro.entity.enums;
 
-public enum UserRoleEnum {
+public enum UserRole {
     ADMIN,
     USER,
     ANONYMOUS;
 
-    UserRoleEnum() {
+    UserRole() {
     }
 }

@@ -104,9 +104,14 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
         return sessionFactory;
     }
 
+    @Bean
+    public CustomizeAuthenticationSuccessHandler getCustomizeAuthenticationSuccessHandler() {
+        return new CustomizeAuthenticationSuccessHandler();
+    }
+
     private final Properties getHibernateProperties() {
         Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty("hbm2ddl.auto", "update");
+        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
         hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
 
         return hibernateProperties;

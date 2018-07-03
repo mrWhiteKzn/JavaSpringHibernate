@@ -51,7 +51,7 @@ public class ResultService {
         ResultEntity result = new ResultEntity();
 
         result.setTestEntity(testService.getTestEntity(testId));
-        result.setUserEntity(userService.getUser("1"));
+//        result.setUserEntity(userService.getUser("1"));
         result.setSqlDate(new java.sql.Date(System.currentTimeMillis()));
 
         System.out.println("================= LET'S SEE WHAT IS IN THE RESULT " + result.toString());

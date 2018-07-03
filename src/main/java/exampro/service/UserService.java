@@ -17,7 +17,12 @@ public class UserService {
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public UserEntity getUser(String login) {
-        return userDao.getUser(login);
+    public UserEntity findByUserLogin(String login) {
+        return userDao.findByLogin(login);
+    }
+
+    @Transactional(propagation = Propagation.REQUIRED)
+    public void save(UserEntity userEntity) {
+        userDao.save(userEntity);
     }
 }
