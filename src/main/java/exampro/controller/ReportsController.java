@@ -18,7 +18,7 @@ public class ReportsController {
         this.resultService = resultService;
     }
 
-    @GetMapping("Recently")
+    @GetMapping("recently")
     public String showRecently(Model model){
         model.addAttribute("examResultList",resultService.getRecentlyResults());
         return "recently";

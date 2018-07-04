@@ -2,6 +2,7 @@ package exampro.controller;
 
 import exampro.containerClasses.QuestionContainer;
 import exampro.entity.TestEntity;
+import exampro.entity.UserEntity;
 import exampro.service.AnswerService;
 import exampro.service.QuestionService;
 import exampro.service.ResultService;
@@ -9,6 +10,7 @@ import exampro.service.TestService;
 import exampro.containerClasses.TestContainer;
 import exampro.entity.QuestionEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
@@ -143,8 +145,9 @@ public class TestContoller {
 
     @PostMapping("saveResult/{id}")
     public String saveResult(@RequestParam MultiValueMap<String, String> selectedAnswers,
-                             @PathVariable("id") int testId){
-        resultService.saveTestResult(selectedAnswers, testId);
+                             @PathVariable("id") int testId,
+                             @AuthenticationPrincipal UserEntity userEntity) {
+        resultService.saveTestResult(selectedAnswers, testId, userEntity);
         return "redirect:/exam/getall";
     }
 

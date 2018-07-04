@@ -5,6 +5,8 @@ import exampro.dao.*;
 import exampro.dao.implementions.*;
 import exampro.entity.*;
 import exampro.reports.Reports;
+import exampro.service.UserService;
+import exampro.service.UserServiceImp;
 import org.hibernate.SessionFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -109,6 +111,11 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
         return new CustomizeAuthenticationSuccessHandler();
     }
 
+    @Bean
+    public UserService getUserService() {
+        return new UserServiceImp();
+    }
+
     private final Properties getHibernateProperties() {
         Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
@@ -119,5 +126,6 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
 
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/views/css/");
+        registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/views/js/");
     }
 }

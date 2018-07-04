@@ -1,28 +1,14 @@
 package exampro.service;
 
-import exampro.dao.UserDao;
 import exampro.entity.UserEntity;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
-@Service
-public class UserService {
-    private UserDao userDao;
+public interface UserService extends UserDetailsService {
 
-    @Autowired
-    public void setUserDao(UserDao userDao) {
-        this.userDao = userDao;
-    }
+    UserEntity findByUserLogin(String login);
 
-    @Transactional(propagation = Propagation.REQUIRED)
-    public UserEntity findByUserLogin(String login) {
-        return userDao.findByLogin(login);
-    }
+    void save(UserEntity userEntity);
 
-    @Transactional(propagation = Propagation.REQUIRED)
-    public void save(UserEntity userEntity) {
-        userDao.save(userEntity);
-    }
+    UserDetails loadUserByUsername(String s);
 }

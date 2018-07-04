@@ -1,12 +1,10 @@
 <#import "spring.ftl" as spring />
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<#import "parts/_page.ftl" as page />
+<#include "parts/navbar.ftl" />
+
+<@page.body>
+
 <h3>Добавить новый тест.</h3>
 <form name="test" action="addNew" method="post">
     Наименование теста:<br>
@@ -18,5 +16,5 @@
 
     <input type="hidden" name="_csrf" value="${_csrf.token}">
 </form>
-</body>
-</html>
+
+</@page.body>

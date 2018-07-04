@@ -37,14 +37,11 @@ public class AnswerDaoImp implements AnswerDao {
                 answerEntityFromDb.setCorrect(answerEntity.isCorrect());
                 session.update(answerEntityFromDb);
             }
-
-
         });
     }
 
     @Override
     public void delete(AnswerEntity answerEntity) {
-
     }
 
     @Override

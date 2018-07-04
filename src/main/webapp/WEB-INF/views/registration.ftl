@@ -1,29 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<#import "parts/_page.ftl" as page/>
+<#include "parts/navbar.ftl"/>
 
-<#--Bootstrap core CSS-->
-    <link href="/css/bootstrap.css" rel="stylesheet">
-</head>
-<body>
-<div class="container" style="width: 300px">
-    <form action="/secure/registration" method="post">
-        <h3>Регистрация</h3>
-        <p><input type="text" class="form-control" name="login" placeholder="login" required autofocus></p>
-        <p><input type="password" class="form-control" name="password" placeholder="password"></p>
+<@page.body>
+    <div class="container" style="width: 300px">
+        <form action="/secure/registration" method="post">
+            <h3>Регистрация</h3>
+            <p><input type="text" class="form-control" name="login" placeholder="login" required autofocus></p>
+            <p><input type="password" class="form-control" name="password" placeholder="password"></p>
 
-        <input type="submit" class="btn btn-lg btn-primary btn-block" value="Зарегистрироваться">
+            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Зарегистрироваться">
 
-        <div class="alert-warning">
+            <div class="alert-warning">
             <#if message??>
                 ${message}
             </#if>
-        </div>
+            </div>
 
-        <input type="hidden" name="_csrf" value="${_csrf.token}">
-    </form>
-</div>
-</body>
-</html>
+            <input type="hidden" name="_csrf" value="${_csrf.token}">
+        </form>
+    </div>
+</@page.body>

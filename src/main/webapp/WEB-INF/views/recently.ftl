@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h3>Список последних результатов:</h3>
+<#import "parts/_page.ftl" as page/>
+<#include "parts/navbar.ftl"/>
+
+<@page.body>
+    <h3>Список последних результатов:</h3>
 <table>
     <tr>
         <td>Имя</td>
@@ -22,5 +19,4 @@
         </tr>
     </#list>
 </table>
-</body>
-</html>
+</@page.body>

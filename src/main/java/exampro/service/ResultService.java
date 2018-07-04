@@ -3,6 +3,7 @@ package exampro.service;
 import exampro.dao.ResultDao;
 import exampro.entity.ResultDetailEntity;
 import exampro.entity.ResultEntity;
+import exampro.entity.UserEntity;
 import exampro.reports.ExamResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -47,11 +48,11 @@ public class ResultService {
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public void saveTestResult(MultiValueMap<String, String> selectedAnswers, int testId) {
+    public void saveTestResult(MultiValueMap<String, String> selectedAnswers, int testId, UserEntity userEntity) {
         ResultEntity result = new ResultEntity();
 
         result.setTestEntity(testService.getTestEntity(testId));
-//        result.setUserEntity(userService.getUser("1"));
+        result.setUserEntity(userEntity);
         result.setSqlDate(new java.sql.Date(System.currentTimeMillis()));
 
         System.out.println("================= LET'S SEE WHAT IS IN THE RESULT " + result.toString());
@@ -60,21 +61,23 @@ public class ResultService {
         System.out.println("================= HAVE JUST SAVED " + result.toString());
 
         selectedAnswers.forEach((k, v) -> {
-            ResultDetailEntity resultDetailEntity = new ResultDetailEntity();
-            resultDetailEntity.setResultEntity(result);
-            resultDetailEntity.setQuestionEntity(questionService.getQuestion(Integer.parseInt(k)));
+            if (!k.equals("_csrf")) {
+                ResultDetailEntity resultDetailEntity = new ResultDetailEntity();
+                resultDetailEntity.setResultEntity(result);
+                resultDetailEntity.setQuestionEntity(questionService.getQuestion(Integer.parseInt(k)));
 
-            for (String s : v) {
-                System.out.println("ЧТО ТО ЕЩЕ" + k + " " + v);
-                resultDetailEntity.setAnswerEntity(answerService.getAnswerEntityById(Integer.parseInt(s)));
-                resultDao.saveResultDetail(resultDetailEntity);
+                for (String s : v) {
+                    System.out.println("ЧТО ТО ЕЩЕ" + k + " " + v);
+                    resultDetailEntity.setAnswerEntity(answerService.getAnswerEntityById(Integer.parseInt(s)));
+                    resultDao.saveResultDetail(resultDetailEntity);
+                }
             }
 
         });
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public ResultEntity getResultEntityById(int id){
+    public ResultEntity getResultEntityById(int id) {
         return resultDao.getResultEntityById(id);
     }
 

@@ -1,13 +1,9 @@
 <#import "spring.ftl" as spring />
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<#import "parts/_page.ftl" as page />
+<#include "parts/navbar.ftl" />
 
-</head>
-<body>
-<h3>Форма редактирования вопроса:</h3>
+<@page.body>
+    <h3>Форма редактирования вопроса:</h3>
 <form name="editedQuestion" action="/exam/updateQuestion/${questionContainer.questionEntity.id}" method="post">
     Id вопроса:
     <input type="text" value="${questionContainer.questionEntity.id}"><br>
@@ -44,5 +40,5 @@
     }
 </script>
 <script src=”https://code.jquery.com/jquery-3.2.1.min.js”></script>
-</body>
-</html>
+</@page.body>
+

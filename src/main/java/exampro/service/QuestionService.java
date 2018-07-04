@@ -25,6 +25,7 @@ public class QuestionService {
         questionDao.delete(id);
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public QuestionEntity getQuestion(int id){
         return questionDao.getQuestion(id);
     }
