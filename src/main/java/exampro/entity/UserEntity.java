@@ -4,6 +4,7 @@ import exampro.entity.enums.UserRole;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.management.relation.Role;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Set;
@@ -44,6 +45,10 @@ public class UserEntity implements UserDetails {
 
     public void setLogin(String login) {
         this.login = login;
+    }
+
+    public boolean isAdmin() {
+        return roles.contains(UserRole.ADMIN);
     }
 
     @Override

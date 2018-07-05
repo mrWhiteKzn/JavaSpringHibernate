@@ -1,5 +1,4 @@
 <#import "parts/_page.ftl" as page/>
-<#include "parts/navbar.ftl"/>
 
 <@page.body>
     <div class="container">
@@ -7,4 +6,5 @@
     <p><a href="/exam/getall">Список экзаменов</a></p>
     <p><a href="/secure/login">Войти</a></p>
     <p><a href="/secure/registration">Зарегистрироваться</a></p>
+    </div>
 </@page.body>

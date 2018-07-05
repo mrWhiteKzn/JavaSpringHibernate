@@ -20,6 +20,11 @@ public class QuestionDaoImp implements QuestionDao {
 
     @Override
     public void update(QuestionEntity questionEntity) {
+        String hqlQuery = "UPDATE Question q set q.name = :newName WHERE q.id = :id";
+        sessionFactory.getCurrentSession().createQuery("UPDATE QuestionEntity q set q.questionText = :newText WHERE q.id = :id")
+                .setParameter("newText", questionEntity.getQuestionText())
+                .setParameter("id", questionEntity.getId())
+                .executeUpdate();
     }
 
     @Override

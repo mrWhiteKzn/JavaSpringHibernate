@@ -76,7 +76,7 @@ public class TestContoller {
     }
 
     @PostMapping("/updateTest")
-    public String updateTest(@ModelAttribute("editedTestContainer") TestContainer testContainer){
+    public String updateTest(@ModelAttribute("testContainer") TestContainer testContainer) {
         testService.saveOrUpdate(testContainer);
         return "redirect:/exam/getall";
     }
@@ -101,10 +101,12 @@ public class TestContoller {
     }
 
     @PostMapping("updateQuestion/{id}")
-    public String editQuestion(@ModelAttribute ("question") QuestionEntity questionEntity, Model model){
-        questionService.saveOrUpdate(questionEntity);
-        model.addAttribute("question", questionEntity);
-        return "editQuestion";
+    public String editQuestion(@ModelAttribute("container") QuestionContainer questionContainer,
+                               @PathVariable("id") int id,
+                               Model model) {
+        questionService.saveOrUpdate(questionContainer.getQuestionEntity());
+        model.addAttribute("question", questionContainer.getQuestionEntity());
+        return "redirect:/exam/editQuestion/" + id;
     }
 
     @GetMapping("addQuestion/{id}")

@@ -1,5 +1,4 @@
 <#import "parts/_page.ftl"as page />
-<#include "parts/navbar.ftl"/>
 
 <@page.body>
     <div class="container" style="width: 300px">
@@ -14,8 +13,10 @@
                     <input type="checkbox" value="remember-me">Запомнить меня
                 </label>
             </div>
-
             <input type="submit" class="btn btn-lg btn-primary btn-block" value="Войти">
+            <label>
+                <a href="/secure/registration">Регистрация</a>
+            </label>
         </form>
     </div>
 </@page.body>

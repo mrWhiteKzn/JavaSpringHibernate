@@ -31,7 +31,10 @@ public class QuestionService {
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public void saveOrUpdate(QuestionEntity questionEntity) { questionDao.saveOrUpdate(questionEntity); }
+    public void saveOrUpdate(QuestionEntity questionEntity) {
+//        questionDao.saveOrUpdate(questionEntity);
+        questionDao.update(questionEntity);
+    }
 
     @Transactional(propagation = Propagation.REQUIRED)
     public List<QuestionEntity> getQuestionsList(TestEntity testEntity) {

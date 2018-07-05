@@ -14,7 +14,7 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/secure")
-public class SecureController {
+public class UserController {
 
     UserService userService;
 

@@ -1,5 +1,4 @@
 <#import "parts/_page.ftl" as page/>
-<#include "parts/navbar.ftl"/>
 
 <@page.body>
     <h3>Список последних результатов:</h3>

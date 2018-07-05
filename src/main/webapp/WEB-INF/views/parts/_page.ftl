@@ -7,7 +7,10 @@
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+    <#include "navbar.ftl"/>
+<div class="container mt-4">
 <#nested>
+</div>
 </body>
 </html>
 </#macro>

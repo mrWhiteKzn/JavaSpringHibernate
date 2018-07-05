@@ -1,5 +1,4 @@
 <#import "parts/_page.ftl" as page/>
-<#include "parts/navbar.ftl"/>
 
 <@page.body>
     <form action="/exam/saveResult/${test.id}" method="post" style="align-content: center">

@@ -1,16 +1,17 @@
 <#import "parts/_page.ftl" as page />
-<#include "parts/navbar.ftl" />
 
 <@page.body>
     <h3>Форма редактирования теста:</h3>
-<form name="editedTestContainer1" action="/exam/updateTest" method="post">
+<form name="testContainer" action="/exam/updateTest" method="post">
     <table id="testTable">
-        ID теста: <input type="text" name="id" title="id" value="${testContainer.testEntity.id}"><br>
-        Название теста: <input type="text" name="name" title="testName" value="${testContainer.testEntity.name}"><br>
+        ID теста: <input type="text" name="testEntity.id" value="${testContainer.testEntity.id}"><br>
+        Название теста: <input type="text" name="testEntity.name" value="${testContainer.testEntity.name}"><br>
 
         <input type="submit" name="updateTest" value="Сохранить">
+        <input type="hidden" name="_csrf" value="${_csrf.token}">
 
     </table>
+</form>
     <table id="questionTable" name="questionTable">
         <tr>
             <td>Номер вопроса:</td>
@@ -25,9 +26,6 @@
             </tr>
         </#list>
     </table>
-
-    <input type="hidden" name="_csrf" value="${_csrf.token}">
-</form>
 
 <form action="/exam/addQuestion/${testContainer.testEntity.id}" method="get">
     <input type="submit" value="Добавить вопрос">

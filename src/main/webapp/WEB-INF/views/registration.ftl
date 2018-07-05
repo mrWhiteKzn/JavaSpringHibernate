@@ -1,5 +1,4 @@
 <#import "parts/_page.ftl" as page/>
-<#include "parts/navbar.ftl"/>
 
 <@page.body>
     <div class="container" style="width: 300px">

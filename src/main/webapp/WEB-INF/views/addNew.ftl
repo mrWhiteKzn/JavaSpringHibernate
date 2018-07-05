@@ -1,7 +1,6 @@
 <#import "spring.ftl" as spring />
 
 <#import "parts/_page.ftl" as page />
-<#include "parts/navbar.ftl" />
 
 <@page.body>
 

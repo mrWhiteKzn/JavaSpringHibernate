@@ -1,14 +1,15 @@
 <#import "spring.ftl" as spring />
 <#import "parts/_page.ftl" as page />
-<#include "parts/navbar.ftl" />
 
 <@page.body>
     <h3>Форма редактирования вопроса:</h3>
-<form name="editedQuestion" action="/exam/updateQuestion/${questionContainer.questionEntity.id}" method="post">
+<form name="question" action="/exam/updateQuestion/${questionContainer.questionEntity.id}" method="post">
     Id вопроса:
-    <input type="text" value="${questionContainer.questionEntity.id}"><br>
+    <input type="text" name="questionEntity.id" value="${questionContainer.questionEntity.id}"><br>
     Текст вопроса:
-    <input type="text" value="${questionContainer.questionEntity.questionText}">
+    <input type="text" name="questionEntity.questionText" value="${questionContainer.questionEntity.questionText}">
+<#--<input type="hidden" name="questionEntity.test_id">-->
+
     <input type="submit" value="Сохранить вопрос">
     <input type="hidden" name="_csrf" value="${_csrf.token}">
 </form>

@@ -26,10 +26,6 @@ public class AnswerDaoImp implements AnswerDao {
 
         answerEntityList.forEach(answerEntity -> {
             answerEntity.setQuestionEntity(questionEntity);
-            System.out.println("ID: " + answerEntity.getId());
-            System.out.println("Answer Text: " + answerEntity.getAnswerText());
-            System.out.println("Question entity: " + answerEntity.getQuestionEntity());
-            System.out.println("is correct: " + answerEntity.isCorrect());
 
             AnswerEntity answerEntityFromDb = session.load(AnswerEntity.class, answerEntity.getId());
             if (!answerEntityFromDb.equals(answerEntity)) {
