@@ -5,6 +5,8 @@ import exampro.entity.ResultDetailEntity;
 import exampro.entity.ResultEntity;
 import exampro.entity.UserEntity;
 import exampro.reports.ExamResult;
+import exampro.reports.ExamResultDetail;
+import exampro.reports.ExamResultOfUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
@@ -84,5 +86,17 @@ public class ResultService {
     @Transactional(propagation = Propagation.REQUIRED)
     public List<ExamResult> getRecentlyResults() {
         return resultDao.getRecentlyResults();
+    }
+
+    @Transactional
+    public List<ExamResultOfUser> getResultListByUser(int id) {
+        UserEntity userEntity = userService.getById(id);
+        return resultDao.getResultListByUser(userEntity);
+    }
+
+    @Transactional
+    public List<ExamResultDetail> getResultsByExam(int id) {
+//        ResultEntity resultEntity = resultDao.getResultEntityById(id);
+        return resultDao.getResultsByExam(id);
     }
 }

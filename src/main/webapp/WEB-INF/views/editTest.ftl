@@ -1,14 +1,13 @@
 <#import "parts/_page.ftl" as page />
-
 <@page.body>
     <h3>Форма редактирования теста:</h3>
 <form name="testContainer" action="/exam/updateTest" method="post">
     <table id="testTable">
-        ID теста: <input type="text" name="testEntity.id" value="${testContainer.testEntity.id}"><br>
         Название теста: <input type="text" name="testEntity.name" value="${testContainer.testEntity.name}"><br>
 
         <input type="submit" name="updateTest" value="Сохранить">
         <input type="hidden" name="_csrf" value="${_csrf.token}">
+        <input type="hidden" name="testEntity.id" value="${testContainer.testEntity.id}"><br>
 
     </table>
 </form>

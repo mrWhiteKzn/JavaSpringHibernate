@@ -3,7 +3,10 @@ package exampro.dao.implementions;
 import exampro.dao.ResultDao;
 import exampro.entity.ResultDetailEntity;
 import exampro.entity.ResultEntity;
+import exampro.entity.UserEntity;
 import exampro.reports.ExamResult;
+import exampro.reports.ExamResultDetail;
+import exampro.reports.ExamResultOfUser;
 import exampro.reports.Reports;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -40,17 +43,21 @@ public class ResultDaoImp implements ResultDao {
     @Override
     public void saveResultDetail(ResultDetailEntity resultDetailEntity) {
         Session session = sessionFactory.getCurrentSession();
-        if (session != null) {
-            System.out.println("#### NOT NULLLLL");
-        } else {
-            System.out.println("####### NULL!!!");
-        }
-        System.out.println(resultDetailEntity.toString());
         session.save(resultDetailEntity);
     }
 
     @Override
     public List<ExamResult> getRecentlyResults() {
-        return reports.getExamResults("white");
+        return reports.getExamResults();
+    }
+
+    @Override
+    public List<ExamResultOfUser> getResultListByUser(UserEntity userEntity) {
+        return reports.getExamResultByUser(userEntity);
+    }
+
+    @Override
+    public List<ExamResultDetail> getResultsByExam(int id) {
+        return reports.getResultsByExam(id);
     }
 }

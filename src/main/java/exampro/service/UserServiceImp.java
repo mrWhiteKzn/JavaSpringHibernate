@@ -8,6 +8,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 public class UserServiceImp implements UserService {
 
     @Autowired
@@ -16,6 +18,12 @@ public class UserServiceImp implements UserService {
     @Transactional(propagation = Propagation.REQUIRED)
     public UserEntity findByUserLogin(String login) {
         return userDao.findByLogin(login);
+    }
+
+    @Override
+    @Transactional
+    public UserEntity getById(int id) {
+        return userDao.getById(id);
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
@@ -28,4 +36,11 @@ public class UserServiceImp implements UserService {
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return userDao.findByLogin(s);
     }
+
+    @Override
+    @Transactional
+    public List<UserEntity> findAll() {
+        return userDao.findAll();
+    }
+
 }

@@ -4,11 +4,9 @@
 <@page.body>
     <h3>Форма редактирования вопроса:</h3>
 <form name="question" action="/exam/updateQuestion/${questionContainer.questionEntity.id}" method="post">
-    Id вопроса:
-    <input type="text" name="questionEntity.id" value="${questionContainer.questionEntity.id}"><br>
+    <input type="hidden" name="questionEntity.id" value="${questionContainer.questionEntity.id}"><br>
     Текст вопроса:
     <input type="text" name="questionEntity.questionText" value="${questionContainer.questionEntity.questionText}">
-<#--<input type="hidden" name="questionEntity.test_id">-->
 
     <input type="submit" value="Сохранить вопрос">
     <input type="hidden" name="_csrf" value="${_csrf.token}">
@@ -28,8 +26,6 @@
                value="${spring.status.value}" onclick="changeValue('correct${answer_index}')">
         <label for="correct${answer_index}" onclick="changeValue('correct${answer_index}');">Верный</label>
 
-     <#--<@spring.bind path="answerContainer.answerEntityList[${answer_index}].questionEntity"/>-->
-     <#--<input type="hidden" name="${spring.status.expression}" value="${spring.status.value}">-->
      <br>
      </#list>
     <input type="submit" value="Сохранить ответы">

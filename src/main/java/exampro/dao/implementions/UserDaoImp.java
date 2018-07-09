@@ -6,6 +6,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
+
 
 public class UserDaoImp implements UserDao {
 
@@ -27,6 +29,17 @@ public class UserDaoImp implements UserDao {
     @Override
     public void save(UserEntity userEntity) {
         sessionFactory.getCurrentSession().save(userEntity);
+    }
+
+    @Override
+    public List<UserEntity> findAll() {
+        return sessionFactory.getCurrentSession().createQuery("from UserEntity ").list();
+    }
+
+    @Override
+    public UserEntity getById(int id) {
+        UserEntity userEntity = sessionFactory.getCurrentSession().get(UserEntity.class, id);
+        return userEntity;
     }
 
 

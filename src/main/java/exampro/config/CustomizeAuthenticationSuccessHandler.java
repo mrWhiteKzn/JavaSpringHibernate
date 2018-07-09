@@ -21,7 +21,7 @@ public class CustomizeAuthenticationSuccessHandler implements AuthenticationSucc
         }
 
         if (admin) {
-            httpServletResponse.sendRedirect("/exam/admin");
+            httpServletResponse.sendRedirect("/exam/getall");
         } else {
             httpServletResponse.sendRedirect("/exam/getall");
         }
