@@ -48,7 +48,7 @@ public class UserEntity implements UserDetails {
     }
 
     public boolean isAdmin() {
-        return roles.contains(UserRole.ADMIN);
+        return roles.contains(UserRole.Admin);
     }
 
     @Override

@@ -3,6 +3,7 @@ package exampro.controller;
 import exampro.containerClasses.QuestionContainer;
 import exampro.entity.TestEntity;
 import exampro.entity.UserEntity;
+import exampro.entity.enums.UserRole;
 import exampro.service.AnswerService;
 import exampro.service.QuestionService;
 import exampro.service.ResultService;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/exam")
@@ -59,7 +62,14 @@ public class TestContoller {
         TestContainer testContainer = new TestContainer();
         testContainer.setTestEntity(testEntity);
         testService.saveOrUpdate(testContainer);
-        return "redirect:/exam/getall";
+        return "redirect:/exam/edit/" + testContainer.getTestEntity().getId();
+    }
+
+    @GetMapping("/addnew")
+    public String addNew(Model model) {
+        TestContainer testContainer = new TestContainer();
+        model.addAttribute(testContainer);
+        return "addNew";
     }
 
     @GetMapping("/gettest/{id}")
@@ -81,15 +91,9 @@ public class TestContoller {
         return "redirect:/exam/getall";
     }
 
-    @GetMapping("/addnew")
-    public String addNew(Model model) {
-        TestContainer testContainer = new TestContainer();
-        model.addAttribute(testContainer);
-        return "addNew";
-    }
-
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") int id){
+    public String delete(@PathVariable("id") int id,
+                         @AuthenticationPrincipal UserEntity userEntity) {
         testService.delete(id);
         return "redirect:/exam/getall";
     }

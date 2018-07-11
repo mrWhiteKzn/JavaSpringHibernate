@@ -8,7 +8,7 @@
 <form name="test" action="addNew" method="post">
     Наименование теста:<br>
 
-    <input type="text" name="name">
+    <input type="text" name="name" required="required">
     <input type="submit" name="addTest" value="Добавить">
 
     Вопрос:<br>

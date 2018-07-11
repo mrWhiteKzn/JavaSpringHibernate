@@ -15,11 +15,9 @@
             <td><a href="gettest/${test.id}">пройти</a></td>
             <#if isAdmin>
             <td>
-                <form action="edit/${test.id}" method="get">
-                    <button class="btn btn-default" data-toggle="confirmation">Изменить</button>
-                </form>
+                <a class="btn btn-large btn-primary" data-toggle="confirmation" data-title="Open Google?"
+                   href="edit/${test.id}" target="_blank">изменить</a>
             </td>
-            <#--<a href="edit/${test.id}">изменить</a>-->
                 <td><a href="delete/${test.id}">удалить</a></td>
             </#if>
         </tr>

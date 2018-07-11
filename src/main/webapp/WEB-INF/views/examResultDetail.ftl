@@ -13,7 +13,12 @@
         <tr>
             <td>${detail.questionName}</td>
             <td>${detail.choosenAnswer}</td>
-            <td>${detail.correctAnswer}</td>
+            <td>
+            <#if detail.correct>
+                Верный
+            <#else>Неверный
+            </#if>
+            </td>
         </tr>
         </#list>
     <#else>Записей нет. =/

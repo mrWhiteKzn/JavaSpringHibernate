@@ -89,8 +89,7 @@ public class ResultService {
     }
 
     @Transactional
-    public List<ExamResultOfUser> getResultListByUser(int id) {
-        UserEntity userEntity = userService.getById(id);
+    public List<ExamResultOfUser> getResultListByUser(UserEntity userEntity) {
         return resultDao.getResultListByUser(userEntity);
     }
 

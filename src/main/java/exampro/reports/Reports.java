@@ -44,7 +44,7 @@ public class Reports {
     }
 
     public List<ExamResultDetail> getResultsByExam(int id) {
-        String query = "SELECT new exampro.reports.ExamResultDetail(q.questionText, a.answerText, (SELECT a.answerText from AnswerEntity where answerEntity.questionEntity.id=q.id)) " +
+        String query = "SELECT new exampro.reports.ExamResultDetail(q.questionText, a.answerText, a.correct) " +
                 "FROM QuestionEntity q, AnswerEntity a, ResultDetailEntity r " +
                 "WHERE r.answerEntity.id=a.id " +
                 "AND r.questionEntity.id=q.id " +

@@ -3,12 +3,12 @@ package exampro.reports;
 public class ExamResultDetail {
     private String questionName;
     private String choosenAnswer;
-    private String correctAnswer;
+    private boolean correct;
 
-    public ExamResultDetail(String questionName, String choosenAsnwer, String correctAnswer) {
+    public ExamResultDetail(String questionName, String choosenAsnwer, boolean correct) {
         this.questionName = questionName;
         this.choosenAnswer = choosenAsnwer;
-        this.correctAnswer = correctAnswer;
+        this.correct = correct;
     }
 
     public String getQuestionName() {
@@ -27,11 +27,11 @@ public class ExamResultDetail {
         this.choosenAnswer = choosenAnswer;
     }
 
-    public String getCorrectAnswer() {
-        return correctAnswer;
+    public boolean isCorrect() {
+        return correct;
     }
 
-    public void setCorrectAnswer(String correctAnswer) {
-        this.correctAnswer = correctAnswer;
+    public void setCorrect(boolean correct) {
+        this.correct = correct;
     }
 }

@@ -1,6 +1,7 @@
 package exampro.controller;
 
 import exampro.entity.UserEntity;
+import exampro.entity.enums.UserRole;
 import exampro.reports.ExamResultOfUser;
 import exampro.service.ResultService;
 import exampro.service.UserService;
@@ -37,17 +38,20 @@ public class ReportsController {
     }
 
     @GetMapping("byUser/{id}")
-    public String byUser(@PathVariable("id") int id,
-                         Model model) {
-        List<ExamResultOfUser> examResultOfUserList = resultService.getResultListByUser(id);
+    public String byUser(@PathVariable("id") int id, Model model) {
+        UserEntity userEntity = userService.getById(id);
+
+        List<ExamResultOfUser> examResultOfUserList = resultService.getResultListByUser(userEntity);
+
         model.addAttribute("examResultOfUserList", examResultOfUserList);
-        model.addAttribute("user", userService.getById(id));
+        model.addAttribute("user", userEntity);
+        model.addAttribute("roles", UserRole.values());
+
         return "reportsOfUser";
     }
 
     @GetMapping("byExam/{id}")
-    public String byExam(@PathVariable("id") int id,
-                         Model model) {
+    public String byExam(@PathVariable("id") int id, Model model) {
         model.addAttribute("examResultDetailList", resultService.getResultsByExam(id));
         return "examResultDetail";
     }

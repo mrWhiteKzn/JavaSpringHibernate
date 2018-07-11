@@ -6,7 +6,8 @@
 <form name="question" action="/exam/updateQuestion/${questionContainer.questionEntity.id}" method="post">
     <input type="hidden" name="questionEntity.id" value="${questionContainer.questionEntity.id}"><br>
     Текст вопроса:
-    <input type="text" name="questionEntity.questionText" value="${questionContainer.questionEntity.questionText}">
+    <input type="text" name="questionEntity.questionText" value="${questionContainer.questionEntity.questionText}"
+           required="required">
 
     <input type="submit" value="Сохранить вопрос">
     <input type="hidden" name="_csrf" value="${_csrf.token}">
@@ -19,13 +20,12 @@
         <input type="hidden" name="${spring.status.expression}" value="${spring.status.value}">
 
          <@spring.bind path="questionContainer.answerEntityList[${answer_index}].answerText"/>
-        <input type="text" name="${spring.status.expression}" value="${spring.status.value}">
+        <input type="text" name="${spring.status.expression}" value="${spring.status.value}" required="required">
 
          <@spring.bind path="questionContainer.answerEntityList[${answer_index}].correct"/>
         <input type="checkbox" name="${spring.status.expression}" id="correct${answer_index}"
                value="${spring.status.value}" onclick="changeValue('correct${answer_index}')">
         <label for="correct${answer_index}" onclick="changeValue('correct${answer_index}');">Верный</label>
-
      <br>
      </#list>
     <input type="submit" value="Сохранить ответы">

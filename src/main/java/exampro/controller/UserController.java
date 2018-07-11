@@ -4,15 +4,13 @@ import exampro.entity.UserEntity;
 import exampro.entity.enums.UserRole;
 import exampro.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/secure")
@@ -45,7 +43,7 @@ public class UserController {
         }
 
         userEntity.setActive(true);
-        userEntity.setRoles(Collections.singleton(UserRole.USER));
+        userEntity.setRoles(Collections.singleton(UserRole.Student));
         userService.save(userEntity);
 
         return "redirect:/secure/login";
@@ -55,5 +53,29 @@ public class UserController {
     public String showUserList(Model model) {
         model.addAttribute("users", userService.findAll());
         return "users";
+    }
+
+    @PostMapping("saveUser/{id}")
+    public String editUser(@PathVariable("id") int id,
+                           @RequestParam Map<String, String> formMap,
+                           @RequestParam("login") String login) {
+
+        UserEntity userEntity = userService.getById(id);
+
+        userEntity.setLogin(login);
+        Set<String> roles = Arrays.stream(UserRole.values())
+                .map(UserRole::name)
+                .collect(Collectors.toSet());
+
+        userEntity.getRoles().clear();
+
+        for (String key : formMap.keySet()) {
+            if (roles.contains(key)) {
+                userEntity.getRoles().add(UserRole.valueOf(key));
+            }
+        }
+        userService.save(userEntity);
+
+        return "redirect:/secure/users";
     }
 }

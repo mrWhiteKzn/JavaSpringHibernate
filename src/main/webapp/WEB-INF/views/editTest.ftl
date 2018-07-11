@@ -3,7 +3,8 @@
     <h3>Форма редактирования теста:</h3>
 <form name="testContainer" action="/exam/updateTest" method="post">
     <table id="testTable">
-        Название теста: <input type="text" name="testEntity.name" value="${testContainer.testEntity.name}"><br>
+        Название теста: <input type="text" name="testEntity.name" value="${testContainer.testEntity.name}"
+                               required="required"><br>
 
         <input type="submit" name="updateTest" value="Сохранить">
         <input type="hidden" name="_csrf" value="${_csrf.token}">
