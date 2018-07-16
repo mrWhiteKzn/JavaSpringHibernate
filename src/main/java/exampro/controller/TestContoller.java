@@ -11,6 +11,7 @@ import exampro.service.TestService;
 import exampro.containerClasses.TestContainer;
 import exampro.entity.QuestionEntity;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,34 +43,27 @@ public class TestContoller {
     @Autowired
     public void setResultService(ResultService resultService) { this.resultService = resultService; }
 
-
-    @GetMapping("/hello")
-    public String hello(){
-        return "hello";
-    }
-
     @GetMapping("/getall")
     public String  getAll(Model model){
         model.addAttribute("tests", testService.findAll());
         return "getAll";
     }
 
-    /*
-     * Comment for myself: think whether you should avoid class-wrapper here
-     * */
+    @GetMapping("/addnew")
+    @PreAuthorize("hasAuthority('Admin')")
+    public String addNew(Model model) {
+        TestContainer testContainer = new TestContainer();
+        model.addAttribute(testContainer);
+        return "addNew";
+    }
+
     @PostMapping("/addNew")
+    @PreAuthorize("hasAuthority('Admin')")
     public String addNew(@ModelAttribute TestEntity testEntity) {
         TestContainer testContainer = new TestContainer();
         testContainer.setTestEntity(testEntity);
         testService.saveOrUpdate(testContainer);
         return "redirect:/exam/edit/" + testContainer.getTestEntity().getId();
-    }
-
-    @GetMapping("/addnew")
-    public String addNew(Model model) {
-        TestContainer testContainer = new TestContainer();
-        model.addAttribute(testContainer);
-        return "addNew";
     }
 
     @GetMapping("/gettest/{id}")
@@ -80,31 +74,35 @@ public class TestContoller {
     }
 
     @GetMapping("/edit/{id}")
+    @PreAuthorize("hasAuthority('Admin')")
     public String editTest(@PathVariable("id") int id, Model model){
         model.addAttribute("testContainer", testService.getTestContainer(id));
         return "editTest";
     }
 
     @PostMapping("/updateTest")
+    @PreAuthorize("hasAuthority('Admin')")
     public String updateTest(@ModelAttribute("testContainer") TestContainer testContainer) {
         testService.saveOrUpdate(testContainer);
         return "redirect:/exam/getall";
     }
 
     @GetMapping("/delete/{id}")
-    public String delete(@PathVariable("id") int id,
-                         @AuthenticationPrincipal UserEntity userEntity) {
+    @PreAuthorize("hasAuthority('Admin')")
+    public String delete(@PathVariable("id") int id, @AuthenticationPrincipal UserEntity userEntity) {
         testService.delete(id);
         return "redirect:/exam/getall";
     }
 
     @GetMapping("/deleteQuestion/{id}")
+    @PreAuthorize("hasAuthority('Admin')")
     public String deleteQuestion(@PathVariable("id") int id, Model model){
         questionService.delete(id);
         return "redirect:/exam/getall";
     }
 
     @PostMapping("updateQuestion/{id}")
+    @PreAuthorize("hasAuthority('Admin')")
     public String editQuestion(@ModelAttribute("container") QuestionContainer questionContainer,
                                @PathVariable("id") int id,
                                Model model) {
@@ -114,6 +112,7 @@ public class TestContoller {
     }
 
     @GetMapping("addQuestion/{id}")
+    @PreAuthorize("hasAuthority('Admin')")
     public String addQuestion(@PathVariable("id") int id, Model model){
         QuestionEntity questionEntity = new QuestionEntity();
 
@@ -123,6 +122,7 @@ public class TestContoller {
     }
 
     @PostMapping("addQuestion/{id}")
+    @PreAuthorize("hasAuthority('Admin')")
     public String addQuestion(@ModelAttribute("question") QuestionEntity questionEntity,
                               @PathVariable("id") int id,
                               @RequestParam("answerText") String[] answersTextArray){
@@ -132,6 +132,7 @@ public class TestContoller {
     }
 
     @GetMapping("editQuestion/{id}")
+    @PreAuthorize("hasAuthority('Admin')")
     public String editQuestion(@PathVariable("id") int id, Model model) {
         QuestionEntity questionEntity = questionService.getQuestion(id);
 
@@ -144,9 +145,11 @@ public class TestContoller {
     }
 
     @PostMapping("updateAnswers/")
-    public String updateAnswers(@ModelAttribute("questionContainer") QuestionContainer questionContainer) {
+    @PreAuthorize("hasAuthority('Admin')")
+    public String updateAnswers(@ModelAttribute("questionContainer") QuestionContainer questionContainer, Model model) {
         answerService.updateAnswers(questionContainer);
-        return "redirect:/exam/getall";
+        model.addAttribute("successSave", "Успешно сохранено!");
+        return "redirect:/exam/editQuestion/" + questionContainer.getQuestionEntity().getId();
     }
 
     @PostMapping("saveResult/{id}")

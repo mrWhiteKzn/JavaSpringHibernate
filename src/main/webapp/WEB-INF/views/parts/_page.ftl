@@ -6,7 +6,7 @@
     <title>Title</title>
     <link href="/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
+    <#include "_header.ftl">
     <#include "navbar.ftl"/>
 <div class="container mt-4">
 <#nested>

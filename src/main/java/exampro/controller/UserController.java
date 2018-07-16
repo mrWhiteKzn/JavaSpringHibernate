@@ -4,12 +4,15 @@ import exampro.entity.UserEntity;
 import exampro.entity.enums.UserRole;
 import exampro.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Controller
@@ -50,12 +53,15 @@ public class UserController {
     }
 
     @GetMapping("users")
+    @PreAuthorize("hasAuthority('Admin')")
     public String showUserList(Model model) {
         model.addAttribute("users", userService.findAll());
         return "users";
     }
 
+
     @PostMapping("saveUser/{id}")
+    @PreAuthorize("hasAuthority('Admin')")
     public String editUser(@PathVariable("id") int id,
                            @RequestParam Map<String, String> formMap,
                            @RequestParam("login") String login) {

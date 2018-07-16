@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.hibernate.query.Query;
 import java.util.List;
 
 public class ResultDaoImp implements ResultDao {
@@ -59,5 +60,16 @@ public class ResultDaoImp implements ResultDao {
     @Override
     public List<ExamResultDetail> getResultsByExam(int id) {
         return reports.getResultsByExam(id);
+    }
+
+    @Override
+    public List<ResultDetailEntity> getAnswerEntitySet(ResultEntity resultEntity) {
+        Session session = sessionFactory.getCurrentSession();
+
+        String query = "from ResultDetailEntity where resultEntity.id =:id";
+        Query hibernateQuery = session.createQuery(query);
+        hibernateQuery.setParameter("id", resultEntity.getId());
+
+        return hibernateQuery.list();
     }
 }

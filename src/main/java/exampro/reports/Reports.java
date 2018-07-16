@@ -1,6 +1,5 @@
 package exampro.reports;
 
-import exampro.entity.ResultEntity;
 import exampro.entity.UserEntity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -19,7 +18,7 @@ public class Reports {
     }
 
     public List<ExamResult> getExamResults() {
-        String query = "SELECT new exampro.reports.ExamResult(u.login, r.testEntity.name, 0, r.sqlDate) " +
+        String query = "SELECT new exampro.reports.ExamResult(u.login, r.testEntity.name, r.grade, r.sqlDate) " +
                 "FROM ResultEntity r, UserEntity u " +
                 "WHERE r.userEntity.id = u.id "+
                 "ORDER BY r.sqlDate DESC";
@@ -30,7 +29,7 @@ public class Reports {
     }
 
     public List<ExamResultOfUser> getExamResultByUser(UserEntity userEntity) {
-        String query = "SELECT new exampro.reports.ExamResultOfUser(r.id, r.testEntity.name, r.sqlDate, 0) " +
+        String query = "SELECT new exampro.reports.ExamResultOfUser(r.id, r.testEntity.name, r.sqlDate, r.grade) " +
                 "FROM ResultEntity r " +
                 "WHERE r.userEntity.id = :userId " +
                 "ORDER BY r.sqlDate DESC";

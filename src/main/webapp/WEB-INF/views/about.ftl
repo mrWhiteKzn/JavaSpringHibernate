@@ -3,10 +3,40 @@
 <@page.body>
     <div class="container">
 
-        <h4>В проекте были задействованы:</h4>
+        <h4>How it works:</h4>
 
-        <p>Html/CSS Front end Developer: Дима Белый</p>
-        <p>Java Back end Developer : Белый Дмитрий</p>
-        <p>MySQL database architect: Митяй Местный</p>
+        <div class="card-deck">
+            <div class="card border-dark mb-3" style="max-width: 18rem">
+                <div class="card-header">Front End</div>
+                <div class="card-body text-dark">
+                    Technologies was used: Html, CSS, JS, Bootstrap.
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">covered by D.White</small>
+                </div>
+            </div>
+
+            <div class="card border-dark mb-3" style="max-width: 18rem">
+                <div class="card-header">Back End</div>
+                <div class="card-body text-dark">
+                    Technologies was used: Java, Spring, Hibernate.
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">covered by D.White.</small>
+                </div>
+            </div>
+
+            <div class="card border-dark mb-3" style="max-width: 18rem">
+                <div class="card-header">Data Base</div>
+                <div class="card-body text-dark">
+                    Technologies was used: MySql.
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">covered by D.White</small>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 </@page.body>

@@ -7,7 +7,7 @@
             <p><input type="text" class="form-control" name="login" placeholder="login" required autofocus></p>
             <p><input type="password" class="form-control" name="password" placeholder="password"></p>
 
-            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Зарегистрироваться">
+            <input type="submit" class="btn btn-lg btn btn-info btn-block" value="Зарегистрироваться">
 
             <div class="alert-warning">
             <#if message??>

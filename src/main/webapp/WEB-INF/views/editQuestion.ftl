@@ -2,7 +2,12 @@
 <#import "parts/_page.ftl" as page />
 
 <@page.body>
-    <h3>Форма редактирования вопроса:</h3>
+<h3>Форма редактирования вопроса:</h3>
+    <#if successSave??>
+        <div class="alert alert-success" role="alert">
+            ${successSave}
+        </div>
+    </#if>
 <form name="question" action="/exam/updateQuestion/${questionContainer.questionEntity.id}" method="post">
     <input type="hidden" name="questionEntity.id" value="${questionContainer.questionEntity.id}"><br>
     Текст вопроса:
@@ -14,6 +19,8 @@
 </form>
 
 <form name="questionContainer" action="/exam/updateAnswers/" method="post">
+    <input type="hidden" name="questionEntity.id" value="${questionContainer.questionEntity.id}">
+    <input type="hidden" name="questionEntity.questionText" value="${questionContainer.questionEntity.questionText}">
     А теперь сохраним ответы: <br>
      <#list questionContainer.answerEntityList as answer>
          <@spring.bind path="questionContainer.answerEntityList[${answer_index}].id"/>

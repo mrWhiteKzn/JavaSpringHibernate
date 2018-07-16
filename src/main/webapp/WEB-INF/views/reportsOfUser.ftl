@@ -3,10 +3,14 @@
 <@page.body>
 <form action="/secure/saveUser/${user.id}" method="post">
     <h4>Пользователь:</h4>
-    Логин:
-    <input type="hidden" name="id" value="${user.id}">
-    <input type="text" name="login" value="${user.login}" required>
-    <br>
+
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Логин</span>
+        </div>
+        <input type="hidden" name="id" value="${user.id}">
+        <input type="text" class="form-control" name="login" value="${user.login}" required>
+    </div>
     Роли:
     <#list roles as role>
         <label><input type="checkbox" name="${role}" ${user.roles?seq_contains(role)?string("checked", "")}>${role}
@@ -18,17 +22,43 @@
 
    <h4>Отчет по студенту: ${user.login}</h4>
     Пройденные тесты:
-    <ul>
+
+    <table class="table table-striped">
+        <thead>
+        <th scope="col">Экзамен</th>
+        <th scope="col">Дата</th>
+        <th scope="col">Оценка</th>
+        </thead>
+        <tbody>
+
         <#if examResultOfUserList?has_content>
             <#list examResultOfUserList as exam>
-            <li>
-                <a href="/reports/byExam/${exam.id}">${exam.testName}</a>
-                ${exam.date}
-                0
-            </li>
+            <tr>
+                <th scope="row">
+                    <a href="/reports/byExam/${exam.id}">
+                        ${exam.testName}
+                    </a>
+                </th>
+                <td>${exam.date}</td>
+                <td>${exam.grade}</td>
+            </tr>
             </#list>
-        <#else> Записей не найдено. Видимо, студент не сдавал никаких экзаменов.
+        <#else>Записей не найдено. Видимо, студент не сдавал никаких экзаменов.
         </#if>
 
-    </ul>
+        </tbody>
+    </table>
+
+<#--<ul>-->
+<#--<#if examResultOfUserList?has_content>-->
+<#--<#list examResultOfUserList as exam>-->
+<#--<li>-->
+<#--<a href="/reports/byExam/${exam.id}">${exam.testName}</a>-->
+<#--${exam.date}-->
+<#--${exam.grade}-->
+<#--</li>-->
+<#--</#list>-->
+<#--<#else> -->
+<#--</#if>-->
+<#--</ul>-->
 </@page.body>

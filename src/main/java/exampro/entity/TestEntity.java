@@ -36,6 +36,22 @@ public class TestEntity {
         this.name = name;
     }
 
+    public Set<QuestionEntity> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(Set<QuestionEntity> questions) {
+        this.questions = questions;
+    }
+
+    public Set<ResultEntity> getResultEntities() {
+        return resultEntities;
+    }
+
+    public void setResultEntities(Set<ResultEntity> resultEntities) {
+        this.resultEntities = resultEntities;
+    }
+
     @Override
     public String toString() {
         return "TestEntity{" +

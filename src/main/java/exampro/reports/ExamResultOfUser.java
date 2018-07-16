@@ -6,9 +6,9 @@ public class ExamResultOfUser {
     private int id;
     private String testName;
     private java.util.Date date;
-    private int grade;
+    private float grade;
 
-    public ExamResultOfUser(int id, String testName, Date date, int grade) {
+    public ExamResultOfUser(int id, String testName, Date date, float grade) {
         this.id = id;
         this.testName = testName;
         this.date = date;
@@ -39,11 +39,11 @@ public class ExamResultOfUser {
         this.date = date;
     }
 
-    public int getGrade() {
+    public float getGrade() {
         return grade;
     }
 
-    public void setGrade(int grade) {
+    public void setGrade(float grade) {
         this.grade = grade;
     }
 }

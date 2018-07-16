@@ -4,9 +4,9 @@ public class ExamResult {
     private String userName;
     private String examName;
     private java.util.Date sqlDate;
-    private int grade;
+    private float grade;
 
-    public ExamResult(String userName, String examName, int grade, java.util.Date sqlDate) {
+    public ExamResult(String userName, String examName, float grade, java.util.Date sqlDate) {
         this.userName = userName;
         this.examName = examName;
         this.sqlDate = sqlDate;
@@ -37,11 +37,11 @@ public class ExamResult {
         this.sqlDate = sqlDate;
     }
 
-    public int getGrade() {
+    public float getGrade() {
         return grade;
     }
 
-    public void setGrade(int grade) {
+    public void setGrade(float grade) {
         this.grade = grade;
     }
 }

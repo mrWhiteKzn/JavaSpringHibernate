@@ -13,7 +13,12 @@
                     <input type="checkbox" value="remember-me">Запомнить меня
                 </label>
             </div>
-            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Войти">
+            <#if RequestParameters.error??>
+                <div class="alert alert-warning">
+                    <strong>Ошибка!</strong> Логин или пароль неверны.
+                </div>
+            </#if>
+            <input type="submit" class="btn btn-lg btn btn-info btn-block" value="Войти">
             <label>
                 <a href="/secure/registration">Регистрация</a>
             </label>

@@ -2,20 +2,25 @@
 
 <@page.body>
     <h3>Список последних результатов:</h3>
-<table>
+<table class="table">
+    <thead>
     <tr>
-        <td>Имя</td>
-        <td>Экзамен</td>
-        <td>Оценка</td>
-        <td>Дата</td>
+        <th scope="col">Студент</th>
+        <th scope="col">Экзамен</th>
+        <th scope="col">Результат</th>
+        <th scope="col">Дата</th>
     </tr>
+    </thead>
+    <tbody>
     <#list examResultList as examResult>
-        <tr>
-            <td>${examResult.userName}</td>
-            <td>${examResult.examName}</td>
-            <td>0</td>
-            <td>${examResult.sqlDate}</td>
-        </tr>
+    <tr>
+        <td>${examResult.userName}</td>
+        <td>${examResult.examName}</td>
+        <td>${examResult.grade} %</td>
+        <td>${examResult.sqlDate}</td>
+    </tr>
     </#list>
+    </tbody>
+
 </table>
 </@page.body>

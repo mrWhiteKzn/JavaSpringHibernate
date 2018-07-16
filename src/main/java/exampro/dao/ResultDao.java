@@ -1,5 +1,6 @@
 package exampro.dao;
 
+import exampro.entity.AnswerEntity;
 import exampro.entity.ResultDetailEntity;
 import exampro.entity.ResultEntity;
 import exampro.entity.UserEntity;
@@ -9,6 +10,7 @@ import exampro.reports.ExamResultOfUser;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public interface ResultDao {
     void saveResult(ResultEntity result);
@@ -22,4 +24,6 @@ public interface ResultDao {
     List<ExamResultOfUser> getResultListByUser(UserEntity userEntity);
 
     List<ExamResultDetail> getResultsByExam(int id);
+
+    List<ResultDetailEntity> getAnswerEntitySet(ResultEntity resultEntity);
 }

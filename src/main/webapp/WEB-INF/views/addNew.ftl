@@ -7,11 +7,12 @@
 <h3>Добавить новый тест.</h3>
 <form name="test" action="addNew" method="post">
     Наименование теста:<br>
-
-    <input type="text" name="name" required="required">
-    <input type="submit" name="addTest" value="Добавить">
-
-    Вопрос:<br>
+    <div class="input-group">
+        <textarea class="form-control" name="name"></textarea>
+    </div>
+    <div>
+        <input type="submit" class="btn btn-info" name="addTest" value="Добавить">
+    </div>
 
     <input type="hidden" name="_csrf" value="${_csrf.token}">
 </form>

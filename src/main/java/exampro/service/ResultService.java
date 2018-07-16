@@ -1,9 +1,7 @@
 package exampro.service;
 
 import exampro.dao.ResultDao;
-import exampro.entity.ResultDetailEntity;
-import exampro.entity.ResultEntity;
-import exampro.entity.UserEntity;
+import exampro.entity.*;
 import exampro.reports.ExamResult;
 import exampro.reports.ExamResultDetail;
 import exampro.reports.ExamResultOfUser;
@@ -14,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.MultiValueMap;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ResultService {
@@ -51,32 +50,78 @@ public class ResultService {
 
     @Transactional(propagation = Propagation.REQUIRED)
     public void saveTestResult(MultiValueMap<String, String> selectedAnswers, int testId, UserEntity userEntity) {
-        ResultEntity result = new ResultEntity();
+        TestEntity testEntity = testService.getTestEntity(testId);
 
-        result.setTestEntity(testService.getTestEntity(testId));
+        ResultEntity result = new ResultEntity();
+        result.setTestEntity(testEntity);
         result.setUserEntity(userEntity);
         result.setSqlDate(new java.sql.Date(System.currentTimeMillis()));
 
-        System.out.println("================= LET'S SEE WHAT IS IN THE RESULT " + result.toString());
-
         resultDao.saveResult(result);
-        System.out.println("================= HAVE JUST SAVED " + result.toString());
 
         selectedAnswers.forEach((k, v) -> {
             if (!k.equals("_csrf")) {
-                ResultDetailEntity resultDetailEntity = new ResultDetailEntity();
-                resultDetailEntity.setResultEntity(result);
-                resultDetailEntity.setQuestionEntity(questionService.getQuestion(Integer.parseInt(k)));
-
                 for (String s : v) {
-                    System.out.println("ЧТО ТО ЕЩЕ" + k + " " + v);
+                    ResultDetailEntity resultDetailEntity = new ResultDetailEntity();
+                    resultDetailEntity.setResultEntity(result);
+                    resultDetailEntity.setQuestionEntity(questionService.getQuestion(Integer.parseInt(k)));
+                    Set<AnswerEntity> answerEntitySet;
+
                     resultDetailEntity.setAnswerEntity(answerService.getAnswerEntityById(Integer.parseInt(s)));
                     resultDao.saveResultDetail(resultDetailEntity);
                 }
             }
-
         });
+        float grade;
+
+        List<ResultDetailEntity> answerEntityList = resultDao.getAnswerEntitySet(result);
+
+        int rightChoosenAnswerCount;
+        rightChoosenAnswerCount = getCountOfRightChoosenAnswer(answerEntityList, testEntity.getQuestions());
+
+        // Get % of right choosen Answer.
+        grade = rightChoosenAnswerCount * 100 / testEntity.getQuestions().size();
+        System.out.println("Процент верных ответов:" + grade);
+
+        result.setGrade(grade);
+
     }
+
+    private int getCountOfRightChoosenAnswer(List<ResultDetailEntity> resultDetailEntityList, Set<QuestionEntity> questionEntitySet) {
+        int rightAnswerCounter = 0;
+
+        for (QuestionEntity questionEntity : questionEntitySet) {
+            int countOfCorrectAnswersInQuestions = 0;
+            int countOfChoosenAnswers = 0;
+            int countOfRightChoosenAnswers = 0;
+            for (AnswerEntity answerEntity : questionEntity.getAnswerEntityList()) {
+
+                if (answerEntity.isCorrect()) {
+                    countOfCorrectAnswersInQuestions++;
+
+                    for (ResultDetailEntity resultDetailE : resultDetailEntityList) {
+
+                        if (resultDetailE.getAnswerEntity().equals(answerEntity)) {
+                            countOfRightChoosenAnswers++;
+                        }
+                    }
+                }
+            }
+            for (ResultDetailEntity resultDetailE : resultDetailEntityList) {
+                if (resultDetailE.getQuestionEntity().getId() == questionEntity.getId())
+                    countOfChoosenAnswers++;
+            }
+            if (countOfCorrectAnswersInQuestions == countOfChoosenAnswers && countOfCorrectAnswersInQuestions == countOfRightChoosenAnswers) {
+                rightAnswerCounter++;
+            }
+        }
+        return rightAnswerCounter;
+    }
+
+    public Set<AnswerEntity> getAnswerEntitySetByResult(ResultEntity resultEntity) {
+        return null;
+    }
+
 
     @Transactional(propagation = Propagation.REQUIRED)
     public ResultEntity getResultEntityById(int id) {

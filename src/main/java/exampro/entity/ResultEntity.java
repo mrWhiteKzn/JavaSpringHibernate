@@ -25,6 +25,9 @@ public class ResultEntity {
     @JoinColumn(name = "user_id")
     private UserEntity userEntity;
 
+    @JoinColumn(name = "grade")
+    private float grade;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "resultEntity", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<ResultDetailEntity> resultDetailEntityList;
 
@@ -58,6 +61,14 @@ public class ResultEntity {
 
     public void setUserEntity(UserEntity userEntity) {
         this.userEntity = userEntity;
+    }
+
+    public float getGrade() {
+        return grade;
+    }
+
+    public void setGrade(float grade) {
+        this.grade = grade;
     }
 
     @Override
