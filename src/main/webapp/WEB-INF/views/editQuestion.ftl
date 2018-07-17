@@ -10,11 +10,15 @@
     </#if>
 <form name="question" action="/exam/updateQuestion/${questionContainer.questionEntity.id}" method="post">
     <input type="hidden" name="questionEntity.id" value="${questionContainer.questionEntity.id}"><br>
-    Текст вопроса:
-    <input type="text" name="questionEntity.questionText" value="${questionContainer.questionEntity.questionText}"
-           required="required">
+    <div class="input-group">
+        <div class="input-group-prepend">
+            <span class="input-group-text">Текст вопроса:</span>
+        </div>
+        <input type="text" class="form-control" aria-label="Текст вопроса:" name="questionEntity.questionText"
+               value="${questionContainer.questionEntity.questionText}" required="required">
+    </div>
 
-    <input type="submit" value="Сохранить вопрос">
+    <input type="submit" class="btn btn-sm btn-info" value="Сохранить вопрос">
     <input type="hidden" name="_csrf" value="${_csrf.token}">
 </form>
 
@@ -23,19 +27,27 @@
     <input type="hidden" name="questionEntity.questionText" value="${questionContainer.questionEntity.questionText}">
     А теперь сохраним ответы: <br>
      <#list questionContainer.answerEntityList as answer>
+
          <@spring.bind path="questionContainer.answerEntityList[${answer_index}].id"/>
-        <input type="hidden" name="${spring.status.expression}" value="${spring.status.value}">
+         <input type="hidden" name="${spring.status.expression}" value="${spring.status.value}">
 
+     <div class="input-group mb-3">
          <@spring.bind path="questionContainer.answerEntityList[${answer_index}].answerText"/>
-        <input type="text" name="${spring.status.expression}" value="${spring.status.value}" required="required">
+         <input type="text" class="form-control" name="${spring.status.expression}" value="${spring.status.value}"
+                required="required">
+         <div class="input-group-append">
+             <div class="input-group-text">
+                    <@spring.bind path="questionContainer.answerEntityList[${answer_index}].correct"/>
+                 <input type="checkbox" name="${spring.status.expression}" id="correct${answer_index}"
+                        value="${spring.status.value}" <#if spring.status.value=="true">checked</#if>
+                        onclick="changeValue('correct${answer_index}')">
+                 <label for="correct${answer_index}" onclick="changeValue('correct${answer_index}');">Верный</label>
 
-         <@spring.bind path="questionContainer.answerEntityList[${answer_index}].correct"/>
-        <input type="checkbox" name="${spring.status.expression}" id="correct${answer_index}"
-               value="${spring.status.value}" onclick="changeValue('correct${answer_index}')">
-        <label for="correct${answer_index}" onclick="changeValue('correct${answer_index}');">Верный</label>
-     <br>
+             </div>
+         </div>
+     </div>
      </#list>
-    <input type="submit" value="Сохранить ответы">
+    <input type="submit" class="btn btn-sm btn-info" value="Сохранить ответы">
     <input type="hidden" name="_csrf" value="${_csrf.token}">
 </form>
 <script language="JavaScript">

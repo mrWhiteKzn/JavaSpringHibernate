@@ -2,6 +2,9 @@
 
 <@page.body>
     <h3>Список последних результатов:</h3>
+<form action="/reports/recently" method="get">
+    <input type="submit" class="btn btn-sm btn-outline-secondary" value="Обновить">
+</form>
 <table class="table">
     <thead>
     <tr>

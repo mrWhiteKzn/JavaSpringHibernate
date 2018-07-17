@@ -3,7 +3,6 @@ package exampro.controller;
 import exampro.containerClasses.QuestionContainer;
 import exampro.entity.TestEntity;
 import exampro.entity.UserEntity;
-import exampro.entity.enums.UserRole;
 import exampro.service.AnswerService;
 import exampro.service.QuestionService;
 import exampro.service.ResultService;
@@ -17,8 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("/exam")
@@ -124,10 +121,8 @@ public class TestContoller {
     @PostMapping("addQuestion/{id}")
     @PreAuthorize("hasAuthority('Admin')")
     public String addQuestion(@ModelAttribute("question") QuestionEntity questionEntity,
-                              @PathVariable("id") int id,
-                              @RequestParam("answerText") String[] answersTextArray){
-        testService.saveOrUpdate(questionEntity, id);
-        answerService.saveorUpdateList(answersTextArray, questionEntity);
+                              @PathVariable("id") int testId) {
+        testService.saveOrUpdate(questionEntity, testId);
         return "redirect:/exam/getall";
     }
 

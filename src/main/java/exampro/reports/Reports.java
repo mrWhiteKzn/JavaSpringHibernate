@@ -18,10 +18,10 @@ public class Reports {
     }
 
     public List<ExamResult> getExamResults() {
-        String query = "SELECT new exampro.reports.ExamResult(u.login, r.testEntity.name, r.grade, r.sqlDate) " +
+        String query = "SELECT new exampro.reports.ExamResult(r.id, u.login, r.testEntity.name, r.grade, r.sqlDate) " +
                 "FROM ResultEntity r, UserEntity u " +
                 "WHERE r.userEntity.id = u.id "+
-                "ORDER BY r.sqlDate DESC";
+                "ORDER BY r.id DESC";
 
         Session session = sessionFactory.getCurrentSession();
         Query hibernateQuery = session.createQuery(query);

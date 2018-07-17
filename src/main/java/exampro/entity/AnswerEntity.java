@@ -27,6 +27,9 @@ public class AnswerEntity {
     @OneToMany(mappedBy = "answerEntity", cascade = CascadeType.PERSIST, orphanRemoval = true)
     private List<ResultDetailEntity> resultDetailEntityList;
 
+    public AnswerEntity() {
+    }
+
     public List<ResultDetailEntity> getResultDetailEntityList() {
         return resultDetailEntityList;
     }

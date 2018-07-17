@@ -19,7 +19,7 @@
             <div class="card border-dark mb-3" style="max-width: 18rem">
                 <div class="card-header">Back End</div>
                 <div class="card-body text-dark">
-                    Technologies was used: Java, Spring, Hibernate.
+                    Technologies was used: Java, Spring, Hibernate, Tomcat.
                 </div>
                 <div class="card-footer">
                     <small class="text-muted">covered by D.White.</small>
