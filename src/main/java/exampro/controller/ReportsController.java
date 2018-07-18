@@ -3,6 +3,7 @@ package exampro.controller;
 import exampro.entity.UserEntity;
 import exampro.entity.enums.UserRole;
 import exampro.reports.ExamResultOfUser;
+import exampro.service.QuestionService;
 import exampro.service.ResultService;
 import exampro.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ public class ReportsController {
 
     private ResultService resultService;
     private UserService userService;
+    private QuestionService questionService;
 
     @Autowired
     public void setResultService(ResultService resultService) {
@@ -29,6 +31,11 @@ public class ReportsController {
     @Autowired
     public void setUserService(UserService userService) {
         this.userService = userService;
+    }
+
+    @Autowired
+    public void setQuestionService(QuestionService questionService) {
+        this.questionService = questionService;
     }
 
     @GetMapping("recently")
@@ -54,5 +61,11 @@ public class ReportsController {
     public String byExam(@PathVariable("id") int id, Model model) {
         model.addAttribute("examResultDetailList", resultService.getResultsByExam(id));
         return "examResultDetail";
+    }
+
+    @GetMapping("getRightAnswers/{id}")
+    public String getRightAnswers(@PathVariable("id") int questionId, Model model) {
+        model.addAttribute("question", questionService.getQuestion(questionId));
+        return "showQuestion";
     }
 }

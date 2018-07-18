@@ -18,10 +18,10 @@ public class Reports {
     }
 
     public List<ExamResult> getExamResults() {
-        String query = "SELECT new exampro.reports.ExamResult(r.id, u.login, r.testEntity.name, r.grade, r.sqlDate) " +
+        String query = "SELECT new exampro.reports.ExamResult(r.id, u.login, u.id, r.testEntity.name, r.sqlDate, r.grade) " +
                 "FROM ResultEntity r, UserEntity u " +
                 "WHERE r.userEntity.id = u.id "+
-                "ORDER BY r.id DESC";
+                "ORDER BY r.id DESC ";
 
         Session session = sessionFactory.getCurrentSession();
         Query hibernateQuery = session.createQuery(query);
@@ -43,11 +43,11 @@ public class Reports {
     }
 
     public List<ExamResultDetail> getResultsByExam(int id) {
-        String query = "SELECT new exampro.reports.ExamResultDetail(q.questionText, a.answerText, a.correct) " +
+        String query = "SELECT new exampro.reports.ExamResultDetail(q.questionText, q.id, a.answerText, a.correct) " +
                 "FROM QuestionEntity q, AnswerEntity a, ResultDetailEntity r " +
                 "WHERE r.answerEntity.id=a.id " +
                 "AND r.questionEntity.id=q.id " +
-                "AND r.resultEntity.id =:resultId";
+                "AND r.resultEntity.id =:resultId ";
 
 
         Session session = sessionFactory.getCurrentSession();

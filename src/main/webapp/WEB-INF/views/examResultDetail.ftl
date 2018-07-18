@@ -2,28 +2,45 @@
 
 <@page.body>
 <h3>Отчет по пройденному тесту. </h3>
-<table>
+<table class="table">
+    <thead>
     <tr>
-        <td>Название вопроса:</td>
-        <td>Выбранный ответ:</td>
-        <td>Правильный ответ:</td>
+        <th scope="col">Вопрос:</th>
+    <#--<th scope="col">Выбранные ответы:</th>-->
+        <th scope="col">Результат:</th>
+        <th scope="col">Детали:</th>
     </tr>
+    </thead>
+    <tbody>
     <#if examResultDetailList?has_content>
-        <#list examResultDetailList as detail>
-        <tr>
-            <td>${detail.questionName}</td>
-            <td>${detail.choosenAnswer}</td>
+        <#list 0..examResultDetailList?size-1 as i>
+            <#if examResultDetailList[i].correct>
+            <tr class="table-success">
+            <#else>
+            <tr class="table-danger">
+            </#if>
             <td>
-            <#if detail.correct>
+                <#if prev?? && examResultDetailList[i].questionName == examResultDetailList[prev].questionName>
+                <#else>
+                    ${examResultDetailList[i].questionName}
+
+                </#if>
+            </td>
+        <#--<td>${examResultDetailList[i].choosenAnswer}</td>-->
+            <td>
+            <#if examResultDetailList[i].correct>
                 Верный
             <#else>Неверный
             </#if>
             </td>
+        <td><a href="/reports/getRightAnswers/${examResultDetailList[i].questionId}" class="btn btn-sm btn-success">Посмотреть</a>
+        </td>
         </tr>
+            <#assign prev = i>
         </#list>
     <#else>Записей нет. =/
     </#if>
-
+    </tbody>
 </table>
 
 

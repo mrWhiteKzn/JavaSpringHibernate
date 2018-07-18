@@ -19,23 +19,22 @@
     </div>
 </div>
 <p>Вопросы в тесте:</p>
-    <ul class="list-group">
+<div class="card">
+    <ul class="list-group list-group-flush">
     <#list testContainer.questionEntityList as question>
         <li class="list-group-item">
-            ${question_index+1}.  ${question.questionText}
-            <p>
-                <a href="/exam/editQuestion/${question.id}">изменить</a>
-                <a href="/exam/deleteQuestion/${question.id}"
-                   onclick="return confirm('Вы уверены, что хотите удалить вопрос?')"">удалить</a>
-            </p>
+            <div>
+                ${question_index+1}.  ${question.questionText}
+            </div>
+            <a href="/exam/editQuestion/${question.id}" class="btn btn-sm btn-light">редактировать</a>
+            <a href="/exam/deleteQuestion/${question.id}" class="btn btn-sm btn-light"
+               onclick="return confirm('Вы уверены, что хотите удалить вопрос?')"">удалить</a>
         </li>
     </#list>
     </ul>
-
-<form action="/exam/addQuestion/${testContainer.testEntity.id}" method="get">
-    <input type="submit" class="btn btn-success" value="Добавить вопрос">
-    <input type="hidden" name="_csrf" value="${_csrf.token}">
-</form>
+</div>
+        <a href="/exam/addQuestion/${testContainer.testEntity.id}" class="list-group-item list-group-item-info">Добавить
+            вопрос</a>
 <script language="JavaScript">
     function add() {
         var tr = document.createElement('tr');

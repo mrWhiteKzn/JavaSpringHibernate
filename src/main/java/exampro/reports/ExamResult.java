@@ -1,15 +1,19 @@
 package exampro.reports;
 
+import java.util.Date;
+
 public class ExamResult {
     private int id;
     private String userName;
+    private int userId;
     private String examName;
     private java.util.Date sqlDate;
     private float grade;
 
-    public ExamResult(int id, String userName, String examName, float grade, java.util.Date sqlDate) {
+    public ExamResult(int id, String userName, int userId, String examName, Date sqlDate, float grade) {
         this.id = id;
         this.userName = userName;
+        this.userId = userId;
         this.examName = examName;
         this.sqlDate = sqlDate;
         this.grade = grade;
@@ -54,4 +58,13 @@ public class ExamResult {
     public void setGrade(float grade) {
         this.grade = grade;
     }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
 }

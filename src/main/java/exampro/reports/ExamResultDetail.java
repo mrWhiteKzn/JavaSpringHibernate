@@ -2,12 +2,14 @@ package exampro.reports;
 
 public class ExamResultDetail {
     private String questionName;
+    private int questionId;
     private String choosenAnswer;
     private boolean correct;
 
-    public ExamResultDetail(String questionName, String choosenAsnwer, boolean correct) {
+    public ExamResultDetail(String questionName, int questionId, String choosenAnswer, boolean correct) {
         this.questionName = questionName;
-        this.choosenAnswer = choosenAsnwer;
+        this.questionId = questionId;
+        this.choosenAnswer = choosenAnswer;
         this.correct = correct;
     }
 
@@ -33,5 +35,13 @@ public class ExamResultDetail {
 
     public void setCorrect(boolean correct) {
         this.correct = correct;
+    }
+
+    public int getQuestionId() {
+        return questionId;
+    }
+
+    public void setQuestionId(int questionId) {
+        this.questionId = questionId;
     }
 }

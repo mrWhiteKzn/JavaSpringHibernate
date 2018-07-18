@@ -20,7 +20,7 @@
 
     <input type="submit" class="btn btn-sm btn-info" value="Сохранить вопрос">
     <input type="hidden" name="_csrf" value="${_csrf.token}">
-</form>ж
+</form>
 
 <form name="questionContainer" action="/exam/updateAnswers/" method="post">
     <input type="hidden" name="questionEntity.id" value="${questionContainer.questionEntity.id}">
@@ -41,7 +41,8 @@
                  <input type="checkbox" name="${spring.status.expression}" id="correct${answer_index}"
                         value="${spring.status.value}" <#if spring.status.value=="true">checked</#if>
                         onclick="changeValue('correct${answer_index}')">
-                 <label for="correct${answer_index}" onclick="changeValue('correct${answer_index}');">Верный</label>
+                 <label for="correct${answer_index}" class="form-check-label"
+                        onclick="changeValue('correct${answer_index}');">Верный</label>
 
              </div>
          </div>

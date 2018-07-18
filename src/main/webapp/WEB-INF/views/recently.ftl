@@ -17,8 +17,8 @@
     <tbody>
     <#list examResultList as examResult>
     <tr>
-        <td>${examResult.userName}</td>
-        <td>${examResult.examName}</td>
+        <td><a href="/reports/byUser/${examResult.userId}">${examResult.userName}</a></td>
+        <td><a href="/reports/byExam/${examResult.id}"> ${examResult.examName}</a></td>
         <td>${examResult.grade} %</td>
         <td>${examResult.sqlDate}</td>
     </tr>
