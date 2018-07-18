@@ -20,7 +20,7 @@
 
     <input type="submit" class="btn btn-sm btn-info" value="Сохранить вопрос">
     <input type="hidden" name="_csrf" value="${_csrf.token}">
-</form>
+</form>ж
 
 <form name="questionContainer" action="/exam/updateAnswers/" method="post">
     <input type="hidden" name="questionEntity.id" value="${questionContainer.questionEntity.id}">

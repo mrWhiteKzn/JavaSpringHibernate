@@ -4,12 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
 </head>
+<body>
     <#include "_header.ftl">
     <#include "navbar.ftl"/>
 <div class="container mt-4">
-<#nested>
+    <#nested>
 </div>
 </body>
 </html>

@@ -93,9 +93,10 @@ public class TestContoller {
 
     @GetMapping("/deleteQuestion/{id}")
     @PreAuthorize("hasAuthority('Admin')")
-    public String deleteQuestion(@PathVariable("id") int id, Model model){
+    public String deleteQuestion(@PathVariable("id") int id) {
+        int testId = questionService.getQuestion(id).getTestEntity().getId();
         questionService.delete(id);
-        return "redirect:/exam/getall";
+        return "redirect:/exam/edit/" + testId;
     }
 
     @PostMapping("updateQuestion/{id}")
@@ -123,7 +124,8 @@ public class TestContoller {
     public String addQuestion(@ModelAttribute("question") QuestionEntity questionEntity,
                               @PathVariable("id") int testId) {
         testService.saveOrUpdate(questionEntity, testId);
-        return "redirect:/exam/getall";
+
+        return "redirect:/exam/edit" + testId;
     }
 
     @GetMapping("editQuestion/{id}")

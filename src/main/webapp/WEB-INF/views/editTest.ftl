@@ -25,24 +25,12 @@
             ${question_index+1}.  ${question.questionText}
             <p>
                 <a href="/exam/editQuestion/${question.id}">изменить</a>
-                <a href="/exam/deleteQuestion/${question.id}">удалить</a>
+                <a href="/exam/deleteQuestion/${question.id}"
+                   onclick="return confirm('Вы уверены, что хотите удалить вопрос?')"">удалить</a>
             </p>
         </li>
     </#list>
     </ul>
-
-<#--<table id="questionTable" name="questionTable">-->
-<#--<tr>-->
-<#--<td></td>-->
-<#--</tr>-->
-<#--<#list testContainer.questionEntityList as question>-->
-<#--<tr>-->
-<#--<td>${question_index+1}.  ${question.questionText}</td>-->
-<#--<td><a href="/exam/editQuestion/${question.id}">изменить</a></td>-->
-<#--<td><a href="/exam/deleteQuestion/${question.id}">удалить</a></td>-->
-<#--</tr>-->
-<#--</#list>-->
-<#--</table>-->
 
 <form action="/exam/addQuestion/${testContainer.testEntity.id}" method="get">
     <input type="submit" class="btn btn-success" value="Добавить вопрос">
