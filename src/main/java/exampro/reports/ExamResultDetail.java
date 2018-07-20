@@ -1,32 +1,30 @@
 package exampro.reports;
 
-public class ExamResultDetail {
-    private String questionName;
+public class ExamResultDetail implements Comparable<ExamResultDetail> {
     private int questionId;
-    private String choosenAnswer;
+    private String questionText;
     private boolean correct;
 
-    public ExamResultDetail(String questionName, int questionId, String choosenAnswer, boolean correct) {
-        this.questionName = questionName;
+    public ExamResultDetail(int questionId, String questionText, boolean correct) {
         this.questionId = questionId;
-        this.choosenAnswer = choosenAnswer;
+        this.questionText = questionText;
         this.correct = correct;
     }
 
-    public String getQuestionName() {
-        return questionName;
+    public int getQuestionId() {
+        return questionId;
     }
 
-    public void setQuestionName(String questionName) {
-        this.questionName = questionName;
+    public void setQuestionId(int questionId) {
+        this.questionId = questionId;
     }
 
-    public String getChoosenAnswer() {
-        return choosenAnswer;
+    public String getQuestionText() {
+        return questionText;
     }
 
-    public void setChoosenAnswer(String choosenAnswer) {
-        this.choosenAnswer = choosenAnswer;
+    public void setQuestionText(String questionText) {
+        this.questionText = questionText;
     }
 
     public boolean isCorrect() {
@@ -37,11 +35,8 @@ public class ExamResultDetail {
         this.correct = correct;
     }
 
-    public int getQuestionId() {
-        return questionId;
-    }
-
-    public void setQuestionId(int questionId) {
-        this.questionId = questionId;
+    @Override
+    public int compareTo(ExamResultDetail examResultDetail) {
+        return Integer.compare(questionId, examResultDetail.questionId);
     }
 }

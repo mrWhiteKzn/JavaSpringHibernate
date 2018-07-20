@@ -59,11 +59,11 @@ public class ReportsController {
 
     @GetMapping("byExam/{id}")
     public String byExam(@PathVariable("id") int id, Model model) {
-        model.addAttribute("examResultDetailList", resultService.getResultsByExam(id));
+        model.addAttribute("questionResultDetailList", resultService.getQuestionResults(id));
         return "examResultDetail";
     }
 
-    @GetMapping("getRightAnswers/{id}")
+    @GetMapping("explanation/{id}")
     public String getRightAnswers(@PathVariable("id") int questionId, Model model) {
         model.addAttribute("question", questionService.getQuestion(questionId));
         return "showQuestion";

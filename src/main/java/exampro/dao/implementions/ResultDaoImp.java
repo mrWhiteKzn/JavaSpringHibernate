@@ -4,15 +4,12 @@ import exampro.dao.ResultDao;
 import exampro.entity.ResultDetailEntity;
 import exampro.entity.ResultEntity;
 import exampro.entity.UserEntity;
-import exampro.reports.ExamResult;
-import exampro.reports.ExamResultDetail;
-import exampro.reports.ExamResultOfUser;
-import exampro.reports.Reports;
+import exampro.reports.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.hibernate.query.Query;
 import java.util.List;
 
 public class ResultDaoImp implements ResultDao {
@@ -35,11 +32,11 @@ public class ResultDaoImp implements ResultDao {
         sessionFactory.getCurrentSession().save(resultEntity);
     }
 
-    @Override
-    public ResultEntity getResultEntityById(int id) {
-        Session session = sessionFactory.getCurrentSession();
-        return (ResultEntity) session.load("ResultEntity", id);
-    }
+//    @Override
+//    public ResultEntity getResultEntityById(int id) {
+//        Session session = sessionFactory.getCurrentSession();
+//        return (ResultEntity) session.load("ResultEntity", id);
+//    }
 
     @Override
     public void saveResultDetail(ResultDetailEntity resultDetailEntity) {
@@ -58,8 +55,8 @@ public class ResultDaoImp implements ResultDao {
     }
 
     @Override
-    public List<ExamResultDetail> getResultsByExam(int id) {
-        return reports.getResultsByExam(id);
+    public List<ExamResultDetail> getQuestionResults(int id) {
+        return reports.getExamResultDetailList(id);
     }
 
     @Override
