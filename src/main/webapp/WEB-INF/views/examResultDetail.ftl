@@ -24,8 +24,12 @@
                     <#else>Неверный
                     </#if>
                 </td>
-                <td><a href="/reports/explanation/${questionDetail.questionId}"
-                       class="btn btn-sm btn-success">Посмотреть</a>
+                <td>
+                    <form action="/reports/explanation/${questionDetail.questionId}" method="post">
+                        <input type="hidden" name="resultId" value="${resultId}">
+                        <input type="hidden" name="_csrf" value="${_csrf.token}">
+                        <input type="submit" class="btn btn-sm btn-success" value="Посмотреть">
+                    </form>
                 </td>
             </tr>
         </#list>

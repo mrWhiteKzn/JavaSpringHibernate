@@ -9,9 +9,7 @@ import exampro.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -53,19 +51,22 @@ public class ReportsController {
         model.addAttribute("examResultOfUserList", examResultOfUserList);
         model.addAttribute("user", userEntity);
         model.addAttribute("roles", UserRole.values());
-
         return "reportsOfUser";
     }
 
     @GetMapping("byExam/{id}")
-    public String byExam(@PathVariable("id") int id, Model model) {
-        model.addAttribute("questionResultDetailList", resultService.getQuestionResults(id));
+    public String byExam(@PathVariable("id") int resultId, Model model) {
+        model.addAttribute("questionResultDetailList", resultService.getQuestionResults(resultId));
+        model.addAttribute("resultId", resultId);
         return "examResultDetail";
     }
 
-    @GetMapping("explanation/{id}")
-    public String getRightAnswers(@PathVariable("id") int questionId, Model model) {
+    @PostMapping("explanation/{id}")
+    public String getRightAnswers(@PathVariable("id") int questionId,
+                                  @RequestParam("resultId") int resultId,
+                                  Model model) {
         model.addAttribute("question", questionService.getQuestion(questionId));
+        model.addAttribute("choosenAnswersIdList", resultService.getChoosenAnswersIdList(resultId));
         return "showQuestion";
     }
 }

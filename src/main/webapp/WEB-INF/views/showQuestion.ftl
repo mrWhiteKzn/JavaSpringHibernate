@@ -11,15 +11,16 @@
  </div>
     <#list question.answerEntityList as answer>
     <ul>
+        <#if choosenAnswersIdList?seq_contains(answer.id)> (Выбран).</#if>
         <#if answer.correct>
-            <li class="list-group-item list-group-item-success">${answer.answerText}</li>
+            <li class="list-group-item list-group-item-success">
         <#else>
-            <li class="list-group-item list-group-item-danger">${answer.answerText}</li>
+            <li class="list-group-item list-group-item-danger">
         </#if>
+        ${answer.answerText}
+    </li>
     </ul>
     </#list>
-
-
 <button class="btn btn-primary btn-lg btn-outline-info" onclick="goBack()">Вернуться</button>
 <script>
     function goBack() {

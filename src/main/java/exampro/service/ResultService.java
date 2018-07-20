@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.MultiValueMap;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -68,7 +69,6 @@ public class ResultService {
             }
         });
 
-        // Here is
         List<ResultDetailEntity> answerEntityList = resultDao.getAnswerEntitySet(result);
         int rightChoosenAnswerCount = getCountOfRightChoosenAnswer(answerEntityList, testEntity.getQuestions());
         float grade = rightChoosenAnswerCount * 100 / testEntity.getQuestions().size();
@@ -120,5 +120,20 @@ public class ResultService {
     @Transactional
     public List<ExamResultDetail> getQuestionResults(int id) {
         return resultDao.getQuestionResults(id);
+    }
+
+    @Transactional
+    public List<Integer> getChoosenAnswersIdList(int resuldId) {
+        List<Integer> choosenAnswersIdList = new ArrayList<>();
+
+        resultDao.getChoosenAnswersIdList(resuldId).forEach(r ->
+                choosenAnswersIdList.add(r.getAnswerEntity().getId()));
+
+        return choosenAnswersIdList;
+    }
+
+    @Transactional
+    public ResultEntity getLastExamination(UserEntity userEntity) {
+        return resultDao.getLastExamination(userEntity);
     }
 }

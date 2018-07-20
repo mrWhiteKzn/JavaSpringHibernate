@@ -6,7 +6,6 @@ import exampro.entity.UserEntity;
 import exampro.reports.ExamResult;
 import exampro.reports.ExamResultDetail;
 import exampro.reports.ExamResultOfUser;
-import exampro.reports.QuestionResultDetail;
 
 import java.util.List;
 
@@ -22,4 +21,8 @@ public interface ResultDao {
     List<ExamResultDetail> getQuestionResults(int id);
 
     List<ResultDetailEntity> getAnswerEntitySet(ResultEntity resultEntity);
+
+    List<ResultDetailEntity> getChoosenAnswersIdList(int resultId);
+
+    ResultEntity getLastExamination(UserEntity userEntity);
 }

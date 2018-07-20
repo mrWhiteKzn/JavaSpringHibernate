@@ -125,7 +125,7 @@ public class TestContoller {
                               @PathVariable("id") int testId) {
         testService.saveOrUpdate(questionEntity, testId);
 
-        return "redirect:/exam/edit" + testId;
+        return "redirect:/exam/edit/" + testId;
     }
 
     @GetMapping("editQuestion/{id}")
@@ -152,9 +152,12 @@ public class TestContoller {
     @PostMapping("saveResult/{id}")
     public String saveResult(@RequestParam MultiValueMap<String, String> selectedAnswers,
                              @PathVariable("id") int testId,
-                             @AuthenticationPrincipal UserEntity userEntity) {
+                             @AuthenticationPrincipal UserEntity userEntity,
+                             Model model) {
         resultService.saveTestResult(selectedAnswers, testId, userEntity);
-        return "redirect:/exam/getall";
+
+        model.addAttribute("lastExamination", resultService.getLastExamination(userEntity));
+        return "examFinished";
     }
 
 }

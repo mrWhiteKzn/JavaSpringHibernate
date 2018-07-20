@@ -32,12 +32,6 @@ public class ResultDaoImp implements ResultDao {
         sessionFactory.getCurrentSession().save(resultEntity);
     }
 
-//    @Override
-//    public ResultEntity getResultEntityById(int id) {
-//        Session session = sessionFactory.getCurrentSession();
-//        return (ResultEntity) session.load("ResultEntity", id);
-//    }
-
     @Override
     public void saveResultDetail(ResultDetailEntity resultDetailEntity) {
         Session session = sessionFactory.getCurrentSession();
@@ -68,5 +62,28 @@ public class ResultDaoImp implements ResultDao {
         hibernateQuery.setParameter("id", resultEntity.getId());
 
         return hibernateQuery.list();
+    }
+
+    @Override
+    public List<ResultDetailEntity> getChoosenAnswersIdList(int resultId) {
+        Session session = sessionFactory.getCurrentSession();
+
+        String query = "from ResultDetailEntity where resultEntity.id =:resultId";
+        Query hibernateQuery = session.createQuery(query);
+        hibernateQuery.setParameter("resultId", resultId);
+
+        return hibernateQuery.list();
+    }
+
+    @Override
+    public ResultEntity getLastExamination(UserEntity userEntity) {
+        Session session = sessionFactory.getCurrentSession();
+
+        String query = "from ResultEntity where userEntity =:user order by id DESC ";
+        Query hibernateQuery = session.createQuery(query);
+        hibernateQuery.setMaxResults(1);
+        hibernateQuery.setParameter("user", userEntity);
+
+        return (ResultEntity) hibernateQuery.uniqueResult();
     }
 }
