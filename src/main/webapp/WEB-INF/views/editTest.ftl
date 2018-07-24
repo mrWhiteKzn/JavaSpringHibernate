@@ -28,7 +28,7 @@
             </div>
             <a href="/exam/editQuestion/${question.id}" class="btn btn-sm btn-light">редактировать</a>
             <a href="/exam/deleteQuestion/${question.id}" class="btn btn-sm btn-light"
-               onclick="return confirm('Вы уверены, что хотите удалить вопрос?')"">удалить</a>
+               onclick="return confirm('Вы уверены, что хотите удалить вопрос?')">удалить</a>
         </li>
     </#list>
     </ul>

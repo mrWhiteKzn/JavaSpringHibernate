@@ -16,6 +16,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Map;
 
 @Controller
 @RequestMapping("/exam")
@@ -103,9 +106,11 @@ public class TestContoller {
     @PreAuthorize("hasAuthority('Admin')")
     public String editQuestion(@ModelAttribute("container") QuestionContainer questionContainer,
                                @PathVariable("id") int id,
-                               Model model) {
+                               Model model,
+                               RedirectAttributes redirectAttributes) {
         questionService.saveOrUpdate(questionContainer.getQuestionEntity());
         model.addAttribute("question", questionContainer.getQuestionEntity());
+        redirectAttributes.addFlashAttribute("saved", "Текст вопроса сохранён!");
         return "redirect:/exam/editQuestion/" + id;
     }
 
@@ -143,9 +148,10 @@ public class TestContoller {
 
     @PostMapping("updateAnswers/")
     @PreAuthorize("hasAuthority('Admin')")
-    public String updateAnswers(@ModelAttribute("questionContainer") QuestionContainer questionContainer, Model model) {
+    public String updateAnswers(@ModelAttribute("questionContainer") QuestionContainer questionContainer,
+                                RedirectAttributes redirectAttributes) {
         answerService.updateAnswers(questionContainer);
-        model.addAttribute("successSave", "Успешно сохранено!");
+        redirectAttributes.addFlashAttribute("saved", "Ответы сохранены!");
         return "redirect:/exam/editQuestion/" + questionContainer.getQuestionEntity().getId();
     }
 
@@ -156,7 +162,18 @@ public class TestContoller {
                              Model model) {
         resultService.saveTestResult(selectedAnswers, testId, userEntity);
 
-        model.addAttribute("lastExamination", resultService.getLastExamination(userEntity));
+        /*
+        The things below we may replace with sending: "model.addAtribute(shortResultMap);"
+        Iterating will be working fine with freemarker v 2.3.25 and above, but i'm using 2.3.23 and
+        not very motivated to move to upper version, cause now i am doing that for free.
+         */
+        Map<Integer, Float> shortResultMap = resultService.getLastExaminationShortResult(userEntity);
+        int resultId = (int) shortResultMap.keySet().toArray()[0];
+        float grade = shortResultMap.get(resultId);
+
+        model.addAttribute("grade", grade);
+        model.addAttribute("resultId", resultId);
+
         return "examFinished";
     }
 

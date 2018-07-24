@@ -9,18 +9,50 @@
          <p class="lead">Правильные ответы.</p>
      </div>
  </div>
-    <#list question.answerEntityList as answer>
-    <ul>
-        <#if choosenAnswersIdList?seq_contains(answer.id)> (Выбран).</#if>
-        <#if answer.correct>
-            <li class="list-group-item list-group-item-success">
-        <#else>
-            <li class="list-group-item list-group-item-danger">
-        </#if>
-        ${answer.answerText}
-    </li>
-    </ul>
-    </#list>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Ответ</th>
+            <th scope="col">Верный/Неверный</th>
+            <th scope="col">Выбран</th>
+        </tr>
+        </thead>
+    <tbody>
+        <#list question.answerEntityList as answer>
+        <#--Если выбран правильный-->
+            <#if (choosenAnswersIdList?seq_contains(answer.id)) && (answer.correct)>
+                <tr class="table-success">
+
+            <#--Если выбран неправильный-->
+            <#elseif (choosenAnswersIdList?seq_contains(answer.id)) && (!answer.correct)>
+                <tr class="table-warning">
+
+            <#--Если правильный невыбран-->
+            <#elseif (answer.correct)>
+                <tr class="table-info">
+            <#--Неправильный вариант-->
+            <#else>
+                <tr class="table-light">
+            </#if>
+
+            <td>${answer_index+1}</td>
+            <td>${answer.answerText}</td>
+            <td>
+                    <#if answer.correct>
+                        Верный
+                    <#else> Неверный
+                    </#if>
+            </td>
+            <td>
+                    <#if choosenAnswersIdList?seq_contains(answer.id)>
+                        Выбран
+                    <#else> Невыбран
+                    </#if>
+            </td>
+        </tr>
+        </#list>
+    </tbody>
 <button class="btn btn-primary btn-lg btn-outline-info" onclick="goBack()">Вернуться</button>
 <script>
     function goBack() {

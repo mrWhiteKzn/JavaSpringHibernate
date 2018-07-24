@@ -5,10 +5,11 @@
         <div class="jumbotron jumbotron-fluid">
             <div class="container">
                 <div class="alert alert-success" role="alert">
-                    Результаты успешно сохранены!
+                    Поздравляем! Вы ответили правильно на ${grade}% вопросов.
                 </div>
-                <p class="lead">Посмотреть результаты теста можно <a
-                        href="/reports/byExam/${lastExamination.id}">здесь</a></p>
+                <p class="lead">
+                    Посмотреть детали можно <a href="/reports/byExam/${resultId}">здесь</a>
+                </p>
             </div>
         </div>
 

@@ -3,9 +3,9 @@
 
 <@page.body>
 <h3>Форма редактирования вопроса:</h3>
-    <#if successSave??>
+    <#if saved?has_content>
         <div class="alert alert-success" role="alert">
-            ${successSave}
+            ${saved}
         </div>
     </#if>
 <form name="question" action="/exam/updateQuestion/${questionContainer.questionEntity.id}" method="post">

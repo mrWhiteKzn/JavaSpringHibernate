@@ -30,7 +30,8 @@
     </div>
     </#list>
 
-        <input type="submit" class="btn btn-success" value="сохранить">
+        <input type="submit" class="btn btn-success" value="сохранить"
+               onclick="return confirm('Подтверждаете свои ответы?')">
         <input type="hidden" name="_csrf" value="${_csrf.token}">
     </form>
 </@page.body>

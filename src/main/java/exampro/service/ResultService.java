@@ -12,9 +12,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.MultiValueMap;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class ResultService {
@@ -69,11 +67,23 @@ public class ResultService {
             }
         });
 
-        List<ResultDetailEntity> answerEntityList = resultDao.getAnswerEntitySet(result);
-        int rightChoosenAnswerCount = getCountOfRightChoosenAnswer(answerEntityList, testEntity.getQuestions());
-        float grade = rightChoosenAnswerCount * 100 / testEntity.getQuestions().size();
+//        List<ResultDetailEntity> answerEntityList = resultDao.getAnswerEntitySet(result);
+//        int rightChoosenAnswerCount = getCountOfRightChoosenAnswer(answerEntityList, testEntity.getQuestions());
+//        float grade = rightChoosenAnswerCount * 100 / testEntity.getQuestions().size();
 
-        result.setGrade(grade);
+        result.setGrade(calculateGradeOfExamResult(result));
+    }
+
+    @Transactional
+    public float calculateGradeOfExamResult(ResultEntity result) {
+        float grade = 0;
+
+        List<ResultDetailEntity> answerEntityList = resultDao.getAnswerEntitySet(result);               // 1. get list of all choosen answers by student;
+        Set<QuestionEntity> questionEntitySet = result.getTestEntity().getQuestions();                  // 2. get list of all questions in the exam;
+        int rightChoosenAnswerCount = getCountOfRightChoosenAnswer(answerEntityList, questionEntitySet);// 3. calculate the count of right choosen answers;
+        grade = rightChoosenAnswerCount * 100 / questionEntitySet.size();                               // 4. calculate grade.
+
+        return grade;
     }
 
     private int getCountOfRightChoosenAnswer(List<ResultDetailEntity> resultDetailEntityList, Set<QuestionEntity> questionEntitySet) {
@@ -133,7 +143,13 @@ public class ResultService {
     }
 
     @Transactional
-    public ResultEntity getLastExamination(UserEntity userEntity) {
-        return resultDao.getLastExamination(userEntity);
+    public Map<Integer, Float> getLastExaminationShortResult(UserEntity userEntity) {
+        ResultEntity resultEntity = resultDao.getLastExamination(userEntity);
+        float grade = calculateGradeOfExamResult(resultEntity);
+
+        Map<Integer, Float> results = new HashMap<>();
+        results.put(resultEntity.getId(), grade);
+
+        return results;
     }
 }

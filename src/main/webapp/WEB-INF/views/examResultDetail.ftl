@@ -16,7 +16,7 @@
             <#if questionDetail.correct>
             <tr class="table-success">
             <#else>
-            <tr class="table-danger">
+            <tr class="table-warning">
             </#if>
                 <td>${questionDetail.questionText}</td>
                 <td>

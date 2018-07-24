@@ -12,14 +12,16 @@
                 <span class="input-group-text">Текст вопроса:</span>
             </div>
             <div>
-                <textarea class="form-control" aria-label="Текст вопроса" name="questionText"></textarea>
+                <textarea class="form-control" aria-label="Текст вопроса" name="questionText"
+                          required="required"></textarea>
 
             </div>
         </div>
 
         Ответы:
         <div class="input-group mb-3">
-            <input type="text" class="form-control" name="answerEntityList[0].answerText" placeholder="Ответ 1">
+            <input type="text" class="form-control" name="answerEntityList[0].answerText" placeholder="Ответ 1"
+                   required="required">
             <div class="input-group-append">
                 <div class="input-group-text">
                     <input type="checkbox" name="answerEntityList[0].correct" id="1">
@@ -29,7 +31,8 @@
         </div>
 
         <div class="input-group mb-3">
-            <input type="text" class="form-control" name="answerEntityList[1].answerText" placeholder="Ответ 2">
+            <input type="text" class="form-control" name="answerEntityList[1].answerText" placeholder="Ответ 2"
+                   required="required">
             <div class="input-group-append">
                 <div class="input-group-text">
                     <input type="checkbox" name="answerEntityList[1].correct" id="2">
@@ -39,7 +42,8 @@
         </div>
 
         <div class="input-group mb-3">
-            <input type="text" class="form-control" name="answerEntityList[2].answerText" placeholder="Ответ 3">
+            <input type="text" class="form-control" name="answerEntityList[2].answerText" placeholder="Ответ 3"
+                   required="required">
             <div class="input-group-append">
                 <div class="input-group-text">
                     <input type="checkbox" name="answerEntityList[2].correct" id="3">
@@ -49,7 +53,8 @@
         </div>
 
         <div class="input-group mb-3">
-            <input type="text" class="form-control" name="answerEntityList[3].answerText" placeholder="Ответ 4">
+            <input type="text" class="form-control" name="answerEntityList[3].answerText" placeholder="Ответ 4"
+                   required="required">
             <div class="input-group-append">
                 <div class="input-group-text">
                     <input type="checkbox" name="answerEntityList[3].correct" id="4">
@@ -67,6 +72,14 @@
     </form>
 </div>
 
-
-
+<script>
+    $(document).ready(function () {
+        $("form").submit(function () {
+            if ($('input:checkbox').filter(':checked').length < 1) {
+                alert("Укажите хотя бы один верный ответ!");
+                return false;
+            }
+        });
+    });
+</script>
 </@page.body>

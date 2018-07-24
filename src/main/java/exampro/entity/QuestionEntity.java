@@ -15,7 +15,7 @@ public class QuestionEntity {
     @Column(name = "question_text")
     private String questionText;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "test_id")
     private TestEntity testEntity;
 
