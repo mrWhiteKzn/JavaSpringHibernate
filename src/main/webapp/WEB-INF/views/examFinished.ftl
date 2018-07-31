@@ -2,16 +2,13 @@
 
 <@page.body>
     <div class="container">
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-                <div class="alert alert-success" role="alert">
-                    Поздравляем! Вы ответили правильно на ${grade}% вопросов.
-                </div>
-                <p class="lead">
-                    Посмотреть детали можно <a href="/reports/byExam/${resultId}">здесь</a>
-                </p>
+        <div class="container">
+            <div class="jumbotron">
+                <h1 class="display-4">Экзамен завершен!</h1>
+                <p class="lead">Поздравляем! Вы ответили правильно на ${grade}% вопросов.</p>
+                <hr class="my-4">
+                <p>Посмотреть детали можно <a href="/reports/byExam/${resultId}">здесь</a></p>
             </div>
         </div>
-
     </div>
 </@page.body>

@@ -41,18 +41,17 @@
             <td>
                     <#if answer.correct>
                         Верный
-                    <#else> Неверный
                     </#if>
             </td>
             <td>
                     <#if choosenAnswersIdList?seq_contains(answer.id)>
                         Выбран
-                    <#else> Невыбран
                     </#if>
             </td>
         </tr>
         </#list>
     </tbody>
+    </table>
 <button class="btn btn-primary btn-lg btn-outline-info" onclick="goBack()">Вернуться</button>
 <script>
     function goBack() {

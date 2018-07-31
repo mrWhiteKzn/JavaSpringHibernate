@@ -67,6 +67,6 @@ public class ReportsController {
                                   Model model) {
         model.addAttribute("question", questionService.getQuestion(questionId));
         model.addAttribute("choosenAnswersIdList", resultService.getChoosenAnswersIdList(resultId));
-        return "showQuestion";
+        return "/choosenAnswersForQuestion";
     }
 }

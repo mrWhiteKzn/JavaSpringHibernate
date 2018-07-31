@@ -3,7 +3,7 @@ package exampro.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name="resultDetail")
+@Table(name = "resultdetail")
 public class ResultDetailEntity {
 
     @Id

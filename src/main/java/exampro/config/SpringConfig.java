@@ -8,10 +8,12 @@ import exampro.reports.Reports;
 import exampro.service.UserService;
 import exampro.service.UserServiceImp;
 import org.hibernate.SessionFactory;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
+import org.springframework.context.EnvironmentAware;
+import org.springframework.context.annotation.*;
+import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -29,8 +31,12 @@ import java.util.Properties;
 @EnableTransactionManagement
 @EnableWebMvc
 @Import({SecurityWebApplicationInitializer.class})
+@PropertySource("classpath:application.properties")
 @ComponentScan("exampro")
-public class SpringConfig extends WebMvcConfigurerAdapter {
+public class SpringConfig extends WebMvcConfigurerAdapter implements EnvironmentAware {
+
+    @Autowired
+    Environment env;
 
     @Bean
     public ViewResolver getViewResolver() {
@@ -77,16 +83,6 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
     }
 
     @Bean
-    public org.springframework.jdbc.datasource.DriverManagerDataSource getDataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://192.168.5.248:3306/exams?useSSL=false");
-        dataSource.setUsername("root");
-        dataSource.setPassword("1234567");
-        return dataSource;
-    }
-
-    @Bean
     public UserDao getUserDao() {
         return new UserDaoImp();
     }
@@ -101,9 +97,39 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(getDataSource());
         sessionFactory.setPackagesToScan(new String[]{"examPro"});
-        sessionFactory.setAnnotatedClasses(AnswerEntity.class, QuestionEntity.class, ResultDetailEntity.class, ResultEntity.class, TestEntity.class, UserEntity.class);
+        sessionFactory.setAnnotatedClasses(AnswerEntity.class,
+                QuestionEntity.class,
+                ResultDetailEntity.class,
+                ResultEntity.class,
+                TestEntity.class,
+                UserEntity.class);
         sessionFactory.setHibernateProperties(getHibernateProperties());
         return sessionFactory;
+    }
+
+    private final Properties getHibernateProperties() {
+        Properties hibernateProperties = new Properties();
+        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", env.getProperty("hibernate.hbm2ddl.auto"));
+        hibernateProperties.setProperty("hibernate.dialect", env.getProperty("hibernate.dialect"));
+        return hibernateProperties;
+    }
+
+    @Bean
+    public org.springframework.jdbc.datasource.DriverManagerDataSource getDataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+
+        dataSource.setDriverClassName(env.getProperty("db.driver"));
+        dataSource.setUrl(env.getProperty("db.url"));
+        dataSource.setUsername(env.getProperty("db.username"));
+        dataSource.setPassword(env.getProperty("db.password"));
+        return dataSource;
+    }
+
+    @Bean
+    public PropertyPlaceholderConfigurer getLocaltions() {
+        PropertyPlaceholderConfigurer ppc = new PropertyPlaceholderConfigurer();
+        ppc.setLocation(new ClassPathResource("application.properties"));
+        return ppc;
     }
 
     @Bean
@@ -116,16 +142,13 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
         return new UserServiceImp();
     }
 
-    private final Properties getHibernateProperties() {
-        Properties hibernateProperties = new Properties();
-        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
-        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-
-        return hibernateProperties;
-    }
-
     public void addResourceHandlers(final ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/css/**").addResourceLocations("/WEB-INF/views/css/");
         registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/views/js/");
+    }
+
+    @Override
+    public void setEnvironment(Environment environment) {
+        this.env = environment;
     }
 }
