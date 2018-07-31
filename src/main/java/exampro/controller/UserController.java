@@ -44,11 +44,7 @@ public class UserController {
             model.put("message", "Такой пользователь уже существует!");
             return "registration";
         }
-
-        userEntity.setActive(true);
-        userEntity.setRoles(Collections.singleton(UserRole.Student));
         userService.save(userEntity);
-
         return "redirect:/secure/login";
     }
 

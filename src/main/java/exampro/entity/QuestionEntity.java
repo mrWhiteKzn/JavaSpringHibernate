@@ -12,7 +12,7 @@ public class QuestionEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name = "question_text")
+    @Column(name = "question_text", columnDefinition = "text")
     private String questionText;
 
     @ManyToOne(fetch = FetchType.EAGER)

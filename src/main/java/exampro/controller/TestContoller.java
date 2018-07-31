@@ -163,9 +163,9 @@ public class TestContoller {
         resultService.saveTestResult(selectedAnswers, testId, userEntity);
 
         /*
-        The things below we may replace with sending: "model.addAtribute(shortResultMap);"
-        Iterating will be working fine with freemarker v 2.3.25 and above, but i'm using 2.3.23 and
-        not very motivated to move to upper version, cause now i am doing that for free.
+                The things below we may replace with sending: "model.addAttribute(shortResultMap);"
+            Iterating will be working fine with freemarker v 2.3.25 and above, but i'm using 2.3.23 and
+            not very motivated to move to upper version, cause now i am doing that for free.
          */
         Map<Integer, Float> shortResultMap = resultService.getLastExaminationShortResult(userEntity);
         int resultId = (int) shortResultMap.keySet().toArray()[0];
