@@ -11,10 +11,8 @@
             <div class="input-group-prepend">
                 <span class="input-group-text">Текст вопроса:</span>
             </div>
-            <div>
                 <textarea class="form-control" aria-label="Текст вопроса" name="questionText"
                           required="required"></textarea>
-
             </div>
         </div>
 
