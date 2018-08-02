@@ -67,10 +67,6 @@ public class ResultService {
             }
         });
 
-//        List<ResultDetailEntity> answerEntityList = resultDao.getAnswerEntitySet(result);
-//        int rightChoosenAnswerCount = getCountOfRightChoosenAnswer(answerEntityList, testEntity.getQuestions());
-//        float grade = rightChoosenAnswerCount * 100 / testEntity.getQuestions().size();
-
         result.setGrade(calculateGradeOfExamResult(result));
     }
 
